@@ -4,10 +4,10 @@ using System.Text;
 
 namespace AirportWebAPI.DataAccessLayer.Models
 {
-    class Flight
+    public class Flight
     {
         public Guid Id { get; set; }
-        public uint FlightNumber { get; set; }
+        public string FlightNumber { get; set; }
         public AirportLocation DeparturePoint { get; set; }
         public DateTime DepartureTime { get; set; }
         public AirportLocation DestinationPoint { get; set; }

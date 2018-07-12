@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AirportWebAPI.DataAccessLayer.Models
 {
-    class Crew
+    public class Crew
     {
         public Guid Id { get; set; }
         public Pilot Pilot { get; set; }
