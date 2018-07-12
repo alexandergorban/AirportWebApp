@@ -6,8 +6,8 @@ namespace AirportWebAPI.DataAccessLayer.Models
 {
     class Flight
     {
-        public int Id { get; set; }
-        public int FlightNumber { get; set; }
+        public uint Id { get; set; }
+        public uint FlightNumber { get; set; }
         public AirportLocation DeparturePoint { get; set; }
         public DateTime DepartureTime { get; set; }
         public AirportLocation DestinationPoint { get; set; }

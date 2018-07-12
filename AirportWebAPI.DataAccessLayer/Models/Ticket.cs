@@ -6,9 +6,9 @@ namespace AirportWebAPI.DataAccessLayer.Models
 {
     class Ticket
     {
-        public int Id { get; set; }
-        public int  Number { get; set; }
+        public uint Id { get; set; }
+        public uint  Number { get; set; }
         public float Price { get; set; }
-        public int FlightNumber { get; set; }
+        public uint FlightNumber { get; set; }
     }
 }
