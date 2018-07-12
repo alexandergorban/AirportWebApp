@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportWebAPI.DataAccessLay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportWebAPI.BusinessLayer", "AirportWebAPI.BusinessLayer\AirportWebAPI.BusinessLayer.csproj", "{7188124A-DDCF-474A-AAD5-EE8D2FF4C8BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{C0F96046-7CFD-4E8D-9DD5-C3BC6E4A2825}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7188124A-DDCF-474A-AAD5-EE8D2FF4C8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7188124A-DDCF-474A-AAD5-EE8D2FF4C8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7188124A-DDCF-474A-AAD5-EE8D2FF4C8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0F96046-7CFD-4E8D-9DD5-C3BC6E4A2825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0F96046-7CFD-4E8D-9DD5-C3BC6E4A2825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0F96046-7CFD-4E8D-9DD5-C3BC6E4A2825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0F96046-7CFD-4E8D-9DD5-C3BC6E4A2825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
