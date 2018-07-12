@@ -6,7 +6,7 @@ namespace AirportWebAPI.DataAccessLayer.Models
 {
     class Airplane
     {
-        public uint Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public AirplaneType AirplaneType { get; set; }
         public DateTime DateOfIssue { get; set; }

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AirportWebAPI.DataAccessLayer.Data
+namespace AirportWebAPI.DataAccessLayer.Repositories
 {
-    class DataSource
+    class StewardessRepository
     {
-
-
     }
 }

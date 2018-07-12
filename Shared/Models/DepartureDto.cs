@@ -6,7 +6,7 @@ namespace AirportWebAPI.DataAccessLayer.Models
 {
     class DepartureDto
     {
-        public uint Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime DepartureTime { get; set; }
         public bool IsFlightDelay { get; set; }
         public DateTime DepartureTimeChanged { get; set; }

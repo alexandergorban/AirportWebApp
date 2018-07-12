@@ -6,7 +6,7 @@ namespace AirportWebAPI.DataAccessLayer.Models
 {
     class Crew
     {
-        public uint Id { get; set; }
+        public Guid Id { get; set; }
         public Pilot Pilot { get; set; }
         public List<Stewardess> Stewardesseses { get; set; }
     }
