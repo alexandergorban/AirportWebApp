@@ -8,6 +8,6 @@ namespace AirportWebAPI.DataAccessLayer.Models
     {
         public uint Id { get; set; }
         public Pilot Pilot { get; set; }
-        public List<Stewardesses> Stewardesseses { get; set; }
+        public List<Stewardess> Stewardesseses { get; set; }
     }
 }

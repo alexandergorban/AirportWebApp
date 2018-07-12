@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AirportWebAPI.DataAccessLayer.Data
 {
-    class AirportData
+    class DataSource
     {
     }
 }
