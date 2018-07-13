@@ -16,6 +16,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
         public List<Crew> Crews { get; set; }
         public List<AirportLocation> AirportLocations { get; set; }
         public List<Flight> Flights { get; set; }
+        public List<Ticket> Tickets { get; set; }
         public List<Departure> Departures { get; set; }
 
         public DataSource()

@@ -14,6 +14,7 @@ namespace AirportWebAPI.DataAccessLayer.Interfaces
         List<Crew> Crews { get; set; }
         List<AirportLocation> AirportLocations { get; set; }
         List<Flight> Flights { get; set; }
+        List<Ticket> Tickets { get; set; }
         List<Departure> Departures { get; set; }
 
         int SaveChanges();
