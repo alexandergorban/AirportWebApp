@@ -11,7 +11,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
     {
         private IAirportContext _context;
 
-        public FlightRepository(IAirportContext context, IRepository<Ticket> ticketRepository)
+        public FlightRepository(IAirportContext context)
         {
             _context = context;
         }
