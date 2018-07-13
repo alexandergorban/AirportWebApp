@@ -23,6 +23,11 @@ namespace AirportWebAPI.DataAccessLayer.Data
             EnsureSeedDataForContext();
         }
 
+        public int SaveChanges()
+        {
+            return 1;
+        }
+
         public void EnsureSeedDataForContext()
         {
             AirplaneTypes = new List<AirplaneType>()
