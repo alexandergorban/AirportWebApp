@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
@@ -8,19 +9,50 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 {
     class FlightRepository : IRepository<Flight>
     {
+        private IAirportContext _context;
+
+        public FlightRepository(IAirportContext context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<Flight> GetEntities(IEnumerable<Guid> entityIds)
         {
-            throw new NotImplementedException();
+            return _context.Flights.Where(f => entityIds.Contains(f.Id))
+                .OrderBy(f => f.DepartureTime)
+                .ToList();
         }
 
         public Flight GetEntity(Guid entityId)
         {
-            throw new NotImplementedException();
+            return _context.Flights.FirstOrDefault(f => f.Id == entityId);
         }
 
         public void AddEntity(Flight entity)
         {
-            throw new NotImplementedException();
+            entity.Id = Guid.NewGuid();
+            _context.Flights.Add(entity);
+
+            if (entity.Tickets.Any())
+            {
+                foreach (var entityTicket in entity.Tickets)
+                {
+                    entityTicket.Id = Guid.NewGuid();
+                }
+            }
+        }
+
+        public void AddTicketForFlight(Guid flightId, Ticket ticket)
+        {
+            var flight = GetEntity(flightId);
+            if (flight != null)
+            {
+                if (ticket.Id == Guid.Empty)
+                {
+                    ticket.Id = Guid.NewGuid();
+                }
+                flight.Tickets.Add(ticket);
+            }
         }
 
         public void UpdateEntity(Flight entity)
@@ -30,17 +62,22 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 
         public void DeleteEntity(Flight entity)
         {
-            throw new NotImplementedException();
+            _context.Flights.Remove(entity);
+        }
+
+        public void DeleteTicket(Ticket ticket)
+        {
+            _context.Tickets.Remove(ticket);
         }
 
         public bool EntityExists(Guid entityId)
         {
-            throw new NotImplementedException();
+            return _context.Flights.Any(f => f.Id == entityId);
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
     }
 }
