@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
@@ -8,19 +9,29 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 {
     class CrewRepository : IRepository<Crew>
     {
+        private IAirportContext _context;
+
+        public CrewRepository(IAirportContext context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<Crew> GetEntities(IEnumerable<Guid> entityIds)
         {
-            throw new NotImplementedException();
+            return _context.Crews.Where(c => entityIds.Contains(c.Id))
+                .OrderBy(c => c.Id)
+                .ToList();
         }
 
         public Crew GetEntity(Guid entityId)
         {
-            throw new NotImplementedException();
+            return _context.Crews.FirstOrDefault(c => c.Id == entityId);
         }
 
         public void AddEntity(Crew entity)
         {
-            throw new NotImplementedException();
+            entity.Id = Guid.NewGuid();
+            _context.Crews.Add(entity);
         }
 
         public void UpdateEntity(Crew entity)
@@ -30,17 +41,17 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 
         public void DeleteEntity(Crew entity)
         {
-            throw new NotImplementedException();
+            _context.Crews.Remove(entity);
         }
 
         public bool EntityExists(Guid entityId)
         {
-            throw new NotImplementedException();
+            return _context.Crews.Any(c => c.Id == entityId);
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
     }
 }
