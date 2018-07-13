@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AirportWebAPI.DataAccessLayer.Interfaces;
 
 namespace AirportWebAPI.DataAccessLayer.Models
 {
-    public class Airplane
+    public class Airplane : IEntity
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
