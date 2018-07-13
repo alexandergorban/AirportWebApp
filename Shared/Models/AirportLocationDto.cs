@@ -5,7 +5,7 @@ using Shared.Interfaces;
 
 namespace AirportWebAPI.DataAccessLayer.Models
 {
-    class AirportLocationDto : IModelDto
+    public class AirportLocationDto : IModelDto
     {
         public Guid Id { get; set; }
         public string AirportName { get; set; }
