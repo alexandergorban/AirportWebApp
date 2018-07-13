@@ -11,7 +11,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
     {
         private IAirportContext _context;
 
-        public FlightRepository(IAirportContext context)
+        public FlightRepository(IAirportContext context, IRepository<Ticket> ticketRepository)
         {
             _context = context;
         }
@@ -42,6 +42,22 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             }
         }
 
+        public void UpdateEntity(Flight entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEntity(Flight entity)
+        {
+            _context.Flights.Remove(entity);
+        }
+
+        public bool EntityExists(Guid entityId)
+        {
+            return _context.Flights.Any(f => f.Id == entityId);
+        }
+
+        // Tickets
         public void AddTicketForFlight(Guid flightId, Ticket ticket)
         {
             var flight = GetEntity(flightId);
@@ -55,24 +71,9 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             }
         }
 
-        public void UpdateEntity(Flight entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteEntity(Flight entity)
-        {
-            _context.Flights.Remove(entity);
-        }
-
         public void DeleteTicket(Ticket ticket)
         {
             _context.Tickets.Remove(ticket);
-        }
-
-        public bool EntityExists(Guid entityId)
-        {
-            return _context.Flights.Any(f => f.Id == entityId);
         }
 
         public bool Save()
