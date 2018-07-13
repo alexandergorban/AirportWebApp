@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Shared.Interfaces;
 
 namespace AirportWebAPI.DataAccessLayer.Models
 {
-    class FlightDto
+    class FlightDto : IModelDto
     {
         public Guid Id { get; set; }
         public string FlightNumber { get; set; }
