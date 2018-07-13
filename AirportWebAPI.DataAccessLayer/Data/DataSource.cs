@@ -6,18 +6,23 @@ using AirportWebAPI.DataAccessLayer.Models;
 
 namespace AirportWebAPI.DataAccessLayer.Data
 {
-    public static class DataSource
+    public class DataSource
     {
-        public static List<AirplaneType> AirplaneTypes { get; set; }
-        public static List<Airplane> Airplanes { get; set; }
-        public static List<Pilot> Pilots { get; set; }
-        public static List<Stewardess> Stewardesses { get; set; }
-        public static List<Crew> Crews { get; set; }
-        public static List<AirportLocation> AirportLocations { get; set; }
-        public static List<Flight> Flights { get; set; }
-        public static List<Departure> Departures { get; set; }
+        public List<AirplaneType> AirplaneTypes { get; set; }
+        public List<Airplane> Airplanes { get; set; }
+        public List<Pilot> Pilots { get; set; }
+        public List<Stewardess> Stewardesses { get; set; }
+        public List<Crew> Crews { get; set; }
+        public List<AirportLocation> AirportLocations { get; set; }
+        public List<Flight> Flights { get; set; }
+        public List<Departure> Departures { get; set; }
 
-        public static void EnsureSeedDataForContext()
+        public DataSource()
+        {
+            EnsureSeedDataForContext();
+        }
+
+        public void EnsureSeedDataForContext()
         {
             AirplaneTypes = new List<AirplaneType>()
             {
