@@ -8,5 +8,29 @@ namespace AirportWebAPI.BusinessLayer.Validators
 {
     class PilotDtoValidator : AbstractValidator<PilotDto>
     {
+        public PilotDtoValidator()
+        {
+            RuleFor(p => p.Name)
+                .NotNull()
+                .NotEmpty()
+                .MaximumLength(1)
+                .MaximumLength(20);
+
+            RuleFor(p => p.Surname)
+                .NotNull()
+                .NotEmpty()
+                .MaximumLength(1)
+                .MaximumLength(30);
+
+            RuleFor(p => p.DateOfBirth)
+                .NotNull()
+                .NotEmpty()
+                .LessThan(DateTime.Now);
+
+            RuleFor(p => p.Experience)
+                .NotNull()
+                .NotEmpty()
+                .GreaterThan(TimeSpan.Zero);
+        }
     }
 }

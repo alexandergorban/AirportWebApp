@@ -8,5 +8,15 @@ namespace AirportWebAPI.BusinessLayer.Validators
 {
     class TicketDtoValidator : AbstractValidator<TicketDto>
     {
+        public TicketDtoValidator()
+        {
+            RuleFor(t => t.Number)
+                .NotNull()
+                .NotEmpty();
+
+            RuleFor(t => t.Price)
+                .NotNull()
+                .GreaterThan(0);
+        }
     }
 }
