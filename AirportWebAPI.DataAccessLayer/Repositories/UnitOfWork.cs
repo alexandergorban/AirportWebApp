@@ -25,108 +25,28 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public IRepository<AirplaneType> AirplaneTypes
-        {
-            get
-            {
-                if (_airplaneTypeRepository == null)
-                {
-                    _airplaneTypeRepository = new AirplaneTypeRepository(_context);
-                }
+        public IRepository<AirplaneType> AirplaneTypes => 
+            _airplaneTypeRepository ?? (_airplaneTypeRepository = new AirplaneTypeRepository(_context));
 
-                return _airplaneTypeRepository;
-            }
-        }
+        public IRepository<Airplane> Airplanes => 
+            _airplaneRepository ?? (_airplaneRepository = new AirplaneRepository(_context));
 
-        public IRepository<Airplane> Airplanes
-        {
-            get
-            {
-                if (_airplaneRepository == null)
-                {
-                    _airplaneRepository = new AirplaneRepository(_context);
-                }
+        public IRepository<Pilot> Pilots => 
+            _pilotRepository ?? (_pilotRepository = new PilotRepository(_context));
 
-                return _airplaneRepository;
-            }
-        }
+        public IRepository<Stewardess> Stewardesses => 
+            _stewardessRepository ?? (_stewardessRepository = new StewardessRepository(_context));
 
-        public IRepository<Pilot> Pilots
-        {
-            get
-            {
-                if (_pilotRepository == null)
-                {
-                    _pilotRepository = new PilotRepository(_context);
-                }
+        public IRepository<Crew> Crews => 
+            _crewRepository ?? (_crewRepository = new CrewRepository(_context));
 
-                return _pilotRepository;
-            }
-        }
+        public IRepository<Flight> Flights => 
+            _flightRepository ?? (_flightRepository = new FlightRepository(_context));
 
-        public IRepository<Stewardess> Stewardesses
-        {
-            get
-            {
-                if (_stewardessRepository == null)
-                {
-                    _stewardessRepository = new StewardessRepository(_context);
-                }
+        public IRepository<Ticket> Tickets => 
+            _ticketRepository ?? (_ticketRepository = new TicketRepository(_context));
 
-                return _stewardessRepository;
-            }
-        }
-
-        public IRepository<Crew> Crews
-        {
-            get
-            {
-                if (_crewRepository == null)
-                {
-                    _crewRepository = new CrewRepository(_context);
-                }
-
-                return _crewRepository;
-            }
-        }
-
-        public IRepository<Flight> Flights
-        {
-            get
-            {
-                if (_flightRepository == null)
-                {
-                    _flightRepository = new FlightRepository(_context);
-                }
-
-                return _flightRepository;
-            }
-        }
-
-        public IRepository<Ticket> Tickets
-        {
-            get
-            {
-                if (_ticketRepository == null)
-                {
-                    _ticketRepository = new TicketRepository(_context);
-                }
-
-                return _ticketRepository;
-            }
-        }
-
-        public IRepository<Departure> Departures
-        {
-            get
-            {
-                if (_departureRepository == null)
-                {
-                    _departureRepository = new DepartureRepository(_context);
-                }
-
-                return _departureRepository;
-            }
-        }
+        public IRepository<Departure> Departures => 
+            _departureRepository ?? (_departureRepository = new DepartureRepository(_context));
     }
 }
