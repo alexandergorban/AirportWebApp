@@ -6,10 +6,12 @@ namespace AirportWebAPI.DataAccessLayer.Interfaces
 {
     public interface IRepository<T> where T : IEntity
     {
-        List<T> GetEntities();
-        T GetEntity();
-        bool CreateEntity(T entity);
-        bool UpdateEntity(int id, T entity);
-        bool DeleteEntity(int id, T entity);
+        IEnumerable<T> GetEntities(IEnumerable<Guid> entityIds);
+        T GetEntity(Guid entityId);
+        void AddEntity(T entity);
+        void UpdateEntity(T entity);
+        void DeleteEntity(T entity);
+        bool EntityExists(Guid entityId);
+        bool Save();
     }
 }
