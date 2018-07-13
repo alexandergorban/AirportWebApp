@@ -5,18 +5,23 @@ using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
 using AutoMapper;
+using FluentValidation;
 
 namespace AirportWebAPI.BusinessLayer.Services
 {
     public class AirplaneTypeService : IService<AirplaneTypeDto>
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IRepository<AirplaneType> _repository;
+        private readonly AbstractValidator<AirplaneTypeDto> _validator;
 
-        public AirplaneTypeService(IUnitOfWork unitOfWork, IMapper mapper)
+        public AirplaneTypeService(IMapper mapper, 
+            IRepository<AirplaneType> repository, 
+            AbstractValidator<AirplaneTypeDto> validator)
         {
-            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _repository = repository;
+            _validator = validator;
         }
 
         public List<AirplaneTypeDto> GetEntities()
