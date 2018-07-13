@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
 
 namespace AirportWebAPI.DataAccessLayer.Data
 {
-    public class DataSource
+    public class DataSource : IAirportContext
     {
         public List<AirplaneType> AirplaneTypes { get; set; }
         public List<Airplane> Airplanes { get; set; }

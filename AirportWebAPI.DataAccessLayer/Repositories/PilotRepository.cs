@@ -8,6 +8,8 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 {
     class PilotRepository : IRepository<Pilot>
     {
+
+
         public IEnumerable<Pilot> GetEntities(IEnumerable<Guid> entityIds)
         {
             throw new NotImplementedException();
