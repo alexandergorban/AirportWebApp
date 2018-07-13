@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shared.Interfaces
 {
-    interface IModelDto
+    public interface IModelDto
     {
     }
 }
