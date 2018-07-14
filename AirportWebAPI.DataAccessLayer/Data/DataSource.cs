@@ -383,55 +383,55 @@ namespace AirportWebAPI.DataAccessLayer.Data
                 }
             };
 
-            //Departures = new List<Departure>()
-            //{
-            //    new Departure()
-            //    {
-            //        Id = new Guid("d4749477-f823-4124-aa4a-fc9ad5e79cd1"),
-            //        DepartureTime = new DateTime(2019, 7, 19, 21, 15, 0),
-            //        IsFlightDelay = false,
-            //        Flight = Flights
-            //            .FirstOrDefault(flight => 
-            //                flight.Id.Equals(new Guid("f4749477-f823-4124-aa4a-fc9ad5e79cd1"))),
-            //        Crew = Crews
-            //            .FirstOrDefault(crew => 
-            //                crew.Id.Equals(new Guid("c4749477-f823-4124-aa4a-fc9ad5e79cd1"))),
-            //        Airplane = Airplanes
-            //            .FirstOrDefault(airplane => 
-            //                airplane.Id.Equals(new Guid("a1749477-f823-4124-aa4a-fc9ad5e79cd6")))
-            //    },
-            //    new Departure()
-            //    {
-            //        Id = new Guid("d4749477-f823-4124-aa4a-fc9ad5e79cd2"),
-            //        DepartureTime = new DateTime(2019, 5, 10, 22, 10, 0),
-            //        IsFlightDelay = false,
-            //        Flight = Flights
-            //            .FirstOrDefault(flight =>
-            //                flight.Id.Equals(new Guid("f4749477-f823-4124-aa4a-fc9ad5e79cd2"))),
-            //        Crew = Crews
-            //            .FirstOrDefault(crew =>
-            //                crew.Id.Equals(new Guid("c4749477-f823-4124-aa4a-fc9ad5e79cd2"))),
-            //        Airplane = Airplanes
-            //            .FirstOrDefault(airplane =>
-            //                airplane.Id.Equals(new Guid("a1749477-f823-4124-aa4a-fc9ad5e79cd2")))
-            //    },
-            //    new Departure()
-            //    {
-            //        Id = new Guid("d4749477-f823-4124-aa4a-fc9ad5e79cd3"),
-            //        DepartureTime = new DateTime(2019, 1, 19, 22, 10, 0),
-            //        IsFlightDelay = true,
-            //        DepartureTimeChanged = new DateTime(2019, 1, 19, 23, 45, 0),
-            //        Flight = Flights
-            //            .FirstOrDefault(flight =>
-            //                flight.Id.Equals(new Guid("f4749477-f823-4124-aa4a-fc9ad5e79cd3"))),
-            //        Crew = Crews
-            //            .FirstOrDefault(crew =>
-            //                crew.Id.Equals(new Guid("c4749477-f823-4124-aa4a-fc9ad5e79cd3"))),
-            //        Airplane = Airplanes
-            //            .FirstOrDefault(airplane =>
-            //                airplane.Id.Equals(new Guid("a1749477-f823-4124-aa4a-fc9ad5e79cd3")))
-            //    }
-            //};
+            Departures = new List<Departure>()
+            {
+                new Departure()
+                {
+                    Id = new Guid("70a1f9b9-0a37-4c1a-99b1-c7709fc64161"),
+                    DepartureTime = new DateTime(2019, 7, 19, 21, 15, 0),
+                    IsFlightDelay = false,
+                    Flight = Flights
+                        .FirstOrDefault(flight =>
+                            flight.Id.Equals(new Guid("1325360c-8253-473a-a20f-55c269c20401"))),
+                    Crew = Crews
+                        .FirstOrDefault(crew =>
+                            crew.Id.Equals(new Guid("a1da1d8e-1988-4634-b538-a01709477b71"))),
+                    Airplane = Airplanes
+                        .FirstOrDefault(airplane =>
+                            airplane.Id.Equals(new Guid("a2749477-f823-4124-aa4a-fc9ad5e79cd6")))
+                },
+                new Departure()
+                {
+                    Id = new Guid("70a1f9b9-0a37-4c1a-99b1-c7709fc64162"),
+                    DepartureTime = new DateTime(2019, 5, 10, 22, 10, 0),
+                    IsFlightDelay = false,
+                    Flight = Flights
+                        .FirstOrDefault(flight =>
+                            flight.Id.Equals(new Guid("1325360c-8253-473a-a20f-55c269c20402"))),
+                    Crew = Crews
+                        .FirstOrDefault(crew =>
+                            crew.Id.Equals(new Guid("a1da1d8e-1988-4634-b538-a01709477b72"))),
+                    Airplane = Airplanes
+                        .FirstOrDefault(airplane =>
+                            airplane.Id.Equals(new Guid("a3749477-f823-4124-aa4a-fc9ad5e79cd6")))
+                },
+                new Departure()
+                {
+                    Id = new Guid("70a1f9b9-0a37-4c1a-99b1-c7709fc64163"),
+                    DepartureTime = new DateTime(2019, 1, 19, 22, 10, 0),
+                    IsFlightDelay = true,
+                    DepartureTimeChanged = new DateTime(2019, 1, 19, 23, 45, 0),
+                    Flight = Flights
+                        .FirstOrDefault(flight =>
+                            flight.Id.Equals(new Guid("1325360c-8253-473a-a20f-55c269c20403"))),
+                    Crew = Crews
+                        .FirstOrDefault(crew =>
+                            crew.Id.Equals(new Guid("a1da1d8e-1988-4634-b538-a01709477b73"))),
+                    Airplane = Airplanes
+                        .FirstOrDefault(airplane =>
+                            airplane.Id.Equals(new Guid("a4749477-f823-4124-aa4a-fc9ad5e79cd6")))
+                }
+            };
 
         }
 
