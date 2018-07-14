@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AirportWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/values")]
     public class ValuesController : Controller
     {
         // GET api/values

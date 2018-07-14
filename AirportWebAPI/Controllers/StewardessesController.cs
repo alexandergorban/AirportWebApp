@@ -34,7 +34,7 @@ namespace AirportWebAPI.Controllers
         }
 
         // GET: api/v1/crews/stewardesses/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
             return BadRequest();

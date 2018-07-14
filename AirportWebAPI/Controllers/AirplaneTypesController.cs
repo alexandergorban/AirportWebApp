@@ -34,10 +34,10 @@ namespace AirportWebAPI.Controllers
         }
 
         // GET: api/v1/airplanetypes/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            return BadRequest();
+            return Ok();
         }
 
         // POST: api/v1/airplanetypes

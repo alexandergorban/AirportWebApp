@@ -9,6 +9,7 @@ using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
 using AirportWebAPI.DataAccessLayer.Repositories;
+using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -63,6 +64,8 @@ namespace AirportWebAPI
             services.AddTransient<AbstractValidator<StewardessDto>, StewardessDtoValidator>();
             services.AddTransient<AbstractValidator<TicketDto>, TicketDtoValidator>();
 
+            var mapper = MapperConfiguration().CreateMapper();
+            services.AddTransient(_ => mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +77,38 @@ namespace AirportWebAPI
             }
 
             app.UseMvc();
+        }
+
+        public MapperConfiguration MapperConfiguration()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Airplane, AirplaneDto>();
+                cfg.CreateMap<AirplaneDto, Airplane>();
+
+                cfg.CreateMap<AirplaneType, AirplaneTypeDto>();
+                cfg.CreateMap<AirplaneTypeDto, AirplaneType>();
+
+                cfg.CreateMap<Crew, CrewDto>();
+                cfg.CreateMap<CrewDto, Crew>();
+
+                cfg.CreateMap<Departure, DepartureDto>();
+                cfg.CreateMap<DepartureDto, Departure>();
+
+                cfg.CreateMap<Flight, FlightDto>();
+                cfg.CreateMap<FlightDto, Flight>();
+
+                cfg.CreateMap<Pilot, PilotDto>();
+                cfg.CreateMap<PilotDto, Pilot>();
+
+                cfg.CreateMap<Stewardess, StewardessDto>();
+                cfg.CreateMap<StewardessDto, Stewardess>();
+
+                cfg.CreateMap<Ticket, TicketDto>();
+                cfg.CreateMap<TicketDto, Ticket>();
+            });
+
+            return config;
         }
     }
 }
