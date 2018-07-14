@@ -69,6 +69,11 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public TicketDto AddEntity(TicketDto entity)
         {
+            if (!_flightRepository.EntityExists(entity.FlightId))
+            {
+                throw new NotFoundException();
+            }
+
             var validationResult = _validator.Validate(entity);
             if (!validationResult.IsValid)
             {
@@ -112,6 +117,11 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public TicketDto UpdateEntity(TicketDto entity)
         {
+            if (!_repository.EntityExists(entity.Id))
+            {
+                throw new NotFoundException();
+            }
+
             var validationResult = _validator.Validate(entity);
             if (!validationResult.IsValid)
             {

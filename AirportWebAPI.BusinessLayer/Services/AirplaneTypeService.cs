@@ -34,6 +34,11 @@ namespace AirportWebAPI.BusinessLayer.Services
         public AirplaneTypeDto GetEntity(Guid entityId)
         {
             var data = _repository.GetEntity(entityId);
+            if (data == null)
+            {
+                throw new NotFoundException();
+            }
+
             return _mapper.Map<AirplaneType, AirplaneTypeDto>(data);
         }
 

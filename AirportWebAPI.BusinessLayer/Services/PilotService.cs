@@ -34,6 +34,11 @@ namespace AirportWebAPI.BusinessLayer.Services
         public PilotDto GetEntity(Guid entityId)
         {
             var data = _repository.GetEntity(entityId);
+            if (data == null)
+            {
+                throw new NotFoundException();
+            }
+
             return _mapper.Map<Pilot, PilotDto>(data);
         }
 
@@ -58,6 +63,11 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public PilotDto UpdateEntity(PilotDto entity)
         {
+            if (!_repository.EntityExists(entity.Id))
+            {
+                throw new NotFoundException();
+            }
+
             var validationResult = _validator.Validate(entity);
             if (!validationResult.IsValid)
             {
