@@ -5,16 +5,19 @@ using System.Text;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
+using AutoMapper;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
     public class StewardessRepository : IRepository<Stewardess>
     {
-        private DataSource _context;
+        private readonly DataSource _context;
+        private readonly IMapper _mapper;
 
-        public StewardessRepository(DataSource context)
+        public StewardessRepository(DataSource context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public IEnumerable<Stewardess> GetEntities()
@@ -38,7 +41,8 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 
         public void UpdateEntity(Stewardess entity)
         {
-            throw new NotImplementedException();
+            var stewardessFromRepo = _context.Stewardesses.First(s => s.Id == entity.Id);
+            _mapper.Map(entity, stewardessFromRepo);
         }
 
         public void DeleteEntity(Stewardess entity)

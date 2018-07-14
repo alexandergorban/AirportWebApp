@@ -5,16 +5,19 @@ using System.Text;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
+using AutoMapper;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
     public class AirplaneTypeRepository : IRepository<AirplaneType>
     {
-        private DataSource _context;
+        private readonly DataSource _context;
+        private readonly IMapper _mapper;
 
-        public AirplaneTypeRepository(DataSource context)
+        public AirplaneTypeRepository(DataSource context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public IEnumerable<AirplaneType> GetEntities()
@@ -37,10 +40,8 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 
         public void UpdateEntity(AirplaneType entity)
         {
-            var airplaneTypeFromRepo = _context.AirplaneTypes.First(t => t.Id == entity.Id);
-            airplaneTypeFromRepo.Model = entity.Model;
-            airplaneTypeFromRepo.LoadCapacity = entity.LoadCapacity;
-            airplaneTypeFromRepo.NumberOfSeats = entity.NumberOfSeats;
+            var airplaneTypeFromRepo = _context.AirplaneTypes.First(a => a.Id == entity.Id);
+            _mapper.Map(entity, airplaneTypeFromRepo);
 
         }
 

@@ -85,27 +85,35 @@ namespace AirportWebAPI
             {
                 cfg.CreateMap<Airplane, AirplaneDto>();
                 cfg.CreateMap<AirplaneDto, Airplane>();
+                cfg.CreateMap<Airplane, Airplane>();
 
                 cfg.CreateMap<AirplaneType, AirplaneTypeDto>();
                 cfg.CreateMap<AirplaneTypeDto, AirplaneType>();
+                cfg.CreateMap<AirplaneType, AirplaneType>();
 
                 cfg.CreateMap<Crew, CrewDto>();
                 cfg.CreateMap<CrewDto, Crew>();
+                cfg.CreateMap<Crew, Crew>();
 
                 cfg.CreateMap<Departure, DepartureDto>();
                 cfg.CreateMap<DepartureDto, Departure>();
+                cfg.CreateMap<Departure, Departure>();
 
                 cfg.CreateMap<Flight, FlightDto>();
                 cfg.CreateMap<FlightDto, Flight>();
+                cfg.CreateMap<Flight, Flight>();
 
                 cfg.CreateMap<Pilot, PilotDto>();
                 cfg.CreateMap<PilotDto, Pilot>();
+                cfg.CreateMap<Pilot, Pilot>();
 
                 cfg.CreateMap<Stewardess, StewardessDto>();
                 cfg.CreateMap<StewardessDto, Stewardess>();
+                cfg.CreateMap<Stewardess, Stewardess>();
 
                 cfg.CreateMap<Ticket, TicketDto>();
                 cfg.CreateMap<TicketDto, Ticket>();
+                cfg.CreateMap<Ticket, Ticket>();
             });
 
             return config;
