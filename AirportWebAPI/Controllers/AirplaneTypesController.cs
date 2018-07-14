@@ -64,9 +64,22 @@ namespace AirportWebAPI.Controllers
 
         // PUT: api/v1/airplanetypes/5
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id)
+        public IActionResult Put(Guid id, [FromBody] AirplaneTypeDto airplaneTypeDto)
         {
-            return BadRequest();
+            try
+            {
+                airplaneTypeDto.Id = id;
+                _airplaneTypeService.UpdateEntity(airplaneTypeDto);
+                return NoContent();
+            }
+            catch (BadRequestException)
+            {
+                return BadRequest();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         // DELETE: api/v1/airplanetypes/5

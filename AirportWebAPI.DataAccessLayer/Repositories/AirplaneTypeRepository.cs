@@ -37,7 +37,11 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 
         public void UpdateEntity(AirplaneType entity)
         {
-            throw new NotImplementedException();
+            var airplaneTypeFromRepo = _context.AirplaneTypes.First(t => t.Id == entity.Id);
+            airplaneTypeFromRepo.Model = entity.Model;
+            airplaneTypeFromRepo.LoadCapacity = entity.LoadCapacity;
+            airplaneTypeFromRepo.NumberOfSeats = entity.NumberOfSeats;
+
         }
 
         public void DeleteEntity(AirplaneType entity)

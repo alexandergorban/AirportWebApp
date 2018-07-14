@@ -58,7 +58,26 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public AirplaneTypeDto UpdateEntity(AirplaneTypeDto entity)
         {
-            throw new NotImplementedException();
+            if (!_repository.EntityExists(entity.Id))
+            {
+                throw new NotFoundException();
+            }
+
+            var validationResult = _validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                throw new BadRequestException();
+            }
+
+            var mapedEntity = _mapper.Map<AirplaneTypeDto, AirplaneType>(entity);
+            _repository.UpdateEntity(mapedEntity);
+
+            if (!_repository.Save())
+            {
+                throw new Exception("Updating AirplaneType failed on save.");
+            }
+
+            return _mapper.Map<AirplaneType, AirplaneTypeDto>(mapedEntity);
         }
 
         public void DeleteEntity(Guid entityId)
