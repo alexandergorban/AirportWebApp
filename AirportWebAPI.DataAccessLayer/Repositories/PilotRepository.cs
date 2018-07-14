@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
 
@@ -9,9 +10,9 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 {
     public class PilotRepository : IRepository<Pilot>
     {
-        private IAirportContext _context;
+        private DataSource _context;
 
-        public PilotRepository(IAirportContext context)
+        public PilotRepository(DataSource context)
         {
             _context = context;
         }
