@@ -47,8 +47,8 @@ namespace AirportWebAPI.Controllers
         {
             return BadRequest();
         }
-        
-        // DELETE: api/ApiWithActions/5
+
+        // DELETE: api/v1/crews/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
