@@ -24,7 +24,13 @@ namespace AirportWebAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return BadRequest();
+            var airplanes = _airplaneService.GetEntities();
+            if (airplanes == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(airplanes);
         }
 
         // GET: api/v1/airplanes/5
