@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AirportWebAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Airplanes")]
+    [Route("api/v1/airplanes")]
     public class AirplanesController : Controller
     {
         private readonly IService<AirplaneDto> _airplaneService;

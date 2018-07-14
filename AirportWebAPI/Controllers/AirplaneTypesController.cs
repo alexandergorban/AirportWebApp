@@ -10,7 +10,7 @@ using AirportWebAPI.DataAccessLayer.Models;
 namespace AirportWebAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/AirplaneTypes")]
+    [Route("api/v1/airplanetypes")]
     public class AirplaneTypesController : Controller
     {
         private readonly IService<AirplaneTypeDto> _airplaneTypeService;
