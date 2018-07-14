@@ -11,10 +11,10 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 {
     public class TicketRepository : ITicketRepository
     {
-        private readonly DataSource _context;
+        private readonly AirportDbContext _context;
         private readonly IMapper _mapper;
 
-        public TicketRepository(DataSource context, IMapper mapper)
+        public TicketRepository(AirportDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

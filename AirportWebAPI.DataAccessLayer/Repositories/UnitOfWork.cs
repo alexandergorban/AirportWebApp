@@ -9,10 +9,10 @@ using AutoMapper;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
-        private DataSource _context;
-        private IMapper _mapper;
+        private readonly AirportDbContext _context;
+        private readonly IMapper _mapper;
 
         private AirplaneTypeRepository _airplaneTypeRepository;
         private AirplaneRepository _airplaneRepository;
@@ -23,7 +23,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
         private TicketRepository _ticketRepository;
         private DepartureRepository _departureRepository;
 
-        public UnitOfWork(DataSource context, IMapper mapper)
+        public UnitOfWork(AirportDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

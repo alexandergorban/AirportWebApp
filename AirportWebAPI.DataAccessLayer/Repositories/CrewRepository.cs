@@ -11,10 +11,10 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
 {
     public class CrewRepository : IRepository<Crew>
     {
-        private readonly DataSource _context;
+        private readonly AirportDbContext _context;
         private readonly IMapper _mapper;
 
-        public CrewRepository(DataSource context, IMapper mapper)
+        public CrewRepository(AirportDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
