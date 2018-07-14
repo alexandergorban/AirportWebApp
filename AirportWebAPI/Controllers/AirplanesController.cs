@@ -33,32 +33,32 @@ namespace AirportWebAPI.Controllers
             return Ok(airplanes);
         }
 
-        // GET: api/v1/airplanes/5
-        [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
-        {
-            return BadRequest();
-        }
+        //// GET: api/v1/airplanes/5
+        //[HttpGet("{id}")]
+        //public IActionResult Get(Guid id)
+        //{
+        //    return BadRequest();
+        //}
 
-        // POST: api/v1/airplanes
-        [HttpPost]
-        public IActionResult Post([FromBody] AirplaneDto airplaneDto)
-        {
-            return BadRequest();
-        }
+        //// POST: api/v1/airplanes
+        //[HttpPost]
+        //public IActionResult Post([FromBody] AirplaneDto airplaneDto)
+        //{
+        //    return BadRequest();
+        //}
 
-        // PUT: api/v1/airplanes/5
-        [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] AirplaneDto airplaneDto)
-        {
-            return BadRequest();
-        }
+        //// PUT: api/v1/airplanes/5
+        //[HttpPut("{id}")]
+        //public IActionResult Put(Guid id, [FromBody] AirplaneDto airplaneDto)
+        //{
+        //    return BadRequest();
+        //}
 
-        // DELETE: api/v1/airplanes/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
-        {
-            return BadRequest();
-        }
+        //// DELETE: api/v1/airplanes/5
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(Guid id)
+        //{
+        //    return BadRequest();
+        //}
     }
 }
