@@ -21,7 +21,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
 
         public DataSource()
         {
-            EnsureSeedDataForContext();
+            InitData();
         }
 
         public int SaveChanges()
@@ -29,7 +29,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
             return 1;
         }
 
-        public void EnsureSeedDataForContext()
+        public void InitData()
         {
             AirplaneTypes = new List<AirplaneType>()
             {
