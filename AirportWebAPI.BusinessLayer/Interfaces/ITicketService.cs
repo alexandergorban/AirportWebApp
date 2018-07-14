@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AirportWebAPI.DataAccessLayer.Models;
+using AirportWebAPI.DataAccessLayer.Entities;
 
 namespace AirportWebAPI.BusinessLayer.Interfaces
 {

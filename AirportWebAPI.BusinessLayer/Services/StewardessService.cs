@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Interfaces;
-using AirportWebAPI.DataAccessLayer.Models;
+using AirportWebAPI.DataAccessLayer.Entities;
 using AutoMapper;
 using FluentValidation;
 using Shared.Exceptions;

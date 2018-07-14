@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AirportWebAPI.DataAccessLayer.Interfaces;
-using AirportWebAPI.DataAccessLayer.Models;
+using AirportWebAPI.DataAccessLayer.Entities;
 
 namespace AirportWebAPI.DataAccessLayer.Data
 {

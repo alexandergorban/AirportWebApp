@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
-using AirportWebAPI.DataAccessLayer.Models;
+using AirportWebAPI.DataAccessLayer.Entities;
 using AutoMapper;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories

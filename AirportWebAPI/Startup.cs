@@ -7,7 +7,7 @@ using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.BusinessLayer.Validators;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
-using AirportWebAPI.DataAccessLayer.Models;
+using AirportWebAPI.DataAccessLayer.Entities;
 using AirportWebAPI.DataAccessLayer.Repositories;
 using AutoMapper;
 using FluentValidation;

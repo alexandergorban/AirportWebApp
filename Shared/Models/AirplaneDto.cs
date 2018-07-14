@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Shared.Interfaces;
 
-namespace AirportWebAPI.DataAccessLayer.Models
+namespace AirportWebAPI.DataAccessLayer.Entities
 {
     public class AirplaneDto : IModelDto
     {
