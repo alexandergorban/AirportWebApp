@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirportWebAPI.BusinessLayer.Interfaces;
+using AirportWebAPI.DataAccessLayer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +13,13 @@ namespace AirportWebAPI.Controllers
     [Route("api/Stewardesses")]
     public class StewardessesController : Controller
     {
+        private readonly IService<StewardessDto> _stewardessService;
+
+        public StewardessesController(IService<StewardessDto> stewardessService)
+        {
+            _stewardessService = stewardessService;
+        }
+
         // GET: api/Stewardesses
         [HttpGet]
         public IEnumerable<string> Get()
