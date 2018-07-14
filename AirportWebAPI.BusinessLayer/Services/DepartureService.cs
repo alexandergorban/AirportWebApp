@@ -50,7 +50,7 @@ namespace AirportWebAPI.BusinessLayer.Services
 
             if (!_repository.Save())
             {
-                throw new Exception("Adding Crew failed on save.");
+                throw new Exception("Adding Departure failed on save.");
             }
 
             return _mapper.Map<Departure, DepartureDto>(mapedEntity);

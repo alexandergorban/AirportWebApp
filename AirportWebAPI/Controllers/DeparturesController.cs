@@ -53,8 +53,8 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                var crewToReturn = _departureService.AddEntity(departureDto);
-                return CreatedAtRoute("GetDeparture", new { id = crewToReturn.Id }, crewToReturn);
+                var departureToReturn = _departureService.AddEntity(departureDto);
+                return CreatedAtRoute("GetDeparture", new { id = departureToReturn.Id }, departureToReturn);
             }
             catch (BadRequestException)
             {

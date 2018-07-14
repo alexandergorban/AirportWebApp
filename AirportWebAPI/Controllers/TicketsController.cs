@@ -6,6 +6,7 @@ using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Exceptions;
 
 namespace AirportWebAPI.Controllers
 {
@@ -34,7 +35,7 @@ namespace AirportWebAPI.Controllers
         }
 
         // GET: api/v1/flights/{flightId}/tickets/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetTicket")]
         public IActionResult Get(Guid flightId, Guid id)
         {
             var ticket = _ticketService.GetEntity(id);
@@ -50,7 +51,18 @@ namespace AirportWebAPI.Controllers
         [HttpPost]
         public IActionResult Post(Guid flightId, [FromBody] TicketDto ticketDto)
         {
-            return BadRequest();
+            try
+            {
+                ticketDto.FlightId = flightId;
+                var ticketToReturn = _ticketService.AddEntity(ticketDto);
+                return CreatedAtRoute("GetTicket", 
+                    new { flightId = ticketToReturn.FlightId, id = ticketToReturn.Id }, 
+                    ticketToReturn);
+            }
+            catch (BadRequestException)
+            {
+                return BadRequest();
+            }
         }
 
         // PUT: api/v1/flights/{flightId}/tickets/5
