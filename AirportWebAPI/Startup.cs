@@ -44,7 +44,7 @@ namespace AirportWebAPI
             services.AddTransient<IRepository<Flight>, FlightRepository>();
             services.AddTransient<IRepository<Pilot>, PilotRepository>();
             services.AddTransient<IRepository<Stewardess>, StewardessRepository>();
-            services.AddTransient<IRepository<Ticket>, TicketRepository>();
+            services.AddTransient<ITicketRepository, TicketRepository>();
 
             services.AddScoped<IService<AirplaneDto>, AirplaneService>();
             services.AddScoped<IService<AirplaneTypeDto>, AirplaneTypeService>();
@@ -53,7 +53,7 @@ namespace AirportWebAPI
             services.AddScoped<IService<FlightDto>, FlightService>();
             services.AddScoped<IService<PilotDto>, PilotService>();
             services.AddScoped<IService<StewardessDto>, StewardessService>();
-            services.AddScoped<IService<TicketDto>, TicketService>();
+            services.AddScoped<ITicketService, TicketService>();
 
             services.AddTransient<AbstractValidator<AirplaneDto>, AirplaneDtoValidator>();
             services.AddTransient<AbstractValidator<AirplaneTypeDto>, AirplaneTypeDtoValidator>();

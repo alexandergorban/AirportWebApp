@@ -10,17 +10,20 @@ using Shared.Exceptions;
 
 namespace AirportWebAPI.BusinessLayer.Services
 {
-    public class TicketService : IService<TicketDto>
+    public class TicketService : ITicketService
     {
         private readonly IMapper _mapper;
-        private readonly IRepository<Ticket> _repository;
+        private readonly IRepository<Flight> _flightRepository;
+        private readonly ITicketRepository _repository;
         private readonly AbstractValidator<TicketDto> _validator;
 
         public TicketService(IMapper mapper,
-            IRepository<Ticket> repository,
+            IRepository<Flight> flightRepository,
+            ITicketRepository repository,
             AbstractValidator<TicketDto> validator)
         {
             _mapper = mapper;
+            _flightRepository = flightRepository;
             _repository = repository;
             _validator = validator;
         }
@@ -31,14 +34,65 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDto>>(data);
         }
 
+        public IEnumerable<TicketDto> GetEntities(Guid flightId)
+        {
+            if (!_flightRepository.EntityExists(flightId))
+            {
+                throw new NotFoundException();
+            }
+
+            var ticketsFromRepoByFlight = _repository.GetEntities(flightId);
+            return _mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDto>>(ticketsFromRepoByFlight);
+        }
+
         public TicketDto GetEntity(Guid entityId)
         {
-            var data = _repository.GetEntity(entityId);
-            return _mapper.Map<Ticket, TicketDto>(data);
+            var ticketsFromRepo = _repository.GetEntity(entityId);
+            return _mapper.Map<Ticket, TicketDto>(ticketsFromRepo);
+        }
+
+        public TicketDto GetEntity(Guid flightId, Guid entityId)
+        {
+            if (!_flightRepository.EntityExists(flightId))
+            {
+                throw new NotFoundException();
+            }
+
+            var ticketFromRepo = _repository.GetEntity(entityId);
+            if (ticketFromRepo == null)
+            {
+                throw new NotFoundException();
+            }
+
+            return _mapper.Map<Ticket, TicketDto>(ticketFromRepo);
         }
 
         public TicketDto AddEntity(TicketDto entity)
         {
+            var validationResult = _validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                throw new BadRequestException();
+            }
+
+            var mapedEntity = _mapper.Map<TicketDto, Ticket>(entity);
+            _repository.AddEntity(mapedEntity);
+
+            if (!_repository.Save())
+            {
+                throw new Exception("Adding Ticket failed on save.");
+            }
+
+            return _mapper.Map<Ticket, TicketDto>(mapedEntity);
+        }
+
+        public TicketDto AddEntity(Guid flightId, TicketDto entity)
+        {
+            if (!_flightRepository.EntityExists(flightId))
+            {
+                throw new NotFoundException();
+            }
+
             var validationResult = _validator.Validate(entity);
             if (!validationResult.IsValid)
             {
@@ -63,6 +117,26 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public void DeleteEntity(Guid entityId)
         {
+            var ticketFromRepo = _repository.GetEntity(entityId);
+            if (ticketFromRepo == null)
+            {
+                throw new NotFoundException();
+            }
+
+            _repository.DeleteEntity(ticketFromRepo);
+            if (!_repository.Save())
+            {
+                throw new Exception("Deleting Ticket failed on save.");
+            }
+        }
+
+        public void DeleteEntity(Guid flightId, Guid entityId)
+        {
+            if (!_flightRepository.EntityExists(flightId))
+            {
+                throw new NotFoundException();
+            }
+
             var ticketFromRepo = _repository.GetEntity(entityId);
             if (ticketFromRepo == null)
             {

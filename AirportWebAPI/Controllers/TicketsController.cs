@@ -14,9 +14,9 @@ namespace AirportWebAPI.Controllers
     [Route("api/v1/flights/{flightId}/tickets")]
     public class TicketsController : Controller
     {
-        private readonly IService<TicketDto> _ticketService;
+        private readonly ITicketService _ticketService;
 
-        public TicketsController(IService<TicketDto> ticketService)
+        public TicketsController(ITicketService ticketService)
         {
             _ticketService = ticketService;
         }
@@ -25,26 +25,30 @@ namespace AirportWebAPI.Controllers
         [HttpGet]
         public IActionResult Get(Guid flightId)
         {
-            var tickets = _ticketService.GetEntities();
-            if (tickets == null)
+            try
+            {
+                var tickets = _ticketService.GetEntities(flightId);
+                return Ok(tickets);
+            }
+            catch (NotFoundException)
             {
                 return NotFound();
             }
-
-            return Ok(tickets);
         }
 
         // GET: api/v1/flights/{flightId}/tickets/5
         [HttpGet("{id}", Name = "GetTicket")]
         public IActionResult Get(Guid flightId, Guid id)
         {
-            var ticket = _ticketService.GetEntity(id);
-            if (ticket == null)
+            try
+            {
+                var ticket = _ticketService.GetEntity(flightId, id);
+                return Ok(ticket);
+            }
+            catch (NotFoundException)
             {
                 return NotFound();
             }
-
-            return Ok(ticket);
         }
 
         // POST: api/v1/flights/{flightId}/tickets
@@ -63,6 +67,10 @@ namespace AirportWebAPI.Controllers
             {
                 return BadRequest();
             }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         // PUT: api/v1/flights/{flightId}/tickets/5
@@ -78,7 +86,7 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                _ticketService.DeleteEntity(id);
+                _ticketService.DeleteEntity(flightId, id);
             }
             catch (NotFoundException)
             {

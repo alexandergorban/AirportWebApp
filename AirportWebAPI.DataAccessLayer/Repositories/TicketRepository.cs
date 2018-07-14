@@ -8,7 +8,7 @@ using AirportWebAPI.DataAccessLayer.Models;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
-    public class TicketRepository : IRepository<Ticket>
+    public class TicketRepository : ITicketRepository
     {
         private DataSource _context;
 
@@ -20,6 +20,14 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
         public IEnumerable<Ticket> GetEntities()
         {
             return _context.Tickets
+                .OrderBy(t => t.Number)
+                .ToList();
+        }
+
+        public IEnumerable<Ticket> GetEntities(Guid flightId)
+        {
+            return _context.Tickets
+                .Where(t => t.FlightId == flightId)
                 .OrderBy(t => t.Number)
                 .ToList();
         }
