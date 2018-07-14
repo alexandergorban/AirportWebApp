@@ -13,6 +13,7 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,6 +34,9 @@ namespace AirportWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<AirportDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AirportDBConnectionString")));
 
             // Add Data Source in Memory
             services.AddSingleton<DataSource>();
