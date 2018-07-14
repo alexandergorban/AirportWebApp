@@ -35,7 +35,7 @@ namespace AirportWebAPI.Controllers
         }
 
         // GET: api/v1/airplanes/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetAirplane")]
         public IActionResult Get(Guid id)
         {
             var airplane = _airplaneService.GetEntity(id);
@@ -54,7 +54,7 @@ namespace AirportWebAPI.Controllers
             try
             {
                 var airplaneToReturn = _airplaneService.AddEntity(airplaneDto);
-                return CreatedAtRoute("GetAirplaneType", new { id = airplaneToReturn.Id }, airplaneToReturn);
+                return CreatedAtRoute("GetAirplane", new { id = airplaneToReturn.Id }, airplaneToReturn);
             }
             catch (BadRequestException)
             {

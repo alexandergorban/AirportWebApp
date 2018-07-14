@@ -38,7 +38,7 @@ namespace AirportWebAPI.BusinessLayer.Services
 
             if (!_repository.Save())
             {
-                throw new Exception("Adding AirplaneType failed on save.");
+                throw new Exception("Adding Airplane failed on save.");
             }
 
             return _mapper.Map<Airplane, AirplaneDto>(mapedEntity);
