@@ -22,34 +22,37 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/Departures
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return BadRequest();
         }
 
         // GET: api/Departures/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            return BadRequest();
         }
         
         // POST: api/Departures
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]string value)
         {
+            return BadRequest();
         }
         
         // PUT: api/Departures/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]string value)
         {
+            return BadRequest();
         }
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            return BadRequest();
         }
     }
 }
