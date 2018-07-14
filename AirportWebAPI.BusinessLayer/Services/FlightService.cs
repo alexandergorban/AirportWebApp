@@ -58,7 +58,21 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public FlightDto UpdateEntity(FlightDto entity)
         {
-            throw new NotImplementedException();
+            var validationResult = _validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                throw new BadRequestException();
+            }
+
+            var mapedEntity = _mapper.Map<FlightDto, Flight>(entity);
+            _repository.UpdateEntity(mapedEntity);
+
+            if (!_repository.Save())
+            {
+                throw new Exception("Updating Flight failed on save.");
+            }
+
+            return _mapper.Map<Flight, FlightDto>(mapedEntity);
         }
 
         public void DeleteEntity(Guid entityId)
