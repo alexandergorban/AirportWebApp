@@ -6,6 +6,7 @@ using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Models;
 using AutoMapper;
 using FluentValidation;
+using Shared.Exceptions;
 
 namespace AirportWebAPI.BusinessLayer.Services
 {
@@ -26,7 +27,21 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public AirplaneDto AddEntity(AirplaneDto entity)
         {
-            throw new NotImplementedException();
+            var validationResult = _validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                throw new BadRequestException();
+            }
+
+            var mapedEntity = _mapper.Map<AirplaneDto, Airplane>(entity);
+            _repository.AddEntity(mapedEntity);
+
+            if (!_repository.Save())
+            {
+                throw new Exception("Adding AirplaneType failed on save.");
+            }
+
+            return _mapper.Map<Airplane, AirplaneDto>(mapedEntity);
         }
 
         public void DeleteEntity(AirplaneDto entity)

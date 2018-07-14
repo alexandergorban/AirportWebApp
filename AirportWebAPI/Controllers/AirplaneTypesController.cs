@@ -56,11 +56,10 @@ namespace AirportWebAPI.Controllers
                 var airplaneTypeToReturn = _airplaneTypeService.AddEntity(airplaneTypeDto);
                 return CreatedAtRoute("GetAirplaneType", new { id = airplaneTypeToReturn.Id }, airplaneTypeToReturn);
             }
-            catch (BadRequestException e)
+            catch (BadRequestException)
             {
                 return BadRequest();
             }
-            
         }
 
         // PUT: api/v1/airplanetypes/5
