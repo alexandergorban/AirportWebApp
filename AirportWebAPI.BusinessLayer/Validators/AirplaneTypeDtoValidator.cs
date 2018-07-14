@@ -14,7 +14,7 @@ namespace AirportWebAPI.BusinessLayer.Validators
                 .NotNull()
                 .NotEmpty()
                 .MinimumLength(1)
-                .MaximumLength(10);
+                .MaximumLength(30);
 
             RuleFor(a => a.NumberOfSeats)
                 .NotNull()
@@ -24,7 +24,7 @@ namespace AirportWebAPI.BusinessLayer.Validators
             RuleFor(a => a.LoadCapacity)
                 .NotNull()
                 .GreaterThan(1)
-                .LessThan(100000);
+                .LessThan(1000000);
         }
     }
 }
