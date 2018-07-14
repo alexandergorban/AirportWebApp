@@ -16,9 +16,11 @@ namespace AirportWebAPI.DataAccessLayer.Entities
         public string Model { get; set; }
 
         [Required]
+        [Range(1, 100)]
         public int NumberOfSeats { get; set; }
 
         [Required]
+        [Range(1000, 1000000)]
         public int LoadCapacity { get; set; }
     }
 }

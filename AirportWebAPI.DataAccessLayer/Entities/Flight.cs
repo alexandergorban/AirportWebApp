@@ -26,7 +26,6 @@ namespace AirportWebAPI.DataAccessLayer.Entities
         [Required]
         public DateTime ArrivalTime { get; set; }
 
-        [Required]
         public List<Ticket> Tickets { get; set; }
     }
 }
