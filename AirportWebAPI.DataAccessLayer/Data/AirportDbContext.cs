@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AirportWebAPI.DataAccessLayer.Data
 {
-    class AirportDbContext : DbContext
+    public class AirportDbContext : DbContext
     {
         public DbSet<Airplane> Airplanes { get; set; }
         public DbSet<AirplaneType> AirplaneTypes { get; set; }
@@ -17,5 +17,10 @@ namespace AirportWebAPI.DataAccessLayer.Data
         public DbSet<Pilot> Pilots { get; set; }
         public DbSet<Stewardess> Stewardesses { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+
+        public AirportDbContext() : base()
+        {
+            Database.Migrate();
+        }
     }
 }
