@@ -24,18 +24,33 @@ namespace AirportWebAPI.BusinessLayer.Services
             _validator = validator;
         }
 
-        public List<AirplaneTypeDto> GetEntities()
+        public IEnumerable<AirplaneTypeDto> GetEntities()
         {
-            throw new NotImplementedException();
+            var data = _repository.GetEntities();
+            return _mapper.Map<IEnumerable<AirplaneType>, IEnumerable<AirplaneTypeDto>>(data);
         }
 
-        public AirplaneTypeDto GetEntity(AirplaneTypeDto entity)
+        public AirplaneTypeDto GetEntity(Guid entityId)
         {
-            throw new NotImplementedException();
+            var data = _repository.GetEntity(entityId);
+            return _mapper.Map<AirplaneType, AirplaneTypeDto>(data);
         }
 
         public AirplaneTypeDto AddEntity(AirplaneTypeDto entity)
         {
+            var validationResult = _validator.Validate(entity);
+
+            if (validationResult.IsValid)
+            {
+                var mapedEntity = _mapper.Map<AirplaneTypeDto, AirplaneType>(entity);
+                _repository.AddEntity(mapedEntity);
+            }
+
+            if (_repository.Save())
+            {
+                
+            }
+
             throw new NotImplementedException();
         }
 

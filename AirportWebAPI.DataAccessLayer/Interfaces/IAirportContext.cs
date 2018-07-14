@@ -5,7 +5,7 @@ using AirportWebAPI.DataAccessLayer.Models;
 
 namespace AirportWebAPI.DataAccessLayer.Interfaces
 {
-    interface IAirportContext
+    public interface IAirportContext
     {
         List<AirplaneType> AirplaneTypes { get; set; }
         List<Airplane> Airplanes { get; set; }

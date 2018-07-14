@@ -6,7 +6,7 @@ using FluentValidation;
 
 namespace AirportWebAPI.BusinessLayer.Validators
 {
-    class DepartureDtoValidator : AbstractValidator<DepartureDto>
+    public class DepartureDtoValidator : AbstractValidator<DepartureDto>
     {
         public DepartureDtoValidator()
         {

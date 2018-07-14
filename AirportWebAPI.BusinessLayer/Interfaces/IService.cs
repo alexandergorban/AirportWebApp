@@ -6,10 +6,10 @@ using Shared.Interfaces;
 
 namespace AirportWebAPI.BusinessLayer.Interfaces
 {
-    interface IService<TEntity> where TEntity : IModelDto
+    public interface IService<TEntity> where TEntity : IModelDto
     {
-        List<TEntity> GetEntities();
-        TEntity GetEntity(TEntity entity);
+        IEnumerable<TEntity> GetEntities();
+        TEntity GetEntity(Guid entityId);
         TEntity AddEntity(TEntity entity);
         TEntity UpdateEntity(TEntity entity);
         void DeleteEntity(TEntity entity);

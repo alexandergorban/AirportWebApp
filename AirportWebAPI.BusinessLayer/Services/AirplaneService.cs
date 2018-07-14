@@ -34,14 +34,16 @@ namespace AirportWebAPI.BusinessLayer.Services
             throw new NotImplementedException();
         }
 
-        public List<AirplaneDto> GetEntities()
+        public IEnumerable<AirplaneDto> GetEntities()
         {
-            throw new NotImplementedException();
+            var data = _repository.GetEntities();
+            return _mapper.Map<IEnumerable<Airplane>, IEnumerable<AirplaneDto>>(data);
         }
 
-        public AirplaneDto GetEntity(AirplaneDto entity)
+        public AirplaneDto GetEntity(Guid entityId)
         {
-            throw new NotImplementedException();
+            var data = _repository.GetEntity(entityId);
+            return _mapper.Map<Airplane, AirplaneDto>(data);
         }
 
         public AirplaneDto UpdateEntity(AirplaneDto entity)

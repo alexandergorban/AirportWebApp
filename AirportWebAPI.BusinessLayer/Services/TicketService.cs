@@ -24,14 +24,16 @@ namespace AirportWebAPI.BusinessLayer.Services
             _validator = validator;
         }
 
-        public List<TicketDto> GetEntities()
+        public IEnumerable<TicketDto> GetEntities()
         {
-            throw new NotImplementedException();
+            var data = _repository.GetEntities();
+            return _mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDto>>(data);
         }
 
-        public TicketDto GetEntity(TicketDto entity)
+        public TicketDto GetEntity(Guid entityId)
         {
-            throw new NotImplementedException();
+            var data = _repository.GetEntity(entityId);
+            return _mapper.Map<Ticket, TicketDto>(data);
         }
 
         public TicketDto AddEntity(TicketDto entity)

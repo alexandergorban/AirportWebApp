@@ -6,7 +6,7 @@ namespace AirportWebAPI.DataAccessLayer.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : IEntity
     {
-        IEnumerable<TEntity> GetEntities(IEnumerable<Guid> entityIds);
+        IEnumerable<TEntity> GetEntities();
         TEntity GetEntity(Guid entityId);
         void AddEntity(TEntity entity);
         void UpdateEntity(TEntity entity);

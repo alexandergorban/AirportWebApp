@@ -7,7 +7,7 @@ using AirportWebAPI.DataAccessLayer.Models;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
-    class PilotRepository : IRepository<Pilot>
+    public class PilotRepository : IRepository<Pilot>
     {
         private IAirportContext _context;
 
@@ -16,9 +16,9 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public IEnumerable<Pilot> GetEntities(IEnumerable<Guid> entityIds)
+        public IEnumerable<Pilot> GetEntities()
         {
-            return _context.Pilots.Where(p => entityIds.Contains(p.Id))
+            return _context.Pilots
                 .OrderBy(p => p.Name)
                 .OrderBy(p => p.Surname)
                 .ToList();
