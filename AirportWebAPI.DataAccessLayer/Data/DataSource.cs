@@ -111,73 +111,73 @@ namespace AirportWebAPI.DataAccessLayer.Data
                 }
             };
 
-            //Pilots = new List<Pilot>
-            //{
-            //    new Pilot()
-            //    {
-            //        Id = new Guid("p4749477-f823-4124-aa4a-fc9ad5e79cd1"),
-            //        Name = "Mike",
-            //        Surname = "Doe",
-            //        DateOfBirth = new DateTime(1980, 7, 20),
-            //        Experience = new TimeSpan(783, 0, 0, 0)
-            //    },
-            //    new Pilot()
-            //    {
-            //        Id = new Guid("p4749477-f823-4124-aa4a-fc9ad5e79cd2"),
-            //        Name = "Jac",
-            //        Surname = "Low",
-            //        DateOfBirth = new DateTime(1980, 1, 10),
-            //        Experience = new TimeSpan(543, 0, 0, 0)
-            //    },
-            //    new Pilot()
-            //    {
-            //        Id = new Guid("p4749477-f823-4124-aa4a-fc9ad5e79cd3"),
-            //        Name = "Brad",
-            //        Surname = "Marrow",
-            //        DateOfBirth = new DateTime(1990, 7, 21),
-            //        Experience = new TimeSpan(923, 0, 0, 0)
-            //    },
-            //    new Pilot()
-            //    {
-            //        Id = new Guid("p4749477-f823-4124-aa4a-fc9ad5e79cd4"),
-            //        Name = "Nick",
-            //        Surname = "Hoy",
-            //        DateOfBirth = new DateTime(1980, 5, 15),
-            //        Experience = new TimeSpan(383, 0, 0, 0)
-            //    }
-            //};
+            Pilots = new List<Pilot>
+            {
+                new Pilot()
+                {
+                    Id = new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb1"),
+                    Name = "Mike",
+                    Surname = "Doe",
+                    DateOfBirth = new DateTime(1980, 7, 20),
+                    Experience = new TimeSpan(783, 0, 0, 0)
+                },
+                new Pilot()
+                {
+                    Id = new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb2"),
+                    Name = "Jac",
+                    Surname = "Low",
+                    DateOfBirth = new DateTime(1980, 1, 10),
+                    Experience = new TimeSpan(543, 0, 0, 0)
+                },
+                new Pilot()
+                {
+                    Id = new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb3"),
+                    Name = "Brad",
+                    Surname = "Marrow",
+                    DateOfBirth = new DateTime(1990, 7, 21),
+                    Experience = new TimeSpan(923, 0, 0, 0)
+                },
+                new Pilot()
+                {
+                    Id = new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb4"),
+                    Name = "Nick",
+                    Surname = "Hoy",
+                    DateOfBirth = new DateTime(1980, 5, 15),
+                    Experience = new TimeSpan(383, 0, 0, 0)
+                }
+            };
 
-            //Stewardesses = new List<Stewardess>()
-            //{
-            //    new Stewardess()
-            //    {
-            //        Id = new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd1"),
-            //        Name = "Jane",
-            //        Surname = "Spears",
-            //        DateOfBirth = new DateTime(1990, 7, 30)
-            //    },
-            //    new Stewardess()
-            //    {
-            //        Id = new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd2"),
-            //        Name = "Helen",
-            //        Surname = "Moss",
-            //        DateOfBirth = new DateTime(1990, 7, 30)
-            //    },
-            //    new Stewardess()
-            //    {
-            //        Id = new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd3"),
-            //        Name = "Stefany",
-            //        Surname = "Hilton",
-            //        DateOfBirth = new DateTime(1990, 7, 30)
-            //    },
-            //    new Stewardess()
-            //    {
-            //        Id = new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd4"),
-            //        Name = "Merlin",
-            //        Surname = "Jess",
-            //        DateOfBirth = new DateTime(1990, 7, 30)
-            //    }
-            //};
+            Stewardesses = new List<Stewardess>()
+            {
+                new Stewardess()
+                {
+                    Id = new Guid("01457142-358f-495f-aafa-fb23de3d67e1"),
+                    Name = "Jane",
+                    Surname = "Spears",
+                    DateOfBirth = new DateTime(1990, 7, 30)
+                },
+                new Stewardess()
+                {
+                    Id = new Guid("01457142-358f-495f-aafa-fb23de3d67e2"),
+                    Name = "Helen",
+                    Surname = "Moss",
+                    DateOfBirth = new DateTime(1990, 7, 30)
+                },
+                new Stewardess()
+                {
+                    Id = new Guid("01457142-358f-495f-aafa-fb23de3d67e3"),
+                    Name = "Stefany",
+                    Surname = "Hilton",
+                    DateOfBirth = new DateTime(1990, 7, 30)
+                },
+                new Stewardess()
+                {
+                    Id = new Guid("01457142-358f-495f-aafa-fb23de3d67e4"),
+                    Name = "Merlin",
+                    Surname = "Jess",
+                    DateOfBirth = new DateTime(1990, 7, 30)
+                }
+            };
 
             //Crews = new List<Crew>()
             //{
