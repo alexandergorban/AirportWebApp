@@ -20,28 +20,28 @@ namespace AirportWebAPI.Controllers
             _departureService = departureService;
         }
 
-        // GET: api/Departures
+        // GET: api/v1/departures
         [HttpGet]
         public IActionResult Get()
         {
             return BadRequest();
         }
 
-        // GET: api/Departures/5
+        // GET: api/v1/departures/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(int id)
         {
             return BadRequest();
         }
-        
-        // POST: api/Departures
+
+        // POST: api/v1/departures
         [HttpPost]
         public IActionResult Post([FromBody]string value)
         {
             return BadRequest();
         }
-        
-        // PUT: api/Departures/5
+
+        // PUT: api/v1/departures/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]string value)
         {

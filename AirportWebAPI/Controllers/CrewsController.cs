@@ -20,28 +20,28 @@ namespace AirportWebAPI.Controllers
             _crewService = crewService;
         }
 
-        // GET: api/Crews
+        // GET: api/v1/crews
         [HttpGet]
         public IActionResult Get()
         {
             return BadRequest();
         }
 
-        // GET: api/Crews/5
+        // GET: api/v1/crews/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(int id)
         {
             return BadRequest();
         }
-        
-        // POST: api/Crews
+
+        // POST: api/v1/crews
         [HttpPost]
         public IActionResult Post([FromBody]string value)
         {
             return BadRequest();
         }
-        
-        // PUT: api/Crews/5
+
+        // PUT: api/v1/crews/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]string value)
         {
