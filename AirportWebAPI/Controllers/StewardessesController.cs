@@ -29,28 +29,28 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/crews/stewardesses/5
         [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(int id)
+        public IActionResult Get(Guid id)
         {
             return BadRequest();
         }
 
         // POST: api/v1/crews/stewardesses
         [HttpPost]
-        public IActionResult Post([FromBody]string value)
+        public IActionResult Post([FromBody] StewardessDto stewardessDto)
         {
             return BadRequest();
         }
 
         // PUT: api/v1/crews/stewardesses/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]string value)
+        public IActionResult Put(Guid id, [FromBody] StewardessDto stewardessDto)
         {
             return BadRequest();
         }
 
         // DELETE: api/v1/crews/stewardesses/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             return BadRequest();
         }

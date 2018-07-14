@@ -22,35 +22,35 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/flights/{flightId}/tickets
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(Guid flightId)
         {
             return BadRequest();
         }
 
         // GET: api/v1/flights/{flightId}/tickets/5
         [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(int id)
+        public IActionResult Get(Guid flightId, Guid id)
         {
             return BadRequest();
         }
 
         // POST: api/v1/flights/{flightId}/tickets
         [HttpPost]
-        public IActionResult Post([FromBody]string value)
+        public IActionResult Post(Guid flightId, [FromBody] TicketDto ticketDto)
         {
             return BadRequest();
         }
 
         // PUT: api/v1/flights/{flightId}/tickets/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]string value)
+        public IActionResult Put(Guid flightId, Guid id, [FromBody] TicketDto ticketDto)
         {
             return BadRequest();
         }
 
         // DELETE: api/v1/flights/{flightId}/tickets/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid flightId, Guid id)
         {
             return BadRequest();
         }
