@@ -37,7 +37,13 @@ namespace AirportWebAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            return Ok();
+            var airplaneType = _airplaneTypeService.GetEntity(id);
+            if (airplaneType == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(airplaneType);
         }
 
         // POST: api/v1/airplanetypes

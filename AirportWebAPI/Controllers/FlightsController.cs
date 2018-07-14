@@ -37,7 +37,13 @@ namespace AirportWebAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            return BadRequest();
+            var flight = _flightService.GetEntity(id);
+            if (flight == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(flight);
         }
 
         // POST: api/v1/flights
