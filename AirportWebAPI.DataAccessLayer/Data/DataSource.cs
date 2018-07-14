@@ -197,7 +197,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                                 stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e2"))),
                         Stewardesses
                             .FirstOrDefault(stewrdess =>
-                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e3"))),
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e3")))
                     }
                 },
                 new Crew()
@@ -216,7 +216,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                                 stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e2"))),
                         Stewardesses
                             .FirstOrDefault(stewrdess =>
-                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e3"))),
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e3")))
                     }
                 },
                 new Crew()
@@ -235,160 +235,153 @@ namespace AirportWebAPI.DataAccessLayer.Data
                                 stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e2"))),
                         Stewardesses
                             .FirstOrDefault(stewrdess =>
-                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e4"))),
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e4")))
                     }
                 }
             };
 
-            //AirportLocations = new List<AirportLocation>()
-            //{
-            //    new AirportLocation()
-            //    {
-            //        Id = new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd1"),
-            //        AirportName = "Ben Gurion",
-            //        Country = "Israel",
-            //        City = "Tel-Aviv"
-            //    },
-            //    new AirportLocation()
-            //    {
-            //        Id = new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd2"),
-            //        AirportName = "Borispol",
-            //        Country = "Ukraine",
-            //        City = "Kiev"
-            //    },
-            //    new AirportLocation()
-            //    {
-            //        Id = new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd3"),
-            //        AirportName = "Ataturk",
-            //        Country = "Turkey",
-            //        City = "Istanbul"
-            //    },
-            //    new AirportLocation()
-            //    {
-            //        Id = new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd4"),
-            //        AirportName = "Zulyany",
-            //        Country = "Ukraine",
-            //        City = "Kiev"
-            //    }
-            //};
+            AirportLocations = new List<AirportLocation>()
+            {
+                new AirportLocation()
+                {
+                    Id = new Guid("e17b605f-8b3c-4089-b672-6ce9e6d6c23f"),
+                    AirportName = "Ben Gurion",
+                    Country = "Israel",
+                    City = "Tel-Aviv"
+                },
+                new AirportLocation()
+                {
+                    Id = new Guid("e27b605f-8b3c-4089-b672-6ce9e6d6c23f"),
+                    AirportName = "Borispol",
+                    Country = "Ukraine",
+                    City = "Kiev"
+                },
+                new AirportLocation()
+                {
+                    Id = new Guid("e37b605f-8b3c-4089-b672-6ce9e6d6c23f"),
+                    AirportName = "Ataturk",
+                    Country = "Turkey",
+                    City = "Istanbul"
+                },
+                new AirportLocation()
+                {
+                    Id = new Guid("e47b605f-8b3c-4089-b672-6ce9e6d6c23f"),
+                    AirportName = "Zulyany",
+                    Country = "Ukraine",
+                    City = "Kiev"
+                }
+            };
 
-            //Flights = new List<Flight>()
-            //{
-            //    new Flight()
-            //    {
-            //        Id = new Guid("f4749477-f823-4124-aa4a-fc9ad5e79cd1"),
-            //        FlightNumber = "OD1961",
-            //        DeparturePoint = AirportLocations
-            //            .FirstOrDefault(airportLocation => 
-            //                airportLocation.Id.Equals(new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd1"))),
-            //        DepartureTime = new DateTime(2019, 7, 19),
-            //        DestinationPoint = AirportLocations
-            //            .FirstOrDefault(airportLocation =>
-            //                airportLocation.Id.Equals(new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd2"))),
-            //        ArrivalTime = new DateTime(2019, 7, 19),
-            //        Tickets = new List<Ticket>()
-            //        {
-            //            new Ticket()
-            //            {
-            //                Id = new Guid("t4749477-f823-4124-aa4a-fc9ad5e79cd1"),
-            //                Number = 1,
-            //                Price = 200,
-            //                FlightId = "f4749477-f823-4124-aa4a-fc9ad5e79cd1"
-            //            },
-            //            new Ticket()
-            //            {
-            //                Id = new Guid("t4749477-f823-4124-aa4a-fc9ad5e79cd2"),
-            //                Number = 2,
-            //                Price = 200,
-            //                FlightId = "f4749477-f823-4124-aa4a-fc9ad5e79cd1"
-            //            }
-            //        }
-            //    },
-            //    new Flight()
-            //    {
-            //        Id = new Guid("f4749477-f823-4124-aa4a-fc9ad5e79cd2"),
-            //        FlightNumber = "PN0034",
-            //        DeparturePoint = AirportLocations
-            //            .FirstOrDefault(airportLocation =>
-            //                airportLocation.Id.Equals(new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd2"))),
-            //        DepartureTime = new DateTime(2019, 5, 10),
-            //        DestinationPoint = AirportLocations
-            //            .FirstOrDefault(airportLocation =>
-            //                airportLocation.Id.Equals(new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd3"))),
-            //        ArrivalTime = new DateTime(2019, 5, 11),
-            //        Tickets = new List<Ticket>()
-            //        {
-            //            new Ticket()
-            //            {
-            //                Id = new Guid("t4749477-f823-4124-aa4a-fc9ad5e79cd3"),
-            //                Number = 3,
-            //                Price = 300
-            //            },
-            //            new Ticket()
-            //            {
-            //                Id = new Guid("t4749477-f823-4124-aa4a-fc9ad5e79cd4"),
-            //                Number = 4,
-            //                Price = 300
-            //            }
-            //        }
-            //    },
-            //    new Flight()
-            //    {
-            //        Id = new Guid("f4749477-f823-4124-aa4a-fc9ad5e79cd3"),
-            //        FlightNumber = "TZ0529",
-            //        DeparturePoint = AirportLocations
-            //            .FirstOrDefault(airportLocation =>
-            //                airportLocation.Id.Equals(new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd3"))),
-            //        DepartureTime = new DateTime(2019, 1, 19),
-            //        DestinationPoint = AirportLocations
-            //            .FirstOrDefault(airportLocation =>
-            //                airportLocation.Id.Equals(new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd4"))),
-            //        ArrivalTime = new DateTime(2019, 1, 19),
-            //        Tickets = new List<Ticket>()
-            //        {
-            //            new Ticket()
-            //            {
-            //                Id = new Guid("t4749477-f823-4124-aa4a-fc9ad5e79cd5"),
-            //                Number = 5,
-            //                Price = 400
-            //            },
-            //            new Ticket()
-            //            {
-            //                Id = new Guid("t4749477-f823-4124-aa4a-fc9ad5e79cd6"),
-            //                Number = 6,
-            //                Price = 400
-            //            }
-            //        }
-            //    },
-            //    new Flight()
-            //    {
-            //        Id = new Guid("f4749477-f823-4124-aa4a-fc9ad5e79cd4"),
-            //        FlightNumber = "OD2415",
-            //        DeparturePoint = AirportLocations
-            //            .FirstOrDefault(airportLocation =>
-            //                airportLocation.Id.Equals(new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd4"))),
-            //        DepartureTime = new DateTime(2019, 2, 18),
-            //        DestinationPoint = AirportLocations
-            //            .FirstOrDefault(airportLocation =>
-            //                airportLocation.Id.Equals(new Guid("l4749477-f823-4124-aa4a-fc9ad5e79cd1"))),
-            //        ArrivalTime = new DateTime(2019, 2, 19),
-            //        Tickets = new List<Ticket>()
-            //        {
-            //            new Ticket()
-            //            {
-            //                Id = new Guid("t4749477-f823-4124-aa4a-fc9ad5e79cd7"),
-            //                Number = 7,
-            //                Price = 340
-            //            },
-            //            new Ticket()
-            //            {
-            //                Id = new Guid("t4749477-f823-4124-aa4a-fc9ad5e79cd8"),
-            //                Number = 8,
-            //                Price = 340
-            //            }
-            //        }
-            //    }
-            //};
+            Tickets = new List<Ticket>()
+            {
+                new Ticket()
+                {
+                    Id = new Guid("147eb762-95e9-4c31-95e1-b20053fbe215"),
+                    Number = 1,
+                    Price = 310
+                },
+                new Ticket()
+                {
+                    Id = new Guid("247eb762-95e9-4c31-95e1-b20053fbe215"),
+                    Number = 2,
+                    Price = 310
+                },
+                new Ticket()
+                {
+                    Id = new Guid("347eb762-95e9-4c31-95e1-b20053fbe215"),
+                    Number = 3,
+                    Price = 300
+                },
+                new Ticket()
+                {
+                    Id = new Guid("447eb762-95e9-4c31-95e1-b20053fbe215"),
+                    Number = 4,
+                    Price = 300
+                },
+                new Ticket()
+                {
+                    Id = new Guid("547eb762-95e9-4c31-95e1-b20053fbe215"),
+                    Number = 5,
+                    Price = 400
+                },
+                new Ticket()
+                {
+                    Id = new Guid("647eb762-95e9-4c31-95e1-b20053fbe215"),
+                    Number = 6,
+                    Price = 400
+                }
+
+            };
+
+            Flights = new List<Flight>()
+            {
+                new Flight()
+                {
+                    Id = new Guid("1325360c-8253-473a-a20f-55c269c20401"),
+                    FlightNumber = "OD1961",
+                    DeparturePoint = AirportLocations
+                        .FirstOrDefault(airportLocation =>
+                            airportLocation.Id.Equals(new Guid("e17b605f-8b3c-4089-b672-6ce9e6d6c23f"))),
+                    DepartureTime = new DateTime(2019, 7, 19),
+                    DestinationPoint = AirportLocations
+                        .FirstOrDefault(airportLocation =>
+                            airportLocation.Id.Equals(new Guid("e27b605f-8b3c-4089-b672-6ce9e6d6c23f"))),
+                    ArrivalTime = new DateTime(2019, 7, 19),
+                    Tickets = new List<Ticket>()
+                    {
+                        Tickets
+                            .FirstOrDefault(ticket =>
+                                ticket.Id.Equals(new Guid("147eb762-95e9-4c31-95e1-b20053fbe215"))),
+                        Tickets
+                            .FirstOrDefault(ticket =>
+                                ticket.Id.Equals(new Guid("247eb762-95e9-4c31-95e1-b20053fbe215")))
+                    }
+                },
+                new Flight()
+                {
+                    Id = new Guid("1325360c-8253-473a-a20f-55c269c20402"),
+                    FlightNumber = "PN0034",
+                    DeparturePoint = AirportLocations
+                        .FirstOrDefault(airportLocation =>
+                            airportLocation.Id.Equals(new Guid("e27b605f-8b3c-4089-b672-6ce9e6d6c23f"))),
+                    DepartureTime = new DateTime(2019, 5, 10),
+                    DestinationPoint = AirportLocations
+                        .FirstOrDefault(airportLocation =>
+                            airportLocation.Id.Equals(new Guid("e17b605f-8b3c-4089-b672-6ce9e6d6c23f"))),
+                    ArrivalTime = new DateTime(2019, 5, 11),
+                    Tickets = new List<Ticket>()
+                    {
+                        Tickets
+                            .FirstOrDefault(ticket =>
+                                ticket.Id.Equals(new Guid("347eb762-95e9-4c31-95e1-b20053fbe215"))),
+                        Tickets
+                            .FirstOrDefault(ticket =>
+                                ticket.Id.Equals(new Guid("447eb762-95e9-4c31-95e1-b20053fbe215")))
+                    }
+                },
+                new Flight()
+                {
+                    Id = new Guid("1325360c-8253-473a-a20f-55c269c20403"),
+                    FlightNumber = "TZ0529",
+                    DeparturePoint = AirportLocations
+                        .FirstOrDefault(airportLocation =>
+                            airportLocation.Id.Equals(new Guid("e37b605f-8b3c-4089-b672-6ce9e6d6c23f"))),
+                    DepartureTime = new DateTime(2019, 1, 19),
+                    DestinationPoint = AirportLocations
+                        .FirstOrDefault(airportLocation =>
+                            airportLocation.Id.Equals(new Guid("e47b605f-8b3c-4089-b672-6ce9e6d6c23f"))),
+                    ArrivalTime = new DateTime(2019, 1, 19),
+                    Tickets = new List<Ticket>()
+                    {
+                        Tickets
+                            .FirstOrDefault(ticket =>
+                                ticket.Id.Equals(new Guid("547eb762-95e9-4c31-95e1-b20053fbe215"))),
+                        Tickets
+                            .FirstOrDefault(ticket =>
+                                ticket.Id.Equals(new Guid("647eb762-95e9-4c31-95e1-b20053fbe215")))
+                    }
+                }
+            };
 
             //Departures = new List<Departure>()
             //{
