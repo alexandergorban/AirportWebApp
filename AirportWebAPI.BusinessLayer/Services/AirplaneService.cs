@@ -25,6 +25,18 @@ namespace AirportWebAPI.BusinessLayer.Services
             _validator = validator;
         }
 
+        public IEnumerable<AirplaneDto> GetEntities()
+        {
+            var data = _repository.GetEntities();
+            return _mapper.Map<IEnumerable<Airplane>, IEnumerable<AirplaneDto>>(data);
+        }
+
+        public AirplaneDto GetEntity(Guid entityId)
+        {
+            var data = _repository.GetEntity(entityId);
+            return _mapper.Map<Airplane, AirplaneDto>(data);
+        }
+
         public AirplaneDto AddEntity(AirplaneDto entity)
         {
             var validationResult = _validator.Validate(entity);
@@ -44,26 +56,24 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Airplane, AirplaneDto>(mapedEntity);
         }
 
-        public void DeleteEntity(AirplaneDto entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<AirplaneDto> GetEntities()
-        {
-            var data = _repository.GetEntities();
-            return _mapper.Map<IEnumerable<Airplane>, IEnumerable<AirplaneDto>>(data);
-        }
-
-        public AirplaneDto GetEntity(Guid entityId)
-        {
-            var data = _repository.GetEntity(entityId);
-            return _mapper.Map<Airplane, AirplaneDto>(data);
-        }
-
         public AirplaneDto UpdateEntity(AirplaneDto entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void DeleteEntity(Guid entityId)
+        {
+            var airplaneFromRepo = _repository.GetEntity(entityId);
+            if (airplaneFromRepo == null)
+            {
+                throw new NotFoundException();
+            }
+
+            _repository.DeleteEntity(airplaneFromRepo);
+            if (!_repository.Save())
+            {
+                throw new Exception("Deleting Airplane failed on save.");
+            }
         }
     }
 }

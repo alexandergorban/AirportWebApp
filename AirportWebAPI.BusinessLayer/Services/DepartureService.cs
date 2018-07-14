@@ -61,9 +61,19 @@ namespace AirportWebAPI.BusinessLayer.Services
             throw new NotImplementedException();
         }
 
-        public void DeleteEntity(DepartureDto entity)
+        public void DeleteEntity(Guid entityId)
         {
-            throw new NotImplementedException();
+            var departureFromRepo = _repository.GetEntity(entityId);
+            if (departureFromRepo == null)
+            {
+                throw new NotFoundException();
+            }
+
+            _repository.DeleteEntity(departureFromRepo);
+            if (!_repository.Save())
+            {
+                throw new Exception("Deleting Departure failed on save.");
+            }
         }
     }
 }

@@ -12,6 +12,6 @@ namespace AirportWebAPI.BusinessLayer.Interfaces
         TEntity GetEntity(Guid entityId);
         TEntity AddEntity(TEntity entity);
         TEntity UpdateEntity(TEntity entity);
-        void DeleteEntity(TEntity entity);
+        void DeleteEntity(Guid entityId);
     }
 }

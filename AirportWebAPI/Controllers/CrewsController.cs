@@ -73,7 +73,16 @@ namespace AirportWebAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            return BadRequest();
+            try
+            {
+                _crewService.DeleteEntity(id);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }
