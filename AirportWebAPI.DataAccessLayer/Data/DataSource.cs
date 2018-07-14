@@ -179,66 +179,66 @@ namespace AirportWebAPI.DataAccessLayer.Data
                 }
             };
 
-            //Crews = new List<Crew>()
-            //{
-            //    new Crew()
-            //    {
-            //        Id = new Guid("c4749477-f823-4124-aa4a-fc9ad5e79cd1"),
-            //        Pilot = Pilots
-            //            .FirstOrDefault(pilot => 
-            //                pilot.Id.Equals(new Guid("p4749477-f823-4124-aa4a-fc9ad5e79cd1"))),
-            //        Stewardesseses = new List<Stewardess>()
-            //        {
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess => 
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd1"))),
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess => 
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd2"))),
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess => 
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd3"))),
-            //        }
-            //    },
-            //    new Crew()
-            //    {
-            //        Id = new Guid("c4749477-f823-4124-aa4a-fc9ad5e79cd2"),
-            //        Pilot = Pilots
-            //            .FirstOrDefault(pilot =>
-            //                pilot.Id.Equals(new Guid("p4749477-f823-4124-aa4a-fc9ad5e79cd2"))),
-            //        Stewardesseses = new List<Stewardess>()
-            //        {
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess =>
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd4"))),
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess =>
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd2"))),
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess =>
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd3"))),
-            //        }
-            //    },
-            //    new Crew()
-            //    {
-            //        Id = new Guid("c4749477-f823-4124-aa4a-fc9ad5e79cd3"),
-            //        Pilot = Pilots
-            //            .FirstOrDefault(pilot =>
-            //                pilot.Id.Equals(new Guid("p4749477-f823-4124-aa4a-fc9ad5e79cd3"))),
-            //        Stewardesseses = new List<Stewardess>()
-            //        {
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess =>
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd4"))),
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess =>
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd1"))),
-            //            Stewardesses
-            //                .FirstOrDefault(stewrdess =>
-            //                    stewrdess.Id.Equals(new Guid("s4749477-f823-4124-aa4a-fc9ad5e79cd3"))),
-            //        }
-            //    }
-            //};
+            Crews = new List<Crew>()
+            {
+                new Crew()
+                {
+                    Id = new Guid("a1da1d8e-1988-4634-b538-a01709477b71"),
+                    Pilot = Pilots
+                        .FirstOrDefault(pilot =>
+                            pilot.Id.Equals(new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb1"))),
+                    Stewardesseses = new List<Stewardess>()
+                    {
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e1"))),
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e2"))),
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e3"))),
+                    }
+                },
+                new Crew()
+                {
+                    Id = new Guid("a1da1d8e-1988-4634-b538-a01709477b72"),
+                    Pilot = Pilots
+                        .FirstOrDefault(pilot =>
+                            pilot.Id.Equals(new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb2"))),
+                    Stewardesseses = new List<Stewardess>()
+                    {
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e1"))),
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e2"))),
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e3"))),
+                    }
+                },
+                new Crew()
+                {
+                    Id = new Guid("a1da1d8e-1988-4634-b538-a01709477b73"),
+                    Pilot = Pilots
+                        .FirstOrDefault(pilot =>
+                            pilot.Id.Equals(new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb3"))),
+                    Stewardesseses = new List<Stewardess>()
+                    {
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e1"))),
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e2"))),
+                        Stewardesses
+                            .FirstOrDefault(stewrdess =>
+                                stewrdess.Id.Equals(new Guid("01457142-358f-495f-aafa-fb23de3d67e4"))),
+                    }
+                }
+            };
 
             //AirportLocations = new List<AirportLocation>()
             //{
