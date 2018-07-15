@@ -35,11 +35,10 @@ namespace AirportWebAPI
         {
             services.AddMvc();
 
-            services.AddDbContext<AirportDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("AirportDBConnectionString")));
+            services.AddDbContext<AirportDbContext>();
 
             // Add Data Source in Memory
-            //services.AddSingleton<DataSource>();
+            services.AddSingleton<DataSource>();
 
             services.AddTransient<IRepository<Airplane>, AirplaneRepository>();
             services.AddTransient<IRepository<AirplaneType>, AirplaneTypeRepository>();
