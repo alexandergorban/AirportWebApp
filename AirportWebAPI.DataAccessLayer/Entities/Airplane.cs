@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 
@@ -17,6 +18,7 @@ namespace AirportWebAPI.DataAccessLayer.Entities
 
         [Required]
         public AirplaneType AirplaneType { get; set; }
+        public Guid AirplaneTypeId { get; set; }
 
         [Required]
         public DateTime DateOfIssue { get; set; }
@@ -26,5 +28,8 @@ namespace AirportWebAPI.DataAccessLayer.Entities
 
         [Required]
         public bool IsOwnAirplane { get; set; }
+
+        public Departure Departure { get; set; }
+        public Guid DepartureId { get; set; }
     }
 }

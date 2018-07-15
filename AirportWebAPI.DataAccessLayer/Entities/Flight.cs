@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 
@@ -27,5 +28,11 @@ namespace AirportWebAPI.DataAccessLayer.Entities
         public DateTime ArrivalTime { get; set; }
 
         public List<Ticket> Tickets { get; set; }
+
+        public Departure Departure { get; set; }
+        public Guid DepartureId { get; set; }
+        public Guid AirportLocationId { get; set; }
+
+
     }
 }

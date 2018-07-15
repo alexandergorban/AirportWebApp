@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 
@@ -22,5 +23,7 @@ namespace AirportWebAPI.DataAccessLayer.Entities
         [Required]
         [Range(1000, 1000000)]
         public int LoadCapacity { get; set; }
+
+        public ICollection<Airplane> Airplanes { get; set; }
     }
 }
