@@ -18,16 +18,9 @@ namespace AirportWebAPI.DataAccessLayer.Data
         public DbSet<Stewardess> Stewardesses { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
 
-        public AirportDbContext()
-            : base()
-        {
-            //Database.Migrate();
-            Database.EnsureCreated();
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(LocalDb)\\MSSQLLocalDB;Database=AirportDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(LocalDb)\MSSQLLocalDB;Database=AirportDB;Trusted_Connection=True;");
             base.OnConfiguring(optionsBuilder);
         }
 
