@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AirportWebAPI.DataAccessLayer.Abstractions;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
@@ -9,30 +10,24 @@ using AutoMapper;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
-    public class FlightRepository : IRepository<Flight>
+    public class FlightRepository : BaseRepository<Flight>
     {
         private readonly AirportDbContext _context;
-        private readonly IMapper _mapper;
 
         public FlightRepository(AirportDbContext context, IMapper mapper)
+            : base(context, mapper)
         {
             _context = context;
-            _mapper = mapper;
         }
 
-        public IEnumerable<Flight> GetEntities()
+        public override IEnumerable<Flight> GetEntities()
         {
             return _context.Flights
                 .OrderBy(f => f.DepartureTime)
                 .ToList();
         }
 
-        public Flight GetEntity(Guid entityId)
-        {
-            return _context.Flights.FirstOrDefault(f => f.Id == entityId);
-        }
-
-        public void AddEntity(Flight entity)
+        public override void AddEntity(Flight entity)
         {
             entity.Id = Guid.NewGuid();
             _context.Flights.Add(entity);
@@ -44,22 +39,6 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                     entityTicket.Id = Guid.NewGuid();
                 }
             }
-        }
-
-        public void UpdateEntity(Flight entity)
-        {
-            var flightsFromRepo = _context.Flights.First(f => f.Id == entity.Id);
-            _mapper.Map(entity, flightsFromRepo);
-        }
-
-        public void DeleteEntity(Flight entity)
-        {
-            _context.Flights.Remove(entity);
-        }
-
-        public bool EntityExists(Guid entityId)
-        {
-            return _context.Flights.Any(f => f.Id == entityId);
         }
 
         // Tickets
@@ -79,11 +58,6 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
         public void DeleteTicket(Ticket ticket)
         {
             _context.Tickets.Remove(ticket);
-        }
-
-        public bool Save()
-        {
-            return (_context.SaveChanges() >= 0);
         }
     }
 }
