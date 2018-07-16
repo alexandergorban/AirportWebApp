@@ -9,6 +9,6 @@ namespace AirportWebAPI.DataAccessLayer.Entities
     {
         public Guid Id { get; set; }
         public PilotDto Pilot { get; set; }
-        public List<StewardessDto> Stewardesseses { get; set; }
+        public List<StewardessDto> Stewardesses { get; set; }
     }
 }

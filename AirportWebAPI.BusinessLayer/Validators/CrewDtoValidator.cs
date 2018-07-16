@@ -13,7 +13,7 @@ namespace AirportWebAPI.BusinessLayer.Validators
             RuleFor(c => c.Pilot)
                 .NotNull();
 
-            RuleFor(c => c.Stewardesseses)
+            RuleFor(c => c.Stewardesses)
                 .NotNull();
         }
     }

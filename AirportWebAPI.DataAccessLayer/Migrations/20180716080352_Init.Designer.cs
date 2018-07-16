@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirportWebAPI.DataAccessLayer.Migrations
 {
     [DbContext(typeof(AirportDbContext))]
-    [Migration("20180715131309_Init")]
+    [Migration("20180716080352_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,8 +29,6 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
 
                     b.Property<DateTime>("DateOfIssue");
 
-                    b.Property<Guid>("DepartureId");
-
                     b.Property<bool>("IsOwnAirplane");
 
                     b.Property<TimeSpan>("LifeTime");
@@ -42,9 +40,6 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AirplaneTypeId");
-
-                    b.HasIndex("DepartureId")
-                        .IsUnique();
 
                     b.ToTable("Airplanes");
                 });
@@ -94,17 +89,11 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("DepartureId");
-
                     b.Property<Guid>("PilotId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartureId")
-                        .IsUnique();
-
-                    b.HasIndex("PilotId")
-                        .IsUnique();
+                    b.HasIndex("PilotId");
 
                     b.ToTable("Crews");
                 });
@@ -114,13 +103,25 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<Guid>("AirplaneId");
+
+                    b.Property<Guid>("CrewId");
+
                     b.Property<DateTime>("DepartureTime");
 
                     b.Property<DateTime>("DepartureTimeChanged");
 
+                    b.Property<Guid>("FlightId");
+
                     b.Property<bool>("IsFlightDelay");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AirplaneId");
+
+                    b.HasIndex("CrewId");
+
+                    b.HasIndex("FlightId");
 
                     b.ToTable("Departures");
                 });
@@ -130,25 +131,21 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AirportLocationId");
-
                     b.Property<DateTime>("ArrivalTime");
 
-                    b.Property<Guid>("DepartureId");
+                    b.Property<Guid?>("DeparturePointId");
 
                     b.Property<DateTime>("DepartureTime");
 
-                    b.Property<Guid>("DestinationPointId");
+                    b.Property<Guid?>("DestinationPointId");
 
                     b.Property<string>("FlightNumber")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(10);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AirportLocationId");
-
-                    b.HasIndex("DepartureId")
-                        .IsUnique();
+                    b.HasIndex("DeparturePointId");
 
                     b.HasIndex("DestinationPointId");
 
@@ -182,7 +179,7 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("CrewId");
+                    b.Property<Guid?>("CrewId");
 
                     b.Property<DateTime>("DateOfBirth");
 
@@ -210,8 +207,6 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
 
                     b.Property<long>("Number");
 
-                    b.Property<Guid>("OwnerId");
-
                     b.Property<float>("Price");
 
                     b.HasKey("Id");
@@ -224,58 +219,58 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
             modelBuilder.Entity("AirportWebAPI.DataAccessLayer.Entities.Airplane", b =>
                 {
                     b.HasOne("AirportWebAPI.DataAccessLayer.Entities.AirplaneType", "AirplaneType")
-                        .WithMany("Airplanes")
+                        .WithMany()
                         .HasForeignKey("AirplaneTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Departure", "Departure")
-                        .WithOne("Airplane")
-                        .HasForeignKey("AirportWebAPI.DataAccessLayer.Entities.Airplane", "DepartureId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AirportWebAPI.DataAccessLayer.Entities.Crew", b =>
                 {
-                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Departure", "Departure")
-                        .WithOne("Crew")
-                        .HasForeignKey("AirportWebAPI.DataAccessLayer.Entities.Crew", "DepartureId")
+                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Pilot", "Pilot")
+                        .WithMany()
+                        .HasForeignKey("PilotId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AirportWebAPI.DataAccessLayer.Entities.Departure", b =>
+                {
+                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Airplane", "Airplane")
+                        .WithMany()
+                        .HasForeignKey("AirplaneId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Pilot", "Pilot")
-                        .WithOne("Crew")
-                        .HasForeignKey("AirportWebAPI.DataAccessLayer.Entities.Crew", "PilotId")
+                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Crew", "Crew")
+                        .WithMany()
+                        .HasForeignKey("CrewId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FlightId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AirportWebAPI.DataAccessLayer.Entities.Flight", b =>
                 {
                     b.HasOne("AirportWebAPI.DataAccessLayer.Entities.AirportLocation", "DeparturePoint")
-                        .WithMany("Flights")
-                        .HasForeignKey("AirportLocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Departure", "Departure")
-                        .WithOne("Flight")
-                        .HasForeignKey("AirportWebAPI.DataAccessLayer.Entities.Flight", "DepartureId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("DeparturePointId");
 
                     b.HasOne("AirportWebAPI.DataAccessLayer.Entities.AirportLocation", "DestinationPoint")
                         .WithMany()
-                        .HasForeignKey("DestinationPointId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DestinationPointId");
                 });
 
             modelBuilder.Entity("AirportWebAPI.DataAccessLayer.Entities.Stewardess", b =>
                 {
-                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Crew", "Crew")
-                        .WithMany("Stewardesseses")
-                        .HasForeignKey("CrewId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Crew")
+                        .WithMany("Stewardesses")
+                        .HasForeignKey("CrewId");
                 });
 
             modelBuilder.Entity("AirportWebAPI.DataAccessLayer.Entities.Ticket", b =>
                 {
-                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Flight", "Flight")
+                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Flight")
                         .WithMany("Tickets")
                         .HasForeignKey("FlightId")
                         .OnDelete(DeleteBehavior.Cascade);

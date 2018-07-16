@@ -37,9 +37,6 @@ namespace AirportWebAPI
 
             services.AddDbContext<AirportDbContext>();
 
-            // Add Data Source in Memory
-            services.AddSingleton<DataSource>();
-
             services.AddTransient<IRepository<Airplane>, AirplaneRepository>();
             services.AddTransient<IRepository<AirplaneType>, AirplaneTypeRepository>();
             services.AddTransient<IRepository<Crew>, CrewRepository>();
@@ -72,15 +69,12 @@ namespace AirportWebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AirportDbContext airportDbContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            // Seed mock data
-            airportDbContext.EnsureSeedDataForContext();
 
             app.UseMvc();
         }

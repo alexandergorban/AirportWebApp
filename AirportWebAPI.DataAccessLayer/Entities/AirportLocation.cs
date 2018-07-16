@@ -23,7 +23,5 @@ namespace AirportWebAPI.DataAccessLayer.Entities
         [Required]
         [MaxLength(30)]
         public string City { get; set; }
-
-        public ICollection<Flight> Flights { get; set; } = new List<Flight>();
     }
 }

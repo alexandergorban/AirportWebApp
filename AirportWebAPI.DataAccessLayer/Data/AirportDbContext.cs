@@ -18,63 +18,21 @@ namespace AirportWebAPI.DataAccessLayer.Data
         public DbSet<Stewardess> Stewardesses { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AirportDbContext(DbContextOptions<AirportDbContext> options)
+            : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=(LocalDb)\MSSQLLocalDB;Database=AirportDB;Trusted_Connection=True;");
-            base.OnConfiguring(optionsBuilder);
+            Database.Migrate();
+
+            if (Database.EnsureCreated())
+            {
+                this.EnsureSeedDataForContext();
+            }
         }
 
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Ticket => Flight
-            modelBuilder.Entity<Ticket>()
-                .HasOne<Flight>(t => t.Flight)
-                .WithMany(f => f.Tickets)
-                .HasForeignKey(t => t.FlightId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // Airplane => AirplaneType
-            modelBuilder.Entity<Airplane>()
-                .HasOne<AirplaneType>(at => at.AirplaneType)
-                .WithMany(a => a.Airplanes)
-                .HasForeignKey(at => at.AirplaneTypeId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // Departure => 1.Flight 2.Crew 3.Airplane
-            modelBuilder.Entity<Departure>()
-                .HasOne<Flight>(d => d.Flight)
-                .WithOne(f => f.Departure)
-                .HasForeignKey<Flight>(d => d.DepartureId);
-
-            modelBuilder.Entity<Departure>()
-                .HasOne<Crew>(d => d.Crew)
-                .WithOne(c => c.Departure)
-                .HasForeignKey<Crew>(d => d.DepartureId);
-
-            modelBuilder.Entity<Departure>()
-                .HasOne<Airplane>(d => d.Airplane)
-                .WithOne(a => a.Departure)
-                .HasForeignKey<Airplane>(a => a.DepartureId);
-
-            // Pilot => Crew
-            modelBuilder.Entity<Pilot>()
-                .HasOne<Crew>(p => p.Crew)
-                .WithOne(c => c.Pilot)
-                .HasForeignKey<Crew>(c => c.PilotId);
-
-            // Stewardess  => Crew
-            modelBuilder.Entity<Stewardess>()
-                .HasOne<Crew>(s => s.Crew)
-                .WithMany(c => c.Stewardesseses)
-                .HasForeignKey(s => s.CrewId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // AirportLocation => Flight
-            modelBuilder.Entity<Flight>()
-                .HasOne<AirportLocation>(f => f.DeparturePoint)
-                .WithMany(a => a.Flights)
-                .HasForeignKey(f => f.AirportLocationId);
+            optionsBuilder.UseSqlServer(@"Server=(LocalDb)\MSSQLLocalDB;Database=AirportWebAppDB;Trusted_Connection=True;");
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

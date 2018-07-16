@@ -30,7 +30,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
         public IEnumerable<Ticket> GetEntities(Guid flightId)
         {
             return _context.Tickets
-                .Where(t => t.OwnerId == flightId)
+                .Where(t => t.FlightId == flightId)
                 .OrderBy(t => t.Number)
                 .ToList();
         }

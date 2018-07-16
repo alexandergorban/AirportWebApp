@@ -14,12 +14,8 @@ namespace AirportWebAPI.DataAccessLayer.Entities
 
         [Required]
         public Pilot Pilot { get; set; }
-        public Guid PilotId { get; set; }
 
         [Required]
-        public List<Stewardess> Stewardesseses { get; set; } = new List<Stewardess>();
-
-        public Departure Departure { get; set; }
-        public Guid DepartureId { get; set; }
+        public ICollection<Stewardess> Stewardesses { get; set; } = new List<Stewardess>();
     }
 }

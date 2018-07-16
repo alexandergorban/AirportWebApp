@@ -23,7 +23,5 @@ namespace AirportWebAPI.DataAccessLayer.Entities
         [Required]
         [Range(1000, 1000000)]
         public int LoadCapacity { get; set; }
-
-        public ICollection<Airplane> Airplanes { get; set; } = new List<Airplane>();
     }
 }

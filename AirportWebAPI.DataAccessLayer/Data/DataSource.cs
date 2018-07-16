@@ -187,7 +187,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                     Pilot = Pilots
                         .FirstOrDefault(pilot =>
                             pilot.Id.Equals(new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb1"))),
-                    Stewardesseses = new List<Stewardess>()
+                    Stewardesses = new List<Stewardess>()
                     {
                         Stewardesses
                             .FirstOrDefault(stewrdess =>
@@ -206,7 +206,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                     Pilot = Pilots
                         .FirstOrDefault(pilot =>
                             pilot.Id.Equals(new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb2"))),
-                    Stewardesseses = new List<Stewardess>()
+                    Stewardesses = new List<Stewardess>()
                     {
                         Stewardesses
                             .FirstOrDefault(stewrdess =>
@@ -225,7 +225,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                     Pilot = Pilots
                         .FirstOrDefault(pilot =>
                             pilot.Id.Equals(new Guid("412c3012-d891-4f5e-9613-ff7aa63e6bb3"))),
-                    Stewardesseses = new List<Stewardess>()
+                    Stewardesses = new List<Stewardess>()
                     {
                         Stewardesses
                             .FirstOrDefault(stewrdess =>

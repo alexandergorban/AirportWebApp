@@ -13,26 +13,19 @@ namespace AirportWebAPI.DataAccessLayer.Entities
         public Guid Id { get; set; }
 
         [Required]
+        [MaxLength(10)]
         public string FlightNumber { get; set; }
 
-        [Required]
         public AirportLocation DeparturePoint { get; set; }
 
         [Required]
         public DateTime DepartureTime { get; set; }
 
-        [Required]
         public AirportLocation DestinationPoint { get; set; }
 
         [Required]
         public DateTime ArrivalTime { get; set; }
 
-        public List<Ticket> Tickets { get; set; } = new List<Ticket>();
-
-        public Departure Departure { get; set; }
-        public Guid DepartureId { get; set; }
-        public Guid AirportLocationId { get; set; }
-
-
+        public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
     }
 }

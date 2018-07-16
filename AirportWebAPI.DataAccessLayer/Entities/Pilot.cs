@@ -25,7 +25,5 @@ namespace AirportWebAPI.DataAccessLayer.Entities
 
         [Required]
         public TimeSpan Experience { get; set; }
-
-        public Crew Crew { get; set; }
     }
 }

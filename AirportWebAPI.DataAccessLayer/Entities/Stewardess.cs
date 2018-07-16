@@ -22,8 +22,5 @@ namespace AirportWebAPI.DataAccessLayer.Entities
 
         [Required]
         public DateTime DateOfBirth { get; set; }
-
-        public Crew Crew { get; set; }
-        public Guid CrewId { get; set; }
     }
 }
