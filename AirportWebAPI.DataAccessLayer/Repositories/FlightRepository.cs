@@ -30,6 +30,16 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 .ToList();
         }
 
+        public override Flight GetEntity(Guid entityId)
+        {
+            return _context.Flights
+                .Include(f => f.DeparturePoint)
+                .Include(f => f.DestinationPoint)
+                .Include(f => f.Tickets)
+                .OrderBy(f => f.DepartureTime)
+                .FirstOrDefault(f => f.Id == entityId);
+        }
+
         public override void AddEntity(Flight entity)
         {
             entity.Id = Guid.NewGuid();
@@ -40,6 +50,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 foreach (var entityTicket in entity.Tickets)
                 {
                     entityTicket.Id = Guid.NewGuid();
+                    
                 }
             }
         }
