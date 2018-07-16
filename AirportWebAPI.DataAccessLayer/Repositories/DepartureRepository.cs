@@ -7,6 +7,7 @@ using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
@@ -23,6 +24,12 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
         public override IEnumerable<Departure> GetEntities()
         {
             return _context.Departures
+                .Include(d => d.Flight)
+                .Include(d => d.Crew)
+                .Include(d => d.Crew.Pilot)
+                .Include(d => d.Crew.Stewardesses)
+                .Include(d => d.Airplane)
+                .Include(d => d.Airplane.AirplaneType)
                 .OrderBy(d => d.DepartureTime)
                 .ToList();
         }
