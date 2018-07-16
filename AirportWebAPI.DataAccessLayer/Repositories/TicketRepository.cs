@@ -47,26 +47,5 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             entity.Id = Guid.NewGuid();
             _context.Tickets.Add(entity);
         }
-
-        public override void UpdateEntity(Ticket entity)
-        {
-            var ticketFromRepo = _context.Tickets.First(t => t.Id == entity.Id);
-            _mapper.Map(entity, ticketFromRepo);
-        }
-
-        public override void DeleteEntity(Ticket entity)
-        {
-            _context.Tickets.Remove(entity);
-        }
-
-        //public bool EntityExists(Guid entityId)
-        //{
-        //    return _context.Tickets.Any(t => t.Id == entityId);
-        //}
-
-        //public bool Save()
-        //{
-        //    return (_context.SaveChanges() >= 0);
-        //}
     }
 }
