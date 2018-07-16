@@ -73,7 +73,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                         .FirstOrDefault(airplaneType =>
                             airplaneType.Id.Equals(new Guid("15320c5e-f58a-4b1f-b63a-8ee07a840bdf"))),
                     DateOfIssue = new DateTime(2011, 1, 17),
-                    LifeTime = new TimeSpan(500, 0, 0, 0),
+//                    LifeTime = new TimeSpan(500, 0, 0, 0),
                     IsOwnAirplane = true
                 },
                 new Airplane()
@@ -84,7 +84,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                         .FirstOrDefault(airplaneType =>
                             airplaneType.Id.Equals(new Guid("25320c5e-f58a-4b1f-b63a-8ee07a840bdf"))),
                     DateOfIssue = new DateTime(2011, 1, 17),
-                    LifeTime = new TimeSpan(500, 0, 0, 0),
+//                    LifeTime = new TimeSpan(500, 0, 0, 0),
                     IsOwnAirplane = true
                 },
                 new Airplane()
@@ -95,7 +95,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                         .FirstOrDefault(airplaneType =>
                             airplaneType.Id.Equals(new Guid("35320c5e-f58a-4b1f-b63a-8ee07a840bdf"))),
                     DateOfIssue = new DateTime(2011, 1, 17),
-                    LifeTime = new TimeSpan(500, 0, 0, 0),
+//                    LifeTime = new TimeSpan(500, 0, 0, 0),
                     IsOwnAirplane = true
                 },
                 new Airplane()
@@ -106,7 +106,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                         .FirstOrDefault(airplaneType =>
                             airplaneType.Id.Equals(new Guid("45320c5e-f58a-4b1f-b63a-8ee07a840bdf"))),
                     DateOfIssue = new DateTime(2011, 1, 17),
-                    LifeTime = new TimeSpan(500, 0, 0, 0),
+//                    LifeTime = new TimeSpan(500, 0, 0, 0),
                     IsOwnAirplane = true
                 }
             };
@@ -119,7 +119,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                     Name = "Mike",
                     Surname = "Doe",
                     DateOfBirth = new DateTime(1980, 7, 20),
-                    Experience = new TimeSpan(783, 0, 0, 0)
+//                    Experience = new TimeSpan(783, 0, 0, 0)
                 },
                 new Pilot()
                 {
@@ -127,7 +127,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                     Name = "Jac",
                     Surname = "Low",
                     DateOfBirth = new DateTime(1980, 1, 10),
-                    Experience = new TimeSpan(543, 0, 0, 0)
+//                    Experience = new TimeSpan(543, 0, 0, 0)
                 },
                 new Pilot()
                 {
@@ -135,7 +135,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                     Name = "Brad",
                     Surname = "Marrow",
                     DateOfBirth = new DateTime(1990, 7, 21),
-                    Experience = new TimeSpan(923, 0, 0, 0)
+//                    Experience = new TimeSpan(923, 0, 0, 0)
                 },
                 new Pilot()
                 {
@@ -143,7 +143,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
                     Name = "Nick",
                     Surname = "Hoy",
                     DateOfBirth = new DateTime(1980, 5, 15),
-                    Experience = new TimeSpan(383, 0, 0, 0)
+//                    Experience = new TimeSpan(383, 0, 0, 0)
                 }
             };
 

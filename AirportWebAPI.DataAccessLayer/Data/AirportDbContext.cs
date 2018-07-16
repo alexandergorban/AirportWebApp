@@ -21,8 +21,6 @@ namespace AirportWebAPI.DataAccessLayer.Data
         public AirportDbContext(DbContextOptions<AirportDbContext> options)
             : base(options)
         {
-            Database.Migrate();
-
             if (Database.EnsureCreated())
             {
                 this.EnsureSeedDataForContext();
