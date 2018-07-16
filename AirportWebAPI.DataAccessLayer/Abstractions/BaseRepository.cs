@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace AirportWebAPI.DataAccessLayer.Abstractions
 {
-    abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
+    public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
         private readonly AirportDbContext _context;
         private readonly IMapper _mapper;
