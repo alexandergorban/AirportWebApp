@@ -1,45 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
+using AutoMapper;
 
 namespace AirportWebAPI.DataAccessLayer.Abstractions
 {
-    abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
+    abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
-        public IEnumerable<TEntity> GetEntities()
+        private readonly AirportDbContext _context;
+        private readonly IMapper _mapper;
+
+        protected BaseRepository(AirportDbContext context, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _mapper = mapper;
         }
 
-        public TEntity GetEntity(Guid entityId)
+        public virtual IEnumerable<TEntity> GetEntities()
         {
-            throw new NotImplementedException();
+            return _context.Set<TEntity>()
+                .OrderBy(e => e.Id)
+                .ToList();
         }
 
-        public void AddEntity(TEntity entity)
+        public virtual TEntity GetEntity(Guid entityId)
         {
-            throw new NotImplementedException();
+            return _context.Set<TEntity>().FirstOrDefault(e => e.Id == entityId);
         }
 
-        public void UpdateEntity(TEntity entity)
+        public virtual void AddEntity(TEntity entity)
         {
-            throw new NotImplementedException();
+            entity.Id = Guid.NewGuid();
+            _context.Set<TEntity>().Add(entity);
         }
 
-        public void DeleteEntity(TEntity entity)
+        public virtual void UpdateEntity(TEntity entity)
         {
-            throw new NotImplementedException();
+            var entiryFromRepo = _context.Set<TEntity>().First(e => e.Id == entity.Id);
+            _mapper.Map(entity, entiryFromRepo);
+        }
+
+        public virtual void DeleteEntity(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
         }
 
         public bool EntityExists(Guid entityId)
         {
-            throw new NotImplementedException();
+            return _context.Set<TEntity>().Any(c => c.Id == entityId);
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
     }
 }
