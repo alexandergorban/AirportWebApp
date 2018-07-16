@@ -15,8 +15,10 @@ namespace AirportWebAPI.DataAccessLayer.Entities
         [Required]
         public uint  Number { get; set; }
 
-        [ForeignKey("Flights")]
         public Guid FlightId { get; set; }
+
+        [ForeignKey("FlightId")]
+        public Flight Flight { get; set; }
 
         [Required]
         public float Price { get; set; }

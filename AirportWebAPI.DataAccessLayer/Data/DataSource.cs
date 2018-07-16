@@ -279,42 +279,42 @@ namespace AirportWebAPI.DataAccessLayer.Data
                     Id = new Guid("147eb762-95e9-4c31-95e1-b20053fbe215"),
                     Number = 1,
                     Price = 310,
-                    //FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20401")
+                    FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20401")
                 },
                 new Ticket()
                 {
                     Id = new Guid("247eb762-95e9-4c31-95e1-b20053fbe215"),
                     Number = 2,
                     Price = 310,
-                    //FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20401")
+                    FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20401")
                 },
                 new Ticket()
                 {
                     Id = new Guid("347eb762-95e9-4c31-95e1-b20053fbe215"),
                     Number = 3,
                     Price = 300,
-                    //FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20402")
+                    FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20402")
                 },
                 new Ticket()
                 {
                     Id = new Guid("447eb762-95e9-4c31-95e1-b20053fbe215"),
                     Number = 4,
                     Price = 300,
-                    //FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20402")
+                    FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20402")
                 },
                 new Ticket()
                 {
                     Id = new Guid("547eb762-95e9-4c31-95e1-b20053fbe215"),
                     Number = 5,
                     Price = 400,
-                    //FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20403")
+                    FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20403")
                 },
                 new Ticket()
                 {
                     Id = new Guid("647eb762-95e9-4c31-95e1-b20053fbe215"),
                     Number = 6,
                     Price = 400,
-                    //FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20403")
+                    FlightId = new Guid("1325360c-8253-473a-a20f-55c269c20403")
                 }
 
             };

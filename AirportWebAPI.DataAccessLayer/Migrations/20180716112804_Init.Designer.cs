@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirportWebAPI.DataAccessLayer.Migrations
 {
     [DbContext(typeof(AirportDbContext))]
-    [Migration("20180716080646_Init")]
+    [Migration("20180716112804_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -270,7 +270,7 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
 
             modelBuilder.Entity("AirportWebAPI.DataAccessLayer.Entities.Ticket", b =>
                 {
-                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Flight")
+                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Flight", "Flight")
                         .WithMany("Tickets")
                         .HasForeignKey("FlightId")
                         .OnDelete(DeleteBehavior.Cascade);

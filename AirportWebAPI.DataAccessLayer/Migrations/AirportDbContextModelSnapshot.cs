@@ -268,7 +268,7 @@ namespace AirportWebAPI.DataAccessLayer.Migrations
 
             modelBuilder.Entity("AirportWebAPI.DataAccessLayer.Entities.Ticket", b =>
                 {
-                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Flight")
+                    b.HasOne("AirportWebAPI.DataAccessLayer.Entities.Flight", "Flight")
                         .WithMany("Tickets")
                         .HasForeignKey("FlightId")
                         .OnDelete(DeleteBehavior.Cascade);
