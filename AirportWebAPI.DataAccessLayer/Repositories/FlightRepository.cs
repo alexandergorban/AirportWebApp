@@ -7,6 +7,7 @@ using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
@@ -23,8 +24,20 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
         public override IEnumerable<Flight> GetEntities()
         {
             return _context.Flights
+                .Include(f => f.DeparturePoint)
+                .Include(f => f.DestinationPoint)
                 .OrderBy(f => f.DepartureTime)
                 .ToList();
+        }
+
+        public override Flight GetEntity(Guid entityId)
+        {
+            return _context.Flights
+                .Include(f => f.DeparturePoint)
+                .Include(f => f.DestinationPoint)
+                .Include(f => f.Tickets)
+                .OrderBy(f => f.DepartureTime)
+                .FirstOrDefault(f => f.Id == entityId);
         }
 
         public override void AddEntity(Flight entity)
@@ -37,6 +50,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 foreach (var entityTicket in entity.Tickets)
                 {
                     entityTicket.Id = Guid.NewGuid();
+                    
                 }
             }
         }
