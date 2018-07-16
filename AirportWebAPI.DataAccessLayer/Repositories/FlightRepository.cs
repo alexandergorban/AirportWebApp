@@ -68,10 +68,5 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 flight.Tickets.Add(ticket);
             }
         }
-
-        public void DeleteTicket(Ticket ticket)
-        {
-            _context.Tickets.Remove(ticket);
-        }
     }
 }
