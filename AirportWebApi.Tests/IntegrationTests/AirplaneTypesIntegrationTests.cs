@@ -13,6 +13,7 @@ using AirportWebAPI.DataAccessLayer.Repositories;
 using AutoMapper;
 using FluentValidation;
 using NUnit.Framework;
+using Shared.Exceptions;
 
 namespace AirportWebApi.Tests.IntegrationTests
 {
@@ -73,6 +74,33 @@ namespace AirportWebApi.Tests.IntegrationTests
 
             Assert.NotNull(airplaneTypeDto);
             Assert.AreEqual(entity.Id, airplaneTypeDto.Id);
+        }
+
+        [Test]
+        public void AddEntity_When_ValidAirplaneTypeDto_Then_Return_AirplaneTypeDto()
+        {
+            var validAirplaneTypeDto = new AirplaneTypeDto()
+            {
+                Model = "Airbus A310",
+                NumberOfSeats = 183,
+                LoadCapacity = 164000
+            };
+
+            var airplaneTypeDto = _service.AddEntity(validAirplaneTypeDto);
+
+            Assert.NotNull(airplaneTypeDto);
+            Assert.AreEqual(validAirplaneTypeDto.NumberOfSeats, airplaneTypeDto.NumberOfSeats);
+        }
+
+        [Test]
+        public void AddEntity_When_InvallidAirplaneTypeDto_Then_ReturnBadRequestException()
+        {
+            var invalidAirplaneTypeDto = new AirplaneTypeDto()
+            {
+                Model = "Airbus A310"
+            };
+
+            Assert.Throws<BadRequestException>(() => _service.AddEntity(invalidAirplaneTypeDto));
         }
     }
 }
