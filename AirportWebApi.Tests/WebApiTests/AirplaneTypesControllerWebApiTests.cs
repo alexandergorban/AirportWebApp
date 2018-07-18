@@ -55,7 +55,7 @@ namespace AirportWebApi.Tests.WebApiTests
         }
 
         [Test]
-        public void Get_When_Request_ById_Then_Respons_200OK()
+        public void Get_When_Request_ByValidId_Then_Respons_200OK()
         {
             var entity = _context.AirplaneTypes.First();
             var airplaneTypeUrlById = _airplaneTypeUrl + "/" + entity.Id.ToString();
@@ -72,7 +72,7 @@ namespace AirportWebApi.Tests.WebApiTests
         }
 
         [Test]
-        public void Post_When_Request_AirplaneTypeValid_Then_Respons_201OK()
+        public void Post_When_Request_ValidAirplaneType_Then_Respons_201OK()
         {
             var validAirplaneTypeDto = new AirplaneTypeDto()
             {
@@ -93,7 +93,7 @@ namespace AirportWebApi.Tests.WebApiTests
         }
 
         [Test]
-        public void Post_When_Request_AirplaneTypeInvalid_Then_Respons_400BadRequest()
+        public void Post_When_Request_InvalidAirplaneType_Then_Respons_400BadRequest()
         {
             var invalidAirplaneTypeDto = new AirplaneTypeDto()
             {
@@ -112,6 +112,18 @@ namespace AirportWebApi.Tests.WebApiTests
 
             Assert.NotNull(result);
             Assert.AreEqual(HttpStatusCode.BadRequest, result.StatusCode);
+        }
+
+        [Test]
+        public void Put_When_Request_ByValidId_Then_Respons_204NoContent()
+        {
+            var entity = _context.AirplaneTypes.First();
+            entity.Model = "New Model";
+            var airplaneTypeUrlById = _airplaneTypeUrl + "/" + entity.Id.ToString();
+
+            _restMethods.Put(airplaneTypeUrlById, out HttpWebResponse response, entity);
+
+            Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
         }
     }
 }
