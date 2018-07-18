@@ -128,5 +128,19 @@ namespace AirportWebApi.Tests.IntegrationTests
 
             Assert.Throws<BadRequestException>(() => _service.UpdateEntity(invalidAirplaneTypeDto));
         }
+
+        [Test]
+        public void DeleteEntity_When_ByValidId_Then_DoesNotThrow()
+        {
+            var airplaneType = _context.AirplaneTypes.First();
+
+            Assert.DoesNotThrow(() => _service.DeleteEntity(airplaneType.Id));
+        }
+
+        [Test]
+        public void DeleteEntity_When_ByInvalidId_Then_Return_NotFoundException()
+        {
+            Assert.Throws<NotFoundException>(() => _service.DeleteEntity(Guid.NewGuid()));
+        }
     }
 }
