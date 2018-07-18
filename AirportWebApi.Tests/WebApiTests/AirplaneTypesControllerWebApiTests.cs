@@ -146,5 +146,35 @@ namespace AirportWebApi.Tests.WebApiTests
             Assert.NotNull(result);
             Assert.AreEqual(HttpStatusCode.NotFound, result.StatusCode);
         }
+
+        [Test]
+        public void Delete_When_Request_ByValidId_Then_Respons_204NoContent()
+        {
+            var entity = _context.AirplaneTypes.First();
+            var airplaneTypeUrlById = _airplaneTypeUrl + "/" + entity.Id.ToString();
+
+            _restMethods.Delete(airplaneTypeUrlById, out HttpWebResponse response);
+
+            Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+        }
+
+        [Test]
+        public void Delete_When_Request_ByInvalidId_Then_Respons_404NotFound()
+        {
+            var airplaneTypeUrlByInvalidId = _airplaneTypeUrl + "/" + Guid.NewGuid().ToString();
+
+            var result = new HttpWebResponse();
+            try
+            {
+                _restMethods.Delete(airplaneTypeUrlByInvalidId, out HttpWebResponse response);
+            }
+            catch (WebException e)
+            {
+                result = e.Response as HttpWebResponse;
+            }
+
+            Assert.NotNull(result);
+            Assert.AreEqual(HttpStatusCode.NotFound, result.StatusCode);
+        }
     }
 }
