@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AirportWebAPI.DataAccessLayer.Abstractions;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
@@ -22,30 +24,30 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _mapper = mapper;
         }
 
-        public override IEnumerable<Ticket> GetEntities()
+        public override async Task<IEnumerable<Ticket>> GetEntities()
         {
-            return _context.Tickets
+            return await _context.Tickets
                 .OrderBy(t => t.Number)
-                .ToList();
+                .ToListAsync();
         }
 
-        public IEnumerable<Ticket> GetEntities(Guid flightId)
+        public async Task<IEnumerable<Ticket>> GetEntities(Guid flightId)
         {
-            return _context.Tickets
+            return await _context.Tickets
                 .Where(t => t.FlightId == flightId)
                 .OrderBy(t => t.Number)
-                .ToList();
+                .ToListAsync();
         }
 
-        public override Ticket GetEntity(Guid entityId)
+        public override async Task<Ticket> GetEntity(Guid entityId)
         {
-            return _context.Tickets.FirstOrDefault(t => t.Id == entityId);
+            return await _context.Tickets.FirstOrDefaultAsync(t => t.Id == entityId);
         }
 
-        public override void AddEntity(Ticket entity)
+        public override async Task AddEntity(Ticket entity)
         {
             entity.Id = Guid.NewGuid();
-            _context.Tickets.Add(entity);
+            await _context.Tickets.AddAsync(entity);
         }
     }
 }

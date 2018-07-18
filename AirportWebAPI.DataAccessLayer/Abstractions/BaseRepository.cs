@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace AirportWebAPI.DataAccessLayer.Abstractions
 {
@@ -19,43 +21,43 @@ namespace AirportWebAPI.DataAccessLayer.Abstractions
             _mapper = mapper;
         }
 
-        public virtual IEnumerable<TEntity> GetEntities()
+        public virtual async Task<IEnumerable<TEntity>> GetEntities()
         {
-            return _context.Set<TEntity>()
+            return await _context.Set<TEntity>()
                 .OrderBy(e => e.Id)
-                .ToList();
+                .ToListAsync();
         }
 
-        public virtual TEntity GetEntity(Guid entityId)
+        public virtual async Task<TEntity> GetEntity(Guid entityId)
         {
-            return _context.Set<TEntity>().FirstOrDefault(e => e.Id == entityId);
+            return await _context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == entityId);
         }
 
-        public virtual void AddEntity(TEntity entity)
+        public virtual async Task AddEntity(TEntity entity)
         {
             entity.Id = Guid.NewGuid();
-            _context.Set<TEntity>().Add(entity);
+            await _context.Set<TEntity>().AddAsync(entity);
         }
 
-        public virtual void UpdateEntity(TEntity entity)
+        public virtual async Task UpdateEntity(TEntity entity)
         {
-            var entiryFromRepo = _context.Set<TEntity>().First(e => e.Id == entity.Id);
+            var entiryFromRepo = await _context.Set<TEntity>().FirstAsync(e => e.Id == entity.Id);
             _mapper.Map(entity, entiryFromRepo);
         }
 
-        public virtual void DeleteEntity(TEntity entity)
+        public virtual async Task DeleteEntity(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
         }
 
-        public bool EntityExists(Guid entityId)
+        public async Task<bool> EntityExists(Guid entityId)
         {
-            return _context.Set<TEntity>().Any(c => c.Id == entityId);
+            return await _context.Set<TEntity>().AnyAsync(c => c.Id == entityId);
         }
 
-        public bool Save()
+        public async Task<bool> Save()
         {
-            return (_context.SaveChanges() >= 0);
+            return (await _context.SaveChangesAsync() >= 0);
         }
     }
 }

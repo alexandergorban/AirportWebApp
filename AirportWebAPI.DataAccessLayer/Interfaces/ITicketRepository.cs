@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using AirportWebAPI.DataAccessLayer.Entities;
 
 namespace AirportWebAPI.DataAccessLayer.Interfaces
 {
     public interface ITicketRepository : IRepository<Ticket>
     {
-        IEnumerable<Ticket> GetEntities(Guid flightId);
+        Task<IEnumerable<Ticket>> GetEntities(Guid flightId);
     }
 }

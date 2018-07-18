@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AirportWebAPI.DataAccessLayer.Abstractions;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
@@ -21,10 +22,11 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public override IEnumerable<Airplane> GetEntities()
+        public override async Task<IEnumerable<Airplane>> GetEntities()
         {
-            return _context.Airplanes
-                .Include(a => a.AirplaneType);
+            return await _context.Airplanes
+                .Include(a => a.AirplaneType)
+                .ToListAsync();
         }
     }
 }
