@@ -72,9 +72,9 @@ namespace AirportWebApi.Tests.ServiceTests
         [Test]
         public void GetEntities_When_AirplaneTypeDtoExist_Then_Return_List_AirplaneTypeDto()
         {
-            var airplaneTypeDtos = _service.GetEntities();
+            var airplaneTypeDtos = _service.GetEntities().ToList();
 
-            Assert.That(airplaneTypeDtos.Count() == 2);
+            Assert.That(airplaneTypeDtos.Count == 2);
         }
 
         [Test]
