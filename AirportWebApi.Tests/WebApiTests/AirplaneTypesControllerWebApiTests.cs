@@ -53,5 +53,22 @@ namespace AirportWebApi.Tests.WebApiTests
             Assert.NotNull(result);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
+
+        [Test]
+        public void Get_When_Request_ById_Then_Respons_200OK()
+        {
+            var entity = _context.AirplaneTypes.First();
+            var airplaneTypeUrlById = _airplaneTypeUrl + "/" + entity.Id.ToString();
+
+            _restMethods.Get(airplaneTypeUrlById, out HttpWebResponse response);
+            var stream = response.GetResponseStream();
+            var reader = new StreamReader(stream);
+            var result = JsonConvert
+                .DeserializeObject<AirplaneTypeDto>(reader.ReadToEnd());
+
+            Assert.NotNull(result);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual(entity.Id, result.Id);
+        }
     }
 }
