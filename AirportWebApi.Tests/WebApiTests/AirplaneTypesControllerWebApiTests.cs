@@ -70,5 +70,26 @@ namespace AirportWebApi.Tests.WebApiTests
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             Assert.AreEqual(entity.Id, result.Id);
         }
+
+        [Test]
+        public void Post_When_Request_AirplaneTypeValid_Then_Respons_201OK()
+        {
+            var validAirplaneTypeDto = new AirplaneTypeDto()
+            {
+                Model = "Airbus A310",
+                NumberOfSeats = 183,
+                LoadCapacity = 164000
+            };
+
+            _restMethods.Post(_airplaneTypeUrl, out HttpWebResponse response, validAirplaneTypeDto);
+            var stream = response.GetResponseStream();
+            var reader = new StreamReader(stream);
+            var result = JsonConvert
+                .DeserializeObject<AirplaneTypeDto>(reader.ReadToEnd());
+
+            Assert.NotNull(result);
+            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+            Assert.AreEqual(validAirplaneTypeDto.NumberOfSeats, result.NumberOfSeats);
+        }
     }
 }
