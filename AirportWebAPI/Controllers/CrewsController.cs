@@ -23,9 +23,9 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/crews
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var crews = _crewService.GetEntities();
+            var crews = await _crewService.GetEntities();
             if (crews == null)
             {
                 return NotFound();
@@ -36,9 +36,9 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/crews/5
         [HttpGet("{id}", Name = "GetCrew")]
-        public IActionResult Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            var crew = _crewService.GetEntity(id);
+            var crew = await _crewService.GetEntity(id);
             if (crew == null)
             {
                 return NotFound();
@@ -49,11 +49,11 @@ namespace AirportWebAPI.Controllers
 
         // POST: api/v1/crews
         [HttpPost]
-        public IActionResult Post([FromBody] CrewDto crewDto)
+        public async Task<IActionResult> Post([FromBody] CrewDto crewDto)
         {
             try
             {
-                var crewToReturn = _crewService.AddEntity(crewDto);
+                var crewToReturn = await _crewService.AddEntity(crewDto);
                 return CreatedAtRoute("GetCrew", new { id = crewToReturn.Id }, crewToReturn);
             }
             catch (BadRequestException)
@@ -64,12 +64,12 @@ namespace AirportWebAPI.Controllers
 
         // PUT: api/v1/crews/5
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] CrewDto crewDto)
+        public async Task<IActionResult> Put(Guid id, [FromBody] CrewDto crewDto)
         {
             try
             {
                 crewDto.Id = id;
-                _crewService.UpdateEntity(crewDto);
+                await _crewService.UpdateEntity(crewDto);
                 return NoContent();
             }
             catch (BadRequestException)
@@ -84,11 +84,11 @@ namespace AirportWebAPI.Controllers
 
         // DELETE: api/v1/crews/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {
-                _crewService.DeleteEntity(id);
+                await _crewService.DeleteEntity(id);
             }
             catch (NotFoundException)
             {
