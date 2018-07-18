@@ -32,6 +32,7 @@ namespace AirportWebApi.Tests.IntegrationTests
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<AirplaneTypeDto, AirplaneType>();
+                cfg.CreateMap<AirplaneType, AirplaneTypeDto>();
                 cfg.CreateMap<AirplaneType, AirplaneType>();
             });
 
@@ -101,6 +102,31 @@ namespace AirportWebApi.Tests.IntegrationTests
             };
 
             Assert.Throws<BadRequestException>(() => _service.AddEntity(invalidAirplaneTypeDto));
+        }
+
+        [Test]
+        public void UpdateEntity_When_ValidAirplaneTypeDto_Then_Return_AirplaneTypeDto()
+        {
+            var airplaneType = _context.AirplaneTypes.First();
+            var airplaneTypeDto = new AirplaneTypeDto();
+            _mapper.Map(airplaneType, airplaneTypeDto);
+            airplaneTypeDto.Model = "Boeing-747";
+
+            var entity = _service.UpdateEntity(airplaneTypeDto);
+
+            Assert.NotNull(entity);
+            Assert.AreEqual(airplaneType.Id, entity.Id);
+        }
+
+        [Test]
+        public void UpdateEntity_When_InvalidAirplaneTypeDto_Then_Return_AirplaneTypeDto()
+        {
+            var airplaneType = _context.AirplaneTypes.First();
+            var invalidAirplaneTypeDto = new AirplaneTypeDto();
+            _mapper.Map(airplaneType, invalidAirplaneTypeDto);
+            invalidAirplaneTypeDto.NumberOfSeats = 1200;
+
+            Assert.Throws<BadRequestException>(() => _service.UpdateEntity(invalidAirplaneTypeDto));
         }
     }
 }
