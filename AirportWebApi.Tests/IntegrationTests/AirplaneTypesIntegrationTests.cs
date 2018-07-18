@@ -62,8 +62,17 @@ namespace AirportWebApi.Tests.IntegrationTests
             var airplaneTypeDtos = _service.GetEntities().ToList();
 
             Assert.NotNull(airplaneTypeDtos);
-            Assert.IsNotEmpty(airplaneTypeDtos);
             Assert.That(airplaneTypeDtos.Count == 4);
+        }
+
+        [Test]
+        public void GetEntity_When_AirplaneTypeDtoExist_Then_Return_AirplaneTypeDto()
+        {
+            var entity = _context.AirplaneTypes.First();
+            var airplaneTypeDto = _service.GetEntity(entity.Id);
+
+            Assert.NotNull(airplaneTypeDto);
+            Assert.AreEqual(entity.Id, airplaneTypeDto.Id);
         }
     }
 }
