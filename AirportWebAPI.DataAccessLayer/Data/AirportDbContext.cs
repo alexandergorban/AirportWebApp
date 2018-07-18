@@ -18,6 +18,14 @@ namespace AirportWebAPI.DataAccessLayer.Data
         public DbSet<Stewardess> Stewardesses { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
 
+        public AirportDbContext()
+        {
+            if (Database.EnsureCreated())
+            {
+                this.EnsureSeedDataForContext();
+            }
+        }
+
         public AirportDbContext(DbContextOptions<AirportDbContext> options)
             : base(options)
         {
