@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using Shared.Exceptions;
 
-namespace AirportWebApi.Tests.Controller
+namespace AirportWebApi.Tests.ControllerTests
 {
     [TestFixture]
     public class AirplaneTypesControllerTests

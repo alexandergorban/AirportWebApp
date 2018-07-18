@@ -13,7 +13,7 @@ using FluentValidation;
 using NUnit.Framework;
 using Shared.Exceptions;
 
-namespace AirportWebApi.Tests.Service
+namespace AirportWebApi.Tests.ServiceTests
 {
     [TestFixture]
     class AirplaneTypeServiceTests
