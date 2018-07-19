@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AirportWebAPI.BusinessLayer.Interfaces;
+using AirportWebAPI.BusinessLayer.Services;
 using AirportWebAPI.DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,9 @@ namespace AirportWebAPI.Controllers
     [Route("api/v1/flights")]
     public class FlightsController : Controller
     {
-        private readonly IService<FlightDto> _flightService;
+        private readonly FlightService _flightService;
 
-        public FlightsController(IService<FlightDto> flightService)
+        public FlightsController(FlightService flightService)
         {
             _flightService = flightService;
         }
@@ -96,6 +97,18 @@ namespace AirportWebAPI.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet("withdelay")]
+        public async Task<IActionResult> GetWithDelay()
+        {
+            var flights = await _flightService.GetFlightWithDelay();
+            if (flights == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(flights);
         }
     }
 }

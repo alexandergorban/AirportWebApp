@@ -60,6 +60,7 @@ namespace AirportWebAPI
             services.AddScoped<ITicketService, TicketService>();
 
             services.AddScoped<CrewDataService>();
+            services.AddScoped<FlightService>();
 
             services.AddTransient<AbstractValidator<AirplaneDto>, AirplaneDtoValidator>();
             services.AddTransient<AbstractValidator<AirplaneTypeDto>, AirplaneTypeDtoValidator>();

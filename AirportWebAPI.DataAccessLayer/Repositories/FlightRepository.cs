@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using AirportWebAPI.DataAccessLayer.Abstractions;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
@@ -68,6 +69,31 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 }
                 flight.Tickets.Add(ticket);
             }
+        }
+
+        public Task<Flight> GetFlightWithDelay()
+        {
+            var taskCompletitionSource = new TaskCompletionSource<Flight>();
+            var timer = new Timer()
+            {
+                Interval = 3000,
+                Enabled = true
+            };
+
+            timer.Elapsed += (source, args) =>
+            {
+                try
+                {
+                    taskCompletitionSource.SetResult(_context.Flights.First());
+                    timer.Enabled = false;
+                }
+                catch (Exception e)
+                {
+                    taskCompletitionSource.SetException(e);
+                }
+            };
+
+            return taskCompletitionSource.Task;
         }
     }
 }

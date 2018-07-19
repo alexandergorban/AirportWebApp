@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
+using AirportWebAPI.DataAccessLayer.Repositories;
 using AutoMapper;
 using FluentValidation;
 using Shared.Exceptions;
@@ -14,11 +15,11 @@ namespace AirportWebAPI.BusinessLayer.Services
     public class FlightService : IService<FlightDto>
     {
         private readonly IMapper _mapper;
-        private readonly IRepository<Flight> _repository;
+        private readonly FlightRepository _repository;
         private readonly AbstractValidator<FlightDto> _validator;
 
         public FlightService(IMapper mapper,
-            IRepository<Flight> repository,
+            FlightRepository repository,
             AbstractValidator<FlightDto> validator)
         {
             _mapper = mapper;
@@ -99,6 +100,11 @@ namespace AirportWebAPI.BusinessLayer.Services
             {
                 throw new Exception("Deleting Flight failed on save.");
             }
+        }
+
+        public async Task<Flight> GetFlightWithDelay()
+        {
+            return await _repository.GetFlightWithDelay();
         }
     }
 }
