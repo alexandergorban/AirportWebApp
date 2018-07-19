@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Shared.Models.Json;
 
 namespace AirportWebAPI
 {
@@ -94,6 +95,10 @@ namespace AirportWebAPI
                 cfg.CreateMap<Crew, CrewDto>();
                 cfg.CreateMap<CrewDto, Crew>();
                 cfg.CreateMap<Crew, Crew>();
+                cfg.CreateMap<JsonCrewDto, Crew>()
+                    .ForMember(c => c.Id, opt => opt.UseValue(Guid.NewGuid()))
+                    .ForMember(c => c.Pilot, opt => opt.MapFrom(jc => jc.Pilot))
+                    .ForMember(c => c.Stewardesses, opt => opt.MapFrom(jc => jc.Stewardesses));
 
                 cfg.CreateMap<Departure, DepartureDto>();
                 cfg.CreateMap<DepartureDto, Departure>();
@@ -106,10 +111,21 @@ namespace AirportWebAPI
                 cfg.CreateMap<Pilot, PilotDto>();
                 cfg.CreateMap<PilotDto, Pilot>();
                 cfg.CreateMap<Pilot, Pilot>();
+                cfg.CreateMap<JsonPilotDto, Pilot>()
+                    .ForMember(p => p.Id, opt => opt.UseValue(Guid.NewGuid()))
+                    .ForMember(p => p.Name, opt => opt.MapFrom(jp => jp.FirstName))
+                    .ForMember(p => p.Surname, opt => opt.MapFrom(jp => jp.LastName))
+                    .ForMember(p => p.DateOfBirth, opt => opt.MapFrom(jp => jp.BirthDate))
+                    .ForMember(p => p.Experience, opt => opt.MapFrom(jp => jp.Exp));
 
                 cfg.CreateMap<Stewardess, StewardessDto>();
                 cfg.CreateMap<StewardessDto, Stewardess>();
                 cfg.CreateMap<Stewardess, Stewardess>();
+                cfg.CreateMap<JsonStewardessDto, Stewardess>()
+                    .ForMember(s => s.Id, opt => opt.UseValue(Guid.NewGuid()))
+                    .ForMember(s => s.Name, opt => opt.MapFrom(js => js.FirstName))
+                    .ForMember(s => s.Surname, opt => opt.MapFrom(js => js.LastName))
+                    .ForMember(s => s.DateOfBirth, opt => opt.MapFrom(js => js.BirthDate));
 
                 cfg.CreateMap<Ticket, TicketDto>();
                 cfg.CreateMap<TicketDto, Ticket>();

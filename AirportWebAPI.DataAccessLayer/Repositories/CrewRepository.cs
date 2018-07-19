@@ -29,5 +29,10 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 .Include(c => c.Stewardesses)
                 .ToListAsync();
         }
+
+        public async Task AddEntities(List<Crew> crews)
+        {
+            await _context.Crews.AddRangeAsync(crews);
+        }
     }
 }
