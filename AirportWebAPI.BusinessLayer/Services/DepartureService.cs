@@ -45,7 +45,7 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task<DepartureDto> AddEntity(DepartureDto entity)
         {
-            var validationResult = _validator.Validate(entity);
+            var validationResult = await _validator.ValidateAsync(entity);
             if (!validationResult.IsValid)
             {
                 throw new BadRequestException();
@@ -69,7 +69,7 @@ namespace AirportWebAPI.BusinessLayer.Services
                 throw new NotFoundException();
             }
 
-            var validationResult = _validator.Validate(entity);
+            var validationResult = await _validator.ValidateAsync(entity);
             if (!validationResult.IsValid)
             {
                 throw new BadRequestException();
