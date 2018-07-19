@@ -47,7 +47,7 @@ namespace AirportWebAPI.BusinessLayer.DataServices
             httpWebRequest.Method = "GET";
             httpWebRequest.ContentType = "application/json";
 
-            var response = httpWebRequest.GetResponse() as HttpWebResponse;
+            var response = await httpWebRequest.GetResponseAsync() as HttpWebResponse;
             var stream = response.GetResponseStream();
 
             using (var reader = new StreamReader(stream))
