@@ -76,7 +76,9 @@ namespace AirportWebAPI.BusinessLayer.DataServices
                 foreach (var jsonCrewDto in entities)
                 {
                     await sw.WriteLineAsync(
-                        $"{jsonCrewDto.Id}, {jsonCrewDto.Pilot.First().FirstName} {jsonCrewDto.Pilot.First().LastName}, Stewardesses: {jsonCrewDto.Stewardess.Count}");
+                        $"CrewId: {jsonCrewDto.Id}, " +
+                        $"Pilot: {jsonCrewDto.Pilot.First().FirstName} {jsonCrewDto.Pilot.First().LastName}, " +
+                        $"Stewardesses: {jsonCrewDto.Stewardess.Count}");
                 }
             }
         }
