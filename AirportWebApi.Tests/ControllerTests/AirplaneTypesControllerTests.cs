@@ -137,7 +137,7 @@ namespace AirportWebApi.Tests.ControllerTests
         }
 
         [Test]
-        public async void Delete_When_AirplaneTypeId_Absent_Then_Return_404NotFound()
+        public async Task Delete_When_AirplaneTypeId_Absent_Then_Return_404NotFound()
         {
             var airplaneTypeDtoId = new Guid("45320c5e-f58a-4b1f-b63a-8ee07a840bdf");
 
