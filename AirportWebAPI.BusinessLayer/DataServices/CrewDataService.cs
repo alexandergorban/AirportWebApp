@@ -36,10 +36,10 @@ namespace AirportWebAPI.BusinessLayer.DataServices
         {
             var entitiesFromResource = await GetDataAsync(url);
 
-            var addEntitiesToDbTask = AddEntitiesToDbAsync(entitiesFromResource);
             var writeEntitiesToLogTask = WriteLogAsync(entitiesFromResource);
+            var addEntitiesToDbTask = AddEntitiesToDbAsync(entitiesFromResource);
 
-            await Task.WhenAll(addEntitiesToDbTask, writeEntitiesToLogTask);
+            await Task.WhenAll(writeEntitiesToLogTask, addEntitiesToDbTask);
         }
 
         public async Task<List<JsonCrewDto>> GetDataAsync(string url)
@@ -62,6 +62,25 @@ namespace AirportWebAPI.BusinessLayer.DataServices
 
         }
 
+        public async Task WriteLogAsync(List<JsonCrewDto> entities)
+        {
+            if (entities == null)
+            {
+                throw new BadRequestException();
+            }
+
+            string path = $"log_{DateTime.Now.ToString().Replace(':', '-').Replace('/', '-')}.csv'";
+
+            using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default))
+            {
+                foreach (var jsonCrewDto in entities)
+                {
+                    await sw.WriteLineAsync(
+                        $"{jsonCrewDto.Id}, {jsonCrewDto.Pilot.First().FirstName} {jsonCrewDto.Pilot.First().LastName}, Stewardesses: {jsonCrewDto.Stewardess.Count}");
+                }
+            }
+        }
+
         public async Task AddEntitiesToDbAsync(List<JsonCrewDto> entities)
         {
             if (entities == null)
@@ -77,25 +96,6 @@ namespace AirportWebAPI.BusinessLayer.DataServices
             if (!_repository.Save().Result)
             {
                 throw new Exception("Adding Crew failed on save.");
-            }
-        }
-
-        public async Task WriteLogAsync(List<JsonCrewDto> entities)
-        {
-            if (entities == null)
-            {
-                throw new BadRequestException();
-            }
-
-            string path = $"../Logs/log_{DateTime.Now.ToString().Replace(':', '_')}.csv'";
-
-            using (StreamWriter sw = new StreamWriter(path, false))
-            {
-                foreach (var jsonCrewDto in entities)
-                {
-                    await sw.WriteLineAsync(
-                        $"{jsonCrewDto.Id}, {jsonCrewDto.Pilot.First().FirstName} {jsonCrewDto.Pilot.First().LastName}, Stewardesses: {jsonCrewDto.Stewardess.Count}");
-                }
             }
         }
     }
