@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.BusinessLayer.Services;
 using AirportWebAPI.BusinessLayer.Validators;
@@ -70,11 +71,11 @@ namespace AirportWebApi.Tests.ServiceTests
         }
 
         [Test]
-        public void GetEntities_When_AirplaneTypeDtoExist_Then_Return_List_AirplaneTypeDto()
+        public async Task GetEntities_When_AirplaneTypeDtoExist_Then_Return_List_AirplaneTypeDto()
         {
-            var airplaneTypeDtos = _service.GetEntities().ToList();
+            var airplaneTypeDtos = await _service.GetEntities();
 
-            Assert.That(airplaneTypeDtos.Count == 2);
+            Assert.That(airplaneTypeDtos.Count() == 2);
         }
 
         [Test]
@@ -86,7 +87,7 @@ namespace AirportWebApi.Tests.ServiceTests
         }
 
         [Test]
-        public void AddEntity_When_ValidAirplaneTypeDto_Then_Return_AirplaneTypeDto()
+        public async Task AddEntity_When_ValidAirplaneTypeDto_Then_Return_AirplaneTypeDto()
         {
             var validAirplaneTypeDto = new AirplaneTypeDto()
             {
@@ -95,7 +96,7 @@ namespace AirportWebApi.Tests.ServiceTests
                 LoadCapacity = 164000
             };
 
-            var result = _service.AddEntity(validAirplaneTypeDto);
+            var result = await _service.AddEntity(validAirplaneTypeDto);
 
             Assert.AreEqual(validAirplaneTypeDto.NumberOfSeats, result.NumberOfSeats);
         }
