@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirportWebAPI.BusinessLayer.DataServices;
 using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Http;
@@ -14,11 +15,15 @@ namespace AirportWebAPI.Controllers
     [Route("api/v1/crews")]
     public class CrewsController : Controller
     {
-        private readonly IService<CrewDto> _crewService;
+        private string resourceUrl = "http://5b128555d50a5c0014ef1204.mockapi.io/crew";
 
-        public CrewsController(IService<CrewDto> crewService)
+        private readonly IService<CrewDto> _crewService;
+        private readonly CrewDataService _crewDataService;
+
+        public CrewsController(IService<CrewDto> crewService, CrewDataService crewDataService)
         {
             _crewService = crewService;
+            _crewDataService = crewDataService;
         }
 
         // GET: api/v1/crews
@@ -96,6 +101,21 @@ namespace AirportWebAPI.Controllers
             }
 
             return NoContent();
+        }
+
+        // GET: api/v1/crews/load
+        [HttpGet("load")]
+        public async Task<IActionResult> Load()
+        {
+            try
+            {
+                await _crewDataService.EntitiesLoadSaveToDbLog(resourceUrl);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
         }
     }
 }

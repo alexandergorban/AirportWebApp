@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirportWebAPI.BusinessLayer.DataServices;
 using AirportWebAPI.BusinessLayer.Services;
 using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.BusinessLayer.Validators;
@@ -55,6 +56,8 @@ namespace AirportWebAPI
             services.AddScoped<IService<PilotDto>, PilotService>();
             services.AddScoped<IService<StewardessDto>, StewardessService>();
             services.AddScoped<ITicketService, TicketService>();
+
+            services.AddScoped<CrewDataService>();
 
             services.AddTransient<AbstractValidator<AirplaneDto>, AirplaneDtoValidator>();
             services.AddTransient<AbstractValidator<AirplaneTypeDto>, AirplaneTypeDtoValidator>();
