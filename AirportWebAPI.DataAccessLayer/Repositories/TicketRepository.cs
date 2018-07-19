@@ -31,7 +31,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Ticket>> GetEntities(Guid flightId)
+        public async Task<IEnumerable<Ticket>> GetEntitiesAsync(Guid flightId)
         {
             return await _context.Tickets
                 .Where(t => t.FlightId == flightId)

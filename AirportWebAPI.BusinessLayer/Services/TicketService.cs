@@ -42,7 +42,7 @@ namespace AirportWebAPI.BusinessLayer.Services
                 throw new NotFoundException();
             }
 
-            var ticketsFromRepoByFlight = await _repository.GetEntities(flightId);
+            var ticketsFromRepoByFlight = await _repository.GetEntitiesAsync(flightId);
             return _mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDto>>(ticketsFromRepoByFlight);
         }
 

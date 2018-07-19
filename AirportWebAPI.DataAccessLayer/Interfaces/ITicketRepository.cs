@@ -8,6 +8,6 @@ namespace AirportWebAPI.DataAccessLayer.Interfaces
 {
     public interface ITicketRepository : IRepository<Ticket>
     {
-        Task<IEnumerable<Ticket>> GetEntities(Guid flightId);
+        Task<IEnumerable<Ticket>> GetEntitiesAsync(Guid flightId);
     }
 }
