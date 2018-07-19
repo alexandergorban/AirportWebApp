@@ -27,7 +27,7 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                var tickets = await _ticketService.GetEntities(flightId);
+                var tickets = await _ticketService.GetEntitiesAsync(flightId);
                 return Ok(tickets);
             }
             catch (NotFoundException)
@@ -42,7 +42,7 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                var ticket = await _ticketService.GetEntity(flightId, id);
+                var ticket = await _ticketService.GetEntityAsync(flightId, id);
                 return Ok(ticket);
             }
             catch (NotFoundException)
@@ -100,7 +100,7 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                await _ticketService.DeleteEntity(flightId, id);
+                await _ticketService.DeleteEntityAsync(flightId, id);
             }
             catch (NotFoundException)
             {
