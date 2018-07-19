@@ -13,6 +13,7 @@ using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Repositories;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Shared.Exceptions;
 
@@ -43,20 +44,20 @@ namespace AirportWebApi.Tests.IntegrationTests
             _validator = new AirplaneTypeDtoValidator();
             _service = new AirplaneTypeService(_mapper, _repository, _validator);
 
-            _context.Database.EnsureDeleted();
-            _context.Database.EnsureCreated();
+//            _context.Database.EnsureDeleted();
+//            _context.Database.EnsureCreated();
 
             // Ensure seed data for context
             var airplaneTypes = DataSourceStub.Instance.AirplaneTypes;
 
-            _context.AirplaneTypes.AddRange(airplaneTypes);
-            _context.SaveChanges();
+//            _context.AirplaneTypes.AddRange(airplaneTypes);
+//            _context.SaveChanges();
         }
 
         [TearDown]
         public void Cleanup()
         {
-            _context.Database.EnsureDeleted();
+//            _context.Database.EnsureDeleted();
         }
 
         [Test]
@@ -65,14 +66,14 @@ namespace AirportWebApi.Tests.IntegrationTests
             var airplaneTypeDtos = await _service.GetEntities();
 
             Assert.NotNull(airplaneTypeDtos);
-            Assert.That(airplaneTypeDtos.Count() == 4);
+            Assert.That(airplaneTypeDtos.Any());
         }
 
         [Test]
-        public void GetEntity_When_AirplaneTypeDtoExist_Then_Return_AirplaneTypeDto()
+        public async void GetEntity_When_AirplaneTypeDtoExist_Then_Return_AirplaneTypeDto()
         {
-            var entity = _context.AirplaneTypes.First();
-            var airplaneTypeDto = _service.GetEntity(entity.Id);
+            var entity = await _context.AirplaneTypes.FirstAsync();
+            var airplaneTypeDto = await _service.GetEntity(entity.Id);
 
             Assert.NotNull(airplaneTypeDto);
             Assert.AreEqual(entity.Id, airplaneTypeDto.Id);

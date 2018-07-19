@@ -25,19 +25,19 @@ namespace AirportWebApi.Tests.WebApiTests
             _context = new AirportDbContext();
             _restMethods = new RESTMethods();
 
-            _context.Database.EnsureDeleted();
-            _context.Database.EnsureCreated();
+//            _context.Database.EnsureDeleted();
+//            _context.Database.EnsureCreated();
 
             var airplaneTypes = DataSourceStub.Instance.AirplaneTypes;
 
-            _context.AirplaneTypes.AddRange(airplaneTypes);
-            _context.SaveChanges();
+//            _context.AirplaneTypes.AddRange(airplaneTypes);
+//            _context.SaveChanges();
         }
 
         [TearDown]
         public void Cleanup()
         {
-            _context.Database.EnsureDeleted();
+//            _context.Database.EnsureDeleted();
         }
 
         [Test]
