@@ -29,7 +29,7 @@ namespace AirportWebAPI.BusinessLayer.Services
             _validator = validator;
         }
 
-        public async Task<IEnumerable<TicketDto>> GetEntities()
+        public async Task<IEnumerable<TicketDto>> GetEntitiesAsync()
         {
             var data = await _repository.GetEntitiesAsync();
             return _mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDto>>(data);
@@ -46,7 +46,7 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDto>>(ticketsFromRepoByFlight);
         }
 
-        public async Task<TicketDto> GetEntity(Guid entityId)
+        public async Task<TicketDto> GetEntityAsync(Guid entityId)
         {
             var ticketsFromRepo = await _repository.GetEntityAsync(entityId);
             return _mapper.Map<Ticket, TicketDto>(ticketsFromRepo);
@@ -68,7 +68,7 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Ticket, TicketDto>(ticketFromRepo);
         }
 
-        public async Task<TicketDto> AddEntity(TicketDto entity)
+        public async Task<TicketDto> AddEntityAsync(TicketDto entity)
         {
             if (!_flightRepository.EntityExistsAsync(entity.FlightId).Result)
             {
@@ -116,7 +116,7 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Ticket, TicketDto>(mapedEntity);
         }
 
-        public async Task<TicketDto> UpdateEntity(TicketDto entity)
+        public async Task<TicketDto> UpdateEntityAsync(TicketDto entity)
         {
             if (!_repository.EntityExistsAsync(entity.Id).Result)
             {
@@ -140,7 +140,7 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Ticket, TicketDto>(mapedEntity);
         }
 
-        public async Task DeleteEntity(Guid entityId)
+        public async Task DeleteEntityAsync(Guid entityId)
         {
             var ticketFromRepo = await _repository.GetEntityAsync(entityId);
             if (ticketFromRepo == null)

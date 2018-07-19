@@ -25,7 +25,7 @@ namespace AirportWebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var stewardesses = await _stewardessService.GetEntities();
+            var stewardesses = await _stewardessService.GetEntitiesAsync();
             if (stewardesses == null)
             {
                 return NotFound();
@@ -38,7 +38,7 @@ namespace AirportWebAPI.Controllers
         [HttpGet("{id}", Name = "GetStewardess")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var stewardess = await _stewardessService.GetEntity(id);
+            var stewardess = await _stewardessService.GetEntityAsync(id);
             if (stewardess == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                var stewardessToReturn = await _stewardessService.AddEntity(stewardessDto);
+                var stewardessToReturn = await _stewardessService.AddEntityAsync(stewardessDto);
                 return CreatedAtRoute("GetStewardess", new { id = stewardessToReturn.Id }, stewardessToReturn);
             }
             catch (BadRequestException)
@@ -69,7 +69,7 @@ namespace AirportWebAPI.Controllers
             try
             {
                 stewardessDto.Id = id;
-                await _stewardessService.UpdateEntity(stewardessDto);
+                await _stewardessService.UpdateEntityAsync(stewardessDto);
                 return NoContent();
             }
             catch (BadRequestException)
@@ -88,7 +88,7 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                await _stewardessService.DeleteEntity(id);
+                await _stewardessService.DeleteEntityAsync(id);
             }
             catch (NotFoundException)
             {

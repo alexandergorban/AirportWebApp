@@ -9,10 +9,10 @@ namespace AirportWebAPI.BusinessLayer.Interfaces
 {
     public interface IService<TEntity> where TEntity : IModelDto
     {
-        Task<IEnumerable<TEntity>> GetEntities();
-        Task<TEntity> GetEntity(Guid entityId);
-        Task<TEntity> AddEntity(TEntity entity);
-        Task<TEntity> UpdateEntity(TEntity entity);
-        Task DeleteEntity(Guid entityId);
+        Task<IEnumerable<TEntity>> GetEntitiesAsync();
+        Task<TEntity> GetEntityAsync(Guid entityId);
+        Task<TEntity> AddEntityAsync(TEntity entity);
+        Task<TEntity> UpdateEntityAsync(TEntity entity);
+        Task DeleteEntityAsync(Guid entityId);
     }
 }

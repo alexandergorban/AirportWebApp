@@ -19,7 +19,7 @@ namespace AirportWebApi.Tests.ControllerTests
         public async Task Get_When_All_Then_Return_200OK()
         {
             var airplaneTypeService = A.Fake<IService<AirplaneTypeDto>>();
-            A.CallTo(() => airplaneTypeService.GetEntities()).Returns(new List<AirplaneTypeDto>());
+            A.CallTo(() => airplaneTypeService.GetEntitiesAsync()).Returns(new List<AirplaneTypeDto>());
 
             var airplaneTypesController = new AirplaneTypesController(airplaneTypeService);
             var result = await airplaneTypesController.Get() as ObjectResult;
@@ -32,7 +32,7 @@ namespace AirportWebApi.Tests.ControllerTests
         public async Task Get_When_ById_Then_Return_200OK()
         {
             var airplaneTypeService = A.Fake<IService<AirplaneTypeDto>>();
-            A.CallTo(() => airplaneTypeService.GetEntity(Guid.NewGuid())).Returns(new AirplaneTypeDto());
+            A.CallTo(() => airplaneTypeService.GetEntityAsync(Guid.NewGuid())).Returns(new AirplaneTypeDto());
 
             var airplaneTypesController = new AirplaneTypesController(airplaneTypeService);
             var result = await airplaneTypesController.Get(Guid.NewGuid()) as ObjectResult;
@@ -52,7 +52,7 @@ namespace AirportWebApi.Tests.ControllerTests
             };
 
             var airplaneTypeService = A.Fake<IService<AirplaneTypeDto>>();
-            A.CallTo(() => airplaneTypeService.AddEntity(airplaneTypeDtoValid))
+            A.CallTo(() => airplaneTypeService.AddEntityAsync(airplaneTypeDtoValid))
                 .Invokes(() => { airplaneTypeDtoValid.Id = Guid.NewGuid(); })
                 .Returns(airplaneTypeDtoValid);
 
@@ -72,7 +72,7 @@ namespace AirportWebApi.Tests.ControllerTests
             };
 
             var airplaneTypeService = A.Fake<IService<AirplaneTypeDto>>();
-            A.CallTo(() => airplaneTypeService.AddEntity(airplaneTypeDtoInvalid)).Throws(new BadRequestException());
+            A.CallTo(() => airplaneTypeService.AddEntityAsync(airplaneTypeDtoInvalid)).Throws(new BadRequestException());
 
             var airplaneTypesController = new AirplaneTypesController(airplaneTypeService);
             var result = await airplaneTypesController.Post(airplaneTypeDtoInvalid) as StatusCodeResult;
@@ -93,7 +93,7 @@ namespace AirportWebApi.Tests.ControllerTests
             };
 
             var airplaneTypeService = A.Fake<IService<AirplaneTypeDto>>();
-            A.CallTo(() => airplaneTypeService.UpdateEntity(airplaneTypeDtoValid)).Returns(airplaneTypeDtoValid);
+            A.CallTo(() => airplaneTypeService.UpdateEntityAsync(airplaneTypeDtoValid)).Returns(airplaneTypeDtoValid);
 
             var airplaneTypesController = new AirplaneTypesController(airplaneTypeService);
             var result = await airplaneTypesController.Put(airplaneTypeDtoValid.Id, airplaneTypeDtoValid) as StatusCodeResult;
@@ -112,7 +112,7 @@ namespace AirportWebApi.Tests.ControllerTests
             };
 
             var airplaneTypeService = A.Fake<IService<AirplaneTypeDto>>();
-            A.CallTo(() => airplaneTypeService.UpdateEntity(airplaneTypeDtoInvalid)).Throws(new BadRequestException());
+            A.CallTo(() => airplaneTypeService.UpdateEntityAsync(airplaneTypeDtoInvalid)).Throws(new BadRequestException());
 
             var airplaneTypesController = new AirplaneTypesController(airplaneTypeService);
             var result = await airplaneTypesController.Put(airplaneTypeDtoInvalid.Id, airplaneTypeDtoInvalid) as StatusCodeResult;
@@ -127,7 +127,7 @@ namespace AirportWebApi.Tests.ControllerTests
             var airplaneTypeDtoId = new Guid("45320c5e-f58a-4b1f-b63a-8ee07a840bdf");
 
             var airplaneTypeService = A.Fake<IService<AirplaneTypeDto>>();
-            A.CallTo(() => airplaneTypeService.DeleteEntity(airplaneTypeDtoId));
+            A.CallTo(() => airplaneTypeService.DeleteEntityAsync(airplaneTypeDtoId));
 
             var airplaneTypesController = new AirplaneTypesController(airplaneTypeService);
             var result = await airplaneTypesController.Delete(airplaneTypeDtoId) as StatusCodeResult;
@@ -142,7 +142,7 @@ namespace AirportWebApi.Tests.ControllerTests
             var airplaneTypeDtoId = new Guid("45320c5e-f58a-4b1f-b63a-8ee07a840bdf");
 
             var airplaneTypeService = A.Fake<IService<AirplaneTypeDto>>();
-            A.CallTo(() => airplaneTypeService.DeleteEntity(airplaneTypeDtoId)).Throws(new NotFoundException());
+            A.CallTo(() => airplaneTypeService.DeleteEntityAsync(airplaneTypeDtoId)).Throws(new NotFoundException());
 
             var airplaneTypesController = new AirplaneTypesController(airplaneTypeService);
             var result = await airplaneTypesController.Delete(airplaneTypeDtoId) as StatusCodeResult;

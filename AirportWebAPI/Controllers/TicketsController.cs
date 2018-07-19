@@ -58,7 +58,7 @@ namespace AirportWebAPI.Controllers
             try
             {
                 ticketDto.FlightId = flightId;
-                var ticketToReturn = await _ticketService.AddEntity(ticketDto);
+                var ticketToReturn = await _ticketService.AddEntityAsync(ticketDto);
                 return CreatedAtRoute("GetTicket", 
                     new { flightId = ticketToReturn.FlightId, id = ticketToReturn.Id }, 
                     ticketToReturn);
@@ -81,7 +81,7 @@ namespace AirportWebAPI.Controllers
             {
                 ticketDto.Id = id;
                 ticketDto.FlightId = flightId;
-                await _ticketService.UpdateEntity(ticketDto);
+                await _ticketService.UpdateEntityAsync(ticketDto);
                 return NoContent();
             }
             catch (BadRequestException)
