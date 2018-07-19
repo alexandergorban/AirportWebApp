@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using AirportWebAPI.DataAccessLayer.Entities;
@@ -58,6 +59,7 @@ namespace AirportWebAPI.BusinessLayer.DataServices
 
                 return result;
             }
+
         }
 
         public async Task AddEntitiesToDbAsync(List<JsonCrewDto> entities)
@@ -92,7 +94,7 @@ namespace AirportWebAPI.BusinessLayer.DataServices
                 foreach (var jsonCrewDto in entities)
                 {
                     await sw.WriteLineAsync(
-                        $"{jsonCrewDto.Id}, {jsonCrewDto.Pilot.First().FirstName} {jsonCrewDto.Pilot.First().LastName}, Stewardesses: {jsonCrewDto.Stewardesses.Count}");
+                        $"{jsonCrewDto.Id}, {jsonCrewDto.Pilot.First().FirstName} {jsonCrewDto.Pilot.First().LastName}, Stewardesses: {jsonCrewDto.Stewardess.Count}");
                 }
             }
         }

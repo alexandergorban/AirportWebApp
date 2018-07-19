@@ -103,7 +103,7 @@ namespace AirportWebAPI
                 cfg.CreateMap<JsonCrewDto, Crew>()
                     .ForMember(c => c.Id, opt => opt.UseValue(Guid.NewGuid()))
                     .ForMember(c => c.Pilot, opt => opt.MapFrom(jc => jc.Pilot))
-                    .ForMember(c => c.Stewardesses, opt => opt.MapFrom(jc => jc.Stewardesses));
+                    .ForMember(c => c.Stewardesses, opt => opt.MapFrom(jc => jc.Stewardess));
 
                 cfg.CreateMap<Departure, DepartureDto>();
                 cfg.CreateMap<DepartureDto, Departure>();

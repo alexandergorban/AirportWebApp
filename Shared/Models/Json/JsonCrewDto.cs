@@ -7,8 +7,8 @@ namespace Shared.Models.Json
 {
     public class JsonCrewDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public List<JsonPilotDto> Pilot { get; set; }
-        public List<JsonStewardessDto> Stewardesses { get; set; }
+        public List<JsonStewardessDto> Stewardess { get; set; }
     }
 }
