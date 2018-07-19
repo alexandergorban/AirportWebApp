@@ -101,7 +101,7 @@ namespace AirportWebAPI
                 cfg.CreateMap<CrewDto, Crew>();
                 cfg.CreateMap<Crew, Crew>();
                 cfg.CreateMap<JsonCrewDto, Crew>()
-                    .ForMember(c => c.Id, opt => opt.UseValue(Guid.NewGuid()))
+                    .ForMember(c => c.Id, opt => opt.UseValue(0))
                     .ForMember(c => c.Pilot, opt => opt.MapFrom(jc => jc.Pilot.First()))
                     .ForMember(c => c.Stewardesses, opt => opt.MapFrom(jc => jc.Stewardess));
 
@@ -117,7 +117,7 @@ namespace AirportWebAPI
                 cfg.CreateMap<PilotDto, Pilot>();
                 cfg.CreateMap<Pilot, Pilot>();
                 cfg.CreateMap<JsonPilotDto, Pilot>()
-                    .ForMember(p => p.Id, opt => opt.UseValue(Guid.NewGuid()))
+                    .ForMember(p => p.Id, opt => opt.UseValue(0))
                     .ForMember(p => p.Name, opt => opt.MapFrom(jp => jp.FirstName))
                     .ForMember(p => p.Surname, opt => opt.MapFrom(jp => jp.LastName))
                     .ForMember(p => p.DateOfBirth, opt => opt.MapFrom(jp => jp.BirthDate))
@@ -127,7 +127,7 @@ namespace AirportWebAPI
                 cfg.CreateMap<StewardessDto, Stewardess>();
                 cfg.CreateMap<Stewardess, Stewardess>();
                 cfg.CreateMap<JsonStewardessDto, Stewardess>()
-                    .ForMember(s => s.Id, opt => opt.UseValue(Guid.NewGuid()))
+                    .ForMember(s => s.Id, opt => opt.UseValue(0))
                     .ForMember(s => s.Name, opt => opt.MapFrom(js => js.FirstName))
                     .ForMember(s => s.Surname, opt => opt.MapFrom(js => js.LastName))
                     .ForMember(s => s.DateOfBirth, opt => opt.MapFrom(js => js.BirthDate));
