@@ -22,7 +22,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public override async Task<IEnumerable<AirplaneType>> GetEntities()
+        public override async Task<IEnumerable<AirplaneType>> GetEntitiesAsync()
         {
             return await _context.AirplaneTypes
                 .OrderBy(t => t.Model)

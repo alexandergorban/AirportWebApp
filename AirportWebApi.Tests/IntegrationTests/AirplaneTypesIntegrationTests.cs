@@ -63,7 +63,7 @@ namespace AirportWebApi.Tests.IntegrationTests
         [Test]
         public async Task GetEntities_When_AirplaneTypeDtoExist_Then_Return_List_AirplaneTypeDto()
         {
-            var airplaneTypeDtos = await _service.GetEntities();
+            var airplaneTypeDtos = await _service.GetEntitiesAsync();
 
             Assert.NotNull(airplaneTypeDtos);
             Assert.That(airplaneTypeDtos.Any());
@@ -73,7 +73,7 @@ namespace AirportWebApi.Tests.IntegrationTests
         public async void GetEntity_When_AirplaneTypeDtoExist_Then_Return_AirplaneTypeDto()
         {
             var entity = await _context.AirplaneTypes.FirstAsync();
-            var airplaneTypeDto = await _service.GetEntity(entity.Id);
+            var airplaneTypeDto = await _service.GetEntityAsync(entity.Id);
 
             Assert.NotNull(airplaneTypeDto);
             Assert.AreEqual(entity.Id, airplaneTypeDto.Id);
@@ -89,7 +89,7 @@ namespace AirportWebApi.Tests.IntegrationTests
                 LoadCapacity = 164000
             };
 
-            var airplaneTypeDto = await _service.AddEntity(validAirplaneTypeDto);
+            var airplaneTypeDto = await _service.AddEntityAsync(validAirplaneTypeDto);
 
             Assert.NotNull(airplaneTypeDto);
             Assert.AreEqual(validAirplaneTypeDto.NumberOfSeats, airplaneTypeDto.NumberOfSeats);
@@ -103,7 +103,7 @@ namespace AirportWebApi.Tests.IntegrationTests
                 Model = "Airbus A310"
             };
 
-            Assert.Throws<BadRequestException>(() => _service.AddEntity(invalidAirplaneTypeDto));
+            Assert.Throws<BadRequestException>(() => _service.AddEntityAsync(invalidAirplaneTypeDto));
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace AirportWebApi.Tests.IntegrationTests
             _mapper.Map(airplaneType, airplaneTypeDto);
             airplaneTypeDto.Model = "Boeing-747";
 
-            var entity = _service.UpdateEntity(airplaneTypeDto);
+            var entity = _service.UpdateEntityAsync(airplaneTypeDto);
 
             Assert.NotNull(entity);
             Assert.AreEqual(airplaneType.Id, entity.Id);
@@ -128,7 +128,7 @@ namespace AirportWebApi.Tests.IntegrationTests
             _mapper.Map(airplaneType, invalidAirplaneTypeDto);
             invalidAirplaneTypeDto.NumberOfSeats = 1200;
 
-            Assert.Throws<BadRequestException>(() => _service.UpdateEntity(invalidAirplaneTypeDto));
+            Assert.Throws<BadRequestException>(() => _service.UpdateEntityAsync(invalidAirplaneTypeDto));
         }
 
         [Test]
@@ -136,13 +136,13 @@ namespace AirportWebApi.Tests.IntegrationTests
         {
             var airplaneType = _context.AirplaneTypes.First();
 
-            Assert.DoesNotThrow(() => _service.DeleteEntity(airplaneType.Id));
+            Assert.DoesNotThrow(() => _service.DeleteEntityAsync(airplaneType.Id));
         }
 
         [Test]
         public void DeleteEntity_When_ByInvalidId_Then_Return_NotFoundException()
         {
-            Assert.Throws<NotFoundException>(() => _service.DeleteEntity(Guid.NewGuid()));
+            Assert.Throws<NotFoundException>(() => _service.DeleteEntityAsync(Guid.NewGuid()));
         }
     }
 }

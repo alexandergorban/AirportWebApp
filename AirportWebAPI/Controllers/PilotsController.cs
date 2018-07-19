@@ -25,7 +25,7 @@ namespace AirportWebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var pilots = await _pilotService.GetEntities();
+            var pilots = await _pilotService.GetEntitiesAsync();
             if (pilots == null)
             {
                 return NotFound();
@@ -38,7 +38,7 @@ namespace AirportWebAPI.Controllers
         [HttpGet("{id}", Name = "GetPilot")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var pilot = await _pilotService.GetEntity(id);
+            var pilot = await _pilotService.GetEntityAsync(id);
             if (pilot == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                var pilotToReturn = await _pilotService.AddEntity(pilotDto);
+                var pilotToReturn = await _pilotService.AddEntityAsync(pilotDto);
                 return CreatedAtRoute("GetPilot", new { id = pilotToReturn.Id }, pilotToReturn);
             }
             catch (BadRequestException)
@@ -69,7 +69,7 @@ namespace AirportWebAPI.Controllers
             try
             {
                 pilotDto.Id = id;
-                await _pilotService.UpdateEntity(pilotDto);
+                await _pilotService.UpdateEntityAsync(pilotDto);
                 return NoContent();
             }
             catch (BadRequestException)
@@ -88,7 +88,7 @@ namespace AirportWebAPI.Controllers
         {
             try
             {
-                await _pilotService.DeleteEntity(id);
+                await _pilotService.DeleteEntityAsync(id);
             }
             catch (NotFoundException)
             {

@@ -37,7 +37,7 @@ namespace AirportWebApi.Tests.ServiceTests
             _validator = new AirplaneTypeDtoValidator();
 
             _repository = A.Fake<IRepository<AirplaneType>>();
-            A.CallTo(() => _repository.GetEntities()).Returns(new List<AirplaneType>()
+            A.CallTo(() => _repository.GetEntitiesAsync()).Returns(new List<AirplaneType>()
             {
                 new AirplaneType()
                 {
@@ -54,7 +54,7 @@ namespace AirportWebApi.Tests.ServiceTests
                     LoadCapacity = 73500
                 }
             });
-            A.CallTo(() => _repository.GetEntity(new Guid("15320c5e-f58a-4b1f-b63a-8ee07a840bdf")))
+            A.CallTo(() => _repository.GetEntityAsync(new Guid("15320c5e-f58a-4b1f-b63a-8ee07a840bdf")))
                 .Returns(new AirplaneType()
                 {
                     Id = new Guid("15320c5e-f58a-4b1f-b63a-8ee07a840bdf"),
@@ -62,10 +62,10 @@ namespace AirportWebApi.Tests.ServiceTests
                     NumberOfSeats = 86,
                     LoadCapacity = 42500
                 });
-            A.CallTo(() => _repository.AddEntity(A<AirplaneType>._));
-            A.CallTo(() => _repository.UpdateEntity(A<AirplaneType>._));
-            A.CallTo(() => _repository.EntityExists(Guid.NewGuid())).Returns(true);
-            A.CallTo(() => _repository.Save()).Returns(true);
+            A.CallTo(() => _repository.AddEntityAsync(A<AirplaneType>._));
+            A.CallTo(() => _repository.UpdateEntityAsync(A<AirplaneType>._));
+            A.CallTo(() => _repository.EntityExistsAsync(Guid.NewGuid())).Returns(true);
+            A.CallTo(() => _repository.SaveAsync()).Returns(true);
 
             _service = new AirplaneTypeService(_mapper, _repository, _validator);
         }
@@ -73,7 +73,7 @@ namespace AirportWebApi.Tests.ServiceTests
         [Test]
         public async Task GetEntities_When_AirplaneTypeDtoExist_Then_Return_List_AirplaneTypeDto()
         {
-            var airplaneTypeDtos = await _service.GetEntities();
+            var airplaneTypeDtos = await _service.GetEntitiesAsync();
 
             Assert.That(airplaneTypeDtos.Count() == 2);
         }
@@ -81,7 +81,7 @@ namespace AirportWebApi.Tests.ServiceTests
         [Test]
         public void GetEntity_When_AirplaneTypeDtoExist_Then_Return_AirplaneTypeDto()
         {
-            var airplaneTypeDto = _service.GetEntity(new Guid("15320c5e-f58a-4b1f-b63a-8ee07a840bdf"));
+            var airplaneTypeDto = _service.GetEntityAsync(new Guid("15320c5e-f58a-4b1f-b63a-8ee07a840bdf"));
 
             Assert.AreEqual(new Guid("15320c5e-f58a-4b1f-b63a-8ee07a840bdf"), airplaneTypeDto.Id);
         }
@@ -96,7 +96,7 @@ namespace AirportWebApi.Tests.ServiceTests
                 LoadCapacity = 164000
             };
 
-            var result = await _service.AddEntity(validAirplaneTypeDto);
+            var result = await _service.AddEntityAsync(validAirplaneTypeDto);
 
             Assert.AreEqual(validAirplaneTypeDto.NumberOfSeats, result.NumberOfSeats);
         }
@@ -109,7 +109,7 @@ namespace AirportWebApi.Tests.ServiceTests
                 Model = "Airbus A310"
             };
 
-            Assert.Throws<BadRequestException>(() => _service.AddEntity(invalidAirplaneTypeDto));
+            Assert.Throws<BadRequestException>(() => _service.AddEntityAsync(invalidAirplaneTypeDto));
         }
     }
 }

@@ -26,15 +26,15 @@ namespace AirportWebAPI.BusinessLayer.Services
             _validator = validator;
         }
 
-        public async Task<IEnumerable<CrewDto>> GetEntities()
+        public async Task<IEnumerable<CrewDto>> GetEntitiesAsync()
         {
-            var data = await _repository.GetEntities();
+            var data = await _repository.GetEntitiesAsync();
             return _mapper.Map<IEnumerable<Crew>, IEnumerable<CrewDto>>(data);
         }
 
-        public async Task<CrewDto> GetEntity(Guid entityId)
+        public async Task<CrewDto> GetEntityAsync(Guid entityId)
         {
-            var data = await _repository.GetEntity(entityId);
+            var data = await _repository.GetEntityAsync(entityId);
             if (data == null)
             {
                 throw new NotFoundException();
@@ -43,7 +43,7 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Crew, CrewDto>(data);
         }
 
-        public async Task<CrewDto> AddEntity(CrewDto entity)
+        public async Task<CrewDto> AddEntityAsync(CrewDto entity)
         {
             var validationResult = await _validator.ValidateAsync(entity);
             if (!validationResult.IsValid)
@@ -52,9 +52,9 @@ namespace AirportWebAPI.BusinessLayer.Services
             }
 
             var mapedEntity = _mapper.Map<CrewDto, Crew>(entity);
-            await _repository.AddEntity(mapedEntity);
+            await _repository.AddEntityAsync(mapedEntity);
 
-            if (!_repository.Save().Result)
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Adding Crew failed on save.");
             }
@@ -62,9 +62,9 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Crew, CrewDto>(mapedEntity);
         }
 
-        public async Task<CrewDto> UpdateEntity(CrewDto entity)
+        public async Task<CrewDto> UpdateEntityAsync(CrewDto entity)
         {
-            if (!_repository.EntityExists(entity.Id).Result)
+            if (!_repository.EntityExistsAsync(entity.Id).Result)
             {
                 throw new NotFoundException();
             }
@@ -76,9 +76,9 @@ namespace AirportWebAPI.BusinessLayer.Services
             }
 
             var mapedEntity = _mapper.Map<CrewDto, Crew>(entity);
-            await _repository.UpdateEntity(mapedEntity);
+            await _repository.UpdateEntityAsync(mapedEntity);
 
-            if (!_repository.Save().Result)
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Updating Crew failed on save.");
             }
@@ -86,16 +86,16 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Crew, CrewDto>(mapedEntity);
         }
 
-        public async Task DeleteEntity(Guid entityId)
+        public async Task DeleteEntityAsync(Guid entityId)
         {
-            var crewFromRepo = await _repository.GetEntity(entityId);
+            var crewFromRepo = await _repository.GetEntityAsync(entityId);
             if (crewFromRepo == null)
             {
                 throw new NotFoundException();
             }
 
-            await _repository.DeleteEntity(crewFromRepo);
-            if (!_repository.Save().Result)
+            await _repository.DeleteEntityAsync(crewFromRepo);
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Deleting Crew failed on save.");
             }

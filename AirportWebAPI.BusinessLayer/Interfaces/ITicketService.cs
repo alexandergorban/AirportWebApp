@@ -8,9 +8,9 @@ namespace AirportWebAPI.BusinessLayer.Interfaces
 {
     public interface ITicketService : IService<TicketDto>
     {
-        Task<IEnumerable<TicketDto>> GetEntities(Guid flightId);
-        Task<TicketDto> GetEntity(Guid flightId, Guid entityId);
-        Task<TicketDto> AddEntity(Guid flightId, TicketDto entity);
-        Task DeleteEntity(Guid flightId, Guid entityId);
+        Task<IEnumerable<TicketDto>> GetEntitiesAsync(Guid flightId);
+        Task<TicketDto> GetEntityAsync(Guid flightId, Guid entityId);
+        Task<TicketDto> AddEntityAsync(Guid flightId, TicketDto entity);
+        Task DeleteEntityAsync(Guid flightId, Guid entityId);
     }
 }
