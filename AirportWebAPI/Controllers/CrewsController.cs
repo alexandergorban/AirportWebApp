@@ -103,8 +103,8 @@ namespace AirportWebAPI.Controllers
             return NoContent();
         }
 
-        // GET: api/v1/crews/load
-        [HttpGet("load")]
+        // GET: api/v1/crews/loaddata
+        [HttpGet("loaddata")]
         public async Task<IActionResult> Load()
         {
             try
