@@ -69,7 +69,7 @@ namespace AirportWebAPI.BusinessLayer.DataServices
                 throw new BadRequestException();
             }
 
-            string path = $"log_{DateTime.Now.ToString().Replace(':', '-').Replace('/', '-')}.csv'";
+            string path = $"Logs/log_{DateTime.Now.ToString().Replace(':', '-').Replace('/', '-')}.csv'";
 
             using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default))
             {
