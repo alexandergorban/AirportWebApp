@@ -48,6 +48,8 @@ namespace AirportWebAPI
             services.AddTransient<IRepository<Stewardess>, StewardessRepository>();
             services.AddTransient<ITicketRepository, TicketRepository>();
 
+            services.AddTransient<CrewRepository>();
+
             services.AddScoped<IService<AirplaneDto>, AirplaneService>();
             services.AddScoped<IService<AirplaneTypeDto>, AirplaneTypeService>();
             services.AddScoped<IService<CrewDto>, CrewService>();
