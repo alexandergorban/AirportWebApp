@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirportWebAPI.BusinessLayer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{C0F96046-7CFD-4E8D-9DD5-C3BC6E4A2825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportWebApi.Tests", "AirportWebApi.Tests\AirportWebApi.Tests.csproj", "{78AE40E8-232F-446B-AD73-D2471876AC38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirportWebApi.Tests", "AirportWebApi.Tests\AirportWebApi.Tests.csproj", "{78AE40E8-232F-446B-AD73-D2471876AC38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
