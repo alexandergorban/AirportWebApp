@@ -24,7 +24,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _mapper = mapper;
         }
 
-        public override async Task<IEnumerable<Ticket>> GetEntities()
+        public override async Task<IEnumerable<Ticket>> GetEntitiesAsync()
         {
             return await _context.Tickets
                 .OrderBy(t => t.Number)
@@ -39,12 +39,12 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 .ToListAsync();
         }
 
-        public override async Task<Ticket> GetEntity(Guid entityId)
+        public override async Task<Ticket> GetEntityAsync(Guid entityId)
         {
             return await _context.Tickets.FirstOrDefaultAsync(t => t.Id == entityId);
         }
 
-        public override async Task AddEntity(Ticket entity)
+        public override async Task AddEntityAsync(Ticket entity)
         {
             entity.Id = Guid.NewGuid();
             await _context.Tickets.AddAsync(entity);

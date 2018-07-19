@@ -95,7 +95,7 @@ namespace AirportWebAPI.BusinessLayer.DataServices
 
             await _repository.AddEntities(models);
 
-            if (!_repository.Save().Result)
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Adding Crew failed on save.");
             }

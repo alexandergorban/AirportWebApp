@@ -28,13 +28,13 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task<IEnumerable<PilotDto>> GetEntities()
         {
-            var data = await _repository.GetEntities();
+            var data = await _repository.GetEntitiesAsync();
             return _mapper.Map<IEnumerable<Pilot>, IEnumerable<PilotDto>>(data);
         }
 
         public async Task<PilotDto> GetEntity(Guid entityId)
         {
-            var data = await _repository.GetEntity(entityId);
+            var data = await _repository.GetEntityAsync(entityId);
             if (data == null)
             {
                 throw new NotFoundException();
@@ -52,9 +52,9 @@ namespace AirportWebAPI.BusinessLayer.Services
             }
 
             var mapedEntity = _mapper.Map<PilotDto, Pilot>(entity);
-            await _repository.AddEntity(mapedEntity);
+            await _repository.AddEntityAsync(mapedEntity);
 
-            if (!_repository.Save().Result)
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Adding Pilot failed on save.");
             }
@@ -64,7 +64,7 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task<PilotDto> UpdateEntity(PilotDto entity)
         {
-            if (!_repository.EntityExists(entity.Id).Result)
+            if (!_repository.EntityExistsAsync(entity.Id).Result)
             {
                 throw new NotFoundException();
             }
@@ -76,9 +76,9 @@ namespace AirportWebAPI.BusinessLayer.Services
             }
 
             var mapedEntity = _mapper.Map<PilotDto, Pilot>(entity);
-            await _repository.UpdateEntity(mapedEntity);
+            await _repository.UpdateEntityAsync(mapedEntity);
 
-            if (!_repository.Save().Result)
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Updating Pilot failed on save.");
             }
@@ -88,14 +88,14 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task DeleteEntity(Guid entityId)
         {
-            var pilotFromRepo = await _repository.GetEntity(entityId);
+            var pilotFromRepo = await _repository.GetEntityAsync(entityId);
             if (pilotFromRepo == null)
             {
                 throw new NotFoundException();
             }
 
-            await _repository.DeleteEntity(pilotFromRepo);
-            if (!_repository.Save().Result)
+            await _repository.DeleteEntityAsync(pilotFromRepo);
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Deleting Pilot failed on save.");
             }

@@ -31,13 +31,13 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task<IEnumerable<TicketDto>> GetEntities()
         {
-            var data = await _repository.GetEntities();
+            var data = await _repository.GetEntitiesAsync();
             return _mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDto>>(data);
         }
 
         public async Task<IEnumerable<TicketDto>> GetEntities(Guid flightId)
         {
-            if (!_flightRepository.EntityExists(flightId).Result)
+            if (!_flightRepository.EntityExistsAsync(flightId).Result)
             {
                 throw new NotFoundException();
             }
@@ -48,18 +48,18 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task<TicketDto> GetEntity(Guid entityId)
         {
-            var ticketsFromRepo = await _repository.GetEntity(entityId);
+            var ticketsFromRepo = await _repository.GetEntityAsync(entityId);
             return _mapper.Map<Ticket, TicketDto>(ticketsFromRepo);
         }
 
         public async Task<TicketDto> GetEntity(Guid flightId, Guid entityId)
         {
-            if (!_flightRepository.EntityExists(flightId).Result)
+            if (!_flightRepository.EntityExistsAsync(flightId).Result)
             {
                 throw new NotFoundException();
             }
 
-            var ticketFromRepo = await _repository.GetEntity(entityId);
+            var ticketFromRepo = await _repository.GetEntityAsync(entityId);
             if (ticketFromRepo == null)
             {
                 throw new NotFoundException();
@@ -70,7 +70,7 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task<TicketDto> AddEntity(TicketDto entity)
         {
-            if (!_flightRepository.EntityExists(entity.FlightId).Result)
+            if (!_flightRepository.EntityExistsAsync(entity.FlightId).Result)
             {
                 throw new NotFoundException();
             }
@@ -82,9 +82,9 @@ namespace AirportWebAPI.BusinessLayer.Services
             }
 
             var mapedEntity = _mapper.Map<TicketDto, Ticket>(entity);
-            await _repository.AddEntity(mapedEntity);
+            await _repository.AddEntityAsync(mapedEntity);
 
-            if (!_repository.Save().Result)
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Adding Ticket failed on save.");
             }
@@ -94,7 +94,7 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task<TicketDto> AddEntity(Guid flightId, TicketDto entity)
         {
-            if (!_flightRepository.EntityExists(flightId).Result)
+            if (!_flightRepository.EntityExistsAsync(flightId).Result)
             {
                 throw new NotFoundException();
             }
@@ -106,9 +106,9 @@ namespace AirportWebAPI.BusinessLayer.Services
             }
 
             var mapedEntity = _mapper.Map<TicketDto, Ticket>(entity);
-            await _repository.AddEntity(mapedEntity);
+            await _repository.AddEntityAsync(mapedEntity);
 
-            if (!_repository.Save().Result)
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Adding Ticket failed on save.");
             }
@@ -118,7 +118,7 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task<TicketDto> UpdateEntity(TicketDto entity)
         {
-            if (!_repository.EntityExists(entity.Id).Result)
+            if (!_repository.EntityExistsAsync(entity.Id).Result)
             {
                 throw new NotFoundException();
             }
@@ -130,9 +130,9 @@ namespace AirportWebAPI.BusinessLayer.Services
             }
 
             var mapedEntity = _mapper.Map<TicketDto, Ticket>(entity);
-            await _repository.UpdateEntity(mapedEntity);
+            await _repository.UpdateEntityAsync(mapedEntity);
 
-            if (!_repository.Save().Result)
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Updating Ticket failed on save.");
             }
@@ -142,14 +142,14 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task DeleteEntity(Guid entityId)
         {
-            var ticketFromRepo = await _repository.GetEntity(entityId);
+            var ticketFromRepo = await _repository.GetEntityAsync(entityId);
             if (ticketFromRepo == null)
             {
                 throw new NotFoundException();
             }
 
-            await _repository.DeleteEntity(ticketFromRepo);
-            if (!_repository.Save().Result)
+            await _repository.DeleteEntityAsync(ticketFromRepo);
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Deleting Ticket failed on save.");
             }
@@ -157,19 +157,19 @@ namespace AirportWebAPI.BusinessLayer.Services
 
         public async Task DeleteEntity(Guid flightId, Guid entityId)
         {
-            if (!_flightRepository.EntityExists(flightId).Result)
+            if (!_flightRepository.EntityExistsAsync(flightId).Result)
             {
                 throw new NotFoundException();
             }
 
-            var ticketFromRepo = await _repository.GetEntity(entityId);
+            var ticketFromRepo = await _repository.GetEntityAsync(entityId);
             if (ticketFromRepo == null)
             {
                 throw new NotFoundException();
             }
 
-            await _repository.DeleteEntity(ticketFromRepo);
-            if (!_repository.Save().Result)
+            await _repository.DeleteEntityAsync(ticketFromRepo);
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Deleting Ticket failed on save.");
             }

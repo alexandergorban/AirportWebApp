@@ -23,7 +23,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public override async Task<IEnumerable<Flight>> GetEntities()
+        public override async Task<IEnumerable<Flight>> GetEntitiesAsync()
         {
             return await _context.Flights
                 .Include(f => f.DeparturePoint)
@@ -32,7 +32,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 .ToListAsync();
         }
 
-        public override async Task<Flight> GetEntity(Guid entityId)
+        public override async Task<Flight> GetEntityAsync(Guid entityId)
         {
             return await _context.Flights
                 .Include(f => f.DeparturePoint)
@@ -42,7 +42,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 .FirstOrDefaultAsync(f => f.Id == entityId);
         }
 
-        public override async Task AddEntity(Flight entity)
+        public override async Task AddEntityAsync(Flight entity)
         {
             entity.Id = Guid.NewGuid();
             await _context.Flights.AddAsync(entity);
@@ -60,7 +60,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
         // Tickets
         public async Task AddTicketForFlight(Guid flightId, Ticket ticket)
         {
-            var flight = await GetEntity(flightId);
+            var flight = await GetEntityAsync(flightId);
             if (flight != null)
             {
                 if (ticket.Id == Guid.Empty)

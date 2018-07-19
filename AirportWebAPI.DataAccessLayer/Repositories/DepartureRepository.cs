@@ -22,7 +22,7 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public override async Task<IEnumerable<Departure>> GetEntities()
+        public override async Task<IEnumerable<Departure>> GetEntitiesAsync()
         {
             return await _context.Departures
                 .Include(d => d.Flight)

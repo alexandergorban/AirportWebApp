@@ -21,41 +21,41 @@ namespace AirportWebAPI.DataAccessLayer.Abstractions
             _mapper = mapper;
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetEntities()
+        public virtual async Task<IEnumerable<TEntity>> GetEntitiesAsync()
         {
             return await _context.Set<TEntity>()
                 .OrderBy(e => e.Id)
                 .ToListAsync();
         }
 
-        public virtual async Task<TEntity> GetEntity(Guid entityId)
+        public virtual async Task<TEntity> GetEntityAsync(Guid entityId)
         {
             return await _context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == entityId);
         }
 
-        public virtual async Task AddEntity(TEntity entity)
+        public virtual async Task AddEntityAsync(TEntity entity)
         {
             entity.Id = Guid.NewGuid();
             await _context.Set<TEntity>().AddAsync(entity);
         }
 
-        public virtual async Task UpdateEntity(TEntity entity)
+        public virtual async Task UpdateEntityAsync(TEntity entity)
         {
             var entiryFromRepo = await _context.Set<TEntity>().FirstAsync(e => e.Id == entity.Id);
             _mapper.Map(entity, entiryFromRepo);
         }
 
-        public virtual async Task DeleteEntity(TEntity entity)
+        public virtual async Task DeleteEntityAsync(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
         }
 
-        public async Task<bool> EntityExists(Guid entityId)
+        public async Task<bool> EntityExistsAsync(Guid entityId)
         {
             return await _context.Set<TEntity>().AnyAsync(c => c.Id == entityId);
         }
 
-        public async Task<bool> Save()
+        public async Task<bool> SaveAsync()
         {
             return (await _context.SaveChangesAsync() >= 0);
         }
