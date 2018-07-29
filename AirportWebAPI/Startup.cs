@@ -76,6 +76,11 @@ namespace AirportWebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
+                .AllowCredentials()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+
             app.UseMvc();
         }
 
