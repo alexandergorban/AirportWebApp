@@ -37,7 +37,7 @@ namespace AirportWebAPI.DataAccessLayer.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(LocalDb)\MSSQLLocalDB;Database=AirportWebAppDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"server=(localdb)\mssqllocaldb;database=AirportWebAppDB;integrated security=yes;connectretrycount=0;AttachDBFileName=c:\users\alexander\airportwebappdb.mdf");
             base.OnConfiguring(optionsBuilder);
         }
     }
