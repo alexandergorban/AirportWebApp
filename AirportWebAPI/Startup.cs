@@ -14,6 +14,8 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +38,17 @@ namespace AirportWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddCors();
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                );
+            });
 
             services.AddDbContext<AirportDbContext>();
 
@@ -84,7 +97,9 @@ namespace AirportWebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCorsMiddleware();
             app.UseMvc();
+            app.UseCors("CorsPolicy");
         }
 
         public MapperConfiguration MapperConfiguration()
