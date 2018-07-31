@@ -23,9 +23,9 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/crews/stewardesses
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var stewardesses = _stewardessService.GetEntities();
+            var stewardesses = await _stewardessService.GetEntitiesAsync();
             if (stewardesses == null)
             {
                 return NotFound();
@@ -36,9 +36,9 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/crews/stewardesses/5
         [HttpGet("{id}", Name = "GetStewardess")]
-        public IActionResult Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            var stewardess = _stewardessService.GetEntity(id);
+            var stewardess = await _stewardessService.GetEntityAsync(id);
             if (stewardess == null)
             {
                 return NotFound();
@@ -49,11 +49,11 @@ namespace AirportWebAPI.Controllers
 
         // POST: api/v1/crews/stewardesses
         [HttpPost]
-        public IActionResult Post([FromBody] StewardessDto stewardessDto)
+        public async Task<IActionResult> Post([FromBody] StewardessDto stewardessDto)
         {
             try
             {
-                var stewardessToReturn = _stewardessService.AddEntity(stewardessDto);
+                var stewardessToReturn = await _stewardessService.AddEntityAsync(stewardessDto);
                 return CreatedAtRoute("GetStewardess", new { id = stewardessToReturn.Id }, stewardessToReturn);
             }
             catch (BadRequestException)
@@ -64,12 +64,12 @@ namespace AirportWebAPI.Controllers
 
         // PUT: api/v1/crews/stewardesses/5
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] StewardessDto stewardessDto)
+        public async Task<IActionResult> Put(Guid id, [FromBody] StewardessDto stewardessDto)
         {
             try
             {
                 stewardessDto.Id = id;
-                _stewardessService.UpdateEntity(stewardessDto);
+                await _stewardessService.UpdateEntityAsync(stewardessDto);
                 return NoContent();
             }
             catch (BadRequestException)
@@ -84,11 +84,11 @@ namespace AirportWebAPI.Controllers
 
         // DELETE: api/v1/crews/stewardesses/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {
-                _stewardessService.DeleteEntity(id);
+                await _stewardessService.DeleteEntityAsync(id);
             }
             catch (NotFoundException)
             {

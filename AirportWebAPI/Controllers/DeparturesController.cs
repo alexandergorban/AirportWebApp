@@ -23,9 +23,9 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/departures
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var departures = _departureService.GetEntities();
+            var departures = await _departureService.GetEntitiesAsync();
             if (departures == null)
             {
                 return NotFound();
@@ -36,9 +36,9 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/departures/5
         [HttpGet("{id}", Name = "GetDeparture")]
-        public IActionResult Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            var departure = _departureService.GetEntity(id);
+            var departure = await _departureService.GetEntityAsync(id);
             if (departure == null)
             {
                 return NotFound();
@@ -49,11 +49,11 @@ namespace AirportWebAPI.Controllers
 
         // POST: api/v1/departures
         [HttpPost]
-        public IActionResult Post([FromBody] DepartureDto departureDto)
+        public async Task<IActionResult> Post([FromBody] DepartureDto departureDto)
         {
             try
             {
-                var departureToReturn = _departureService.AddEntity(departureDto);
+                var departureToReturn = await _departureService.AddEntityAsync(departureDto);
                 return CreatedAtRoute("GetDeparture", new { id = departureToReturn.Id }, departureToReturn);
             }
             catch (BadRequestException)
@@ -64,12 +64,12 @@ namespace AirportWebAPI.Controllers
 
         // PUT: api/v1/departures/5
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] DepartureDto departureDto)
+        public async Task<IActionResult> Put(Guid id, [FromBody] DepartureDto departureDto)
         {
             try
             {
                 departureDto.Id = id;
-                _departureService.UpdateEntity(departureDto);
+                await _departureService.UpdateEntityAsync(departureDto);
                 return NoContent();
             }
             catch (BadRequestException)
@@ -84,11 +84,11 @@ namespace AirportWebAPI.Controllers
 
         // DELETE: api/v1/departures/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {
-                _departureService.DeleteEntity(id);
+                await _departureService.DeleteEntityAsync(id);
             }
             catch (NotFoundException)
             {

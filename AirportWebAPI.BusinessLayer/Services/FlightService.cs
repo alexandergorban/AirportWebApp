@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
+using AirportWebAPI.DataAccessLayer.Repositories;
 using AutoMapper;
 using FluentValidation;
 using Shared.Exceptions;
@@ -13,11 +15,11 @@ namespace AirportWebAPI.BusinessLayer.Services
     public class FlightService : IService<FlightDto>
     {
         private readonly IMapper _mapper;
-        private readonly IRepository<Flight> _repository;
+        private readonly FlightRepository _repository;
         private readonly AbstractValidator<FlightDto> _validator;
 
         public FlightService(IMapper mapper,
-            IRepository<Flight> repository,
+            FlightRepository repository,
             AbstractValidator<FlightDto> validator)
         {
             _mapper = mapper;
@@ -25,15 +27,15 @@ namespace AirportWebAPI.BusinessLayer.Services
             _validator = validator;
         }
 
-        public IEnumerable<FlightDto> GetEntities()
+        public async Task<IEnumerable<FlightDto>> GetEntitiesAsync()
         {
-            var data = _repository.GetEntities();
+            var data = await _repository.GetEntitiesAsync();
             return _mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDto>>(data);
         }
 
-        public FlightDto GetEntity(Guid entityId)
+        public async Task<FlightDto> GetEntityAsync(Guid entityId)
         {
-            var data = _repository.GetEntity(entityId);
+            var data = await _repository.GetEntityAsync(entityId);
             if (data == null)
             {
                 throw new NotFoundException();
@@ -42,18 +44,18 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Flight, FlightDto>(data);
         }
 
-        public FlightDto AddEntity(FlightDto entity)
+        public async Task<FlightDto> AddEntityAsync(FlightDto entity)
         {
-            var validationResult = _validator.Validate(entity);
+            var validationResult = await _validator.ValidateAsync(entity);
             if (!validationResult.IsValid)
             {
                 throw new BadRequestException();
             }
 
             var mapedEntity = _mapper.Map<FlightDto, Flight>(entity);
-            _repository.AddEntity(mapedEntity);
+            await _repository.AddEntityAsync(mapedEntity);
 
-            if (!_repository.Save())
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Adding Flight failed on save.");
             }
@@ -61,23 +63,23 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Flight, FlightDto>(mapedEntity);
         }
 
-        public FlightDto UpdateEntity(FlightDto entity)
+        public async Task<FlightDto> UpdateEntityAsync(FlightDto entity)
         {
-            if (!_repository.EntityExists(entity.Id))
+            if (!_repository.EntityExistsAsync(entity.Id).Result)
             {
                 throw new NotFoundException();
             }
 
-            var validationResult = _validator.Validate(entity);
+            var validationResult = await _validator.ValidateAsync(entity);
             if (!validationResult.IsValid)
             {
                 throw new BadRequestException();
             }
 
             var mapedEntity = _mapper.Map<FlightDto, Flight>(entity);
-            _repository.UpdateEntity(mapedEntity);
+            await _repository.UpdateEntityAsync(mapedEntity);
 
-            if (!_repository.Save())
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Updating Flight failed on save.");
             }
@@ -85,19 +87,24 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Flight, FlightDto>(mapedEntity);
         }
 
-        public void DeleteEntity(Guid entityId)
+        public async Task DeleteEntityAsync(Guid entityId)
         {
-            var flightFromRepo = _repository.GetEntity(entityId);
+            var flightFromRepo = await _repository.GetEntityAsync(entityId);
             if (flightFromRepo == null)
             {
                 throw new NotFoundException();
             }
 
-            _repository.DeleteEntity(flightFromRepo);
-            if (!_repository.Save())
+            await _repository.DeleteEntityAsync(flightFromRepo);
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Deleting Flight failed on save.");
             }
+        }
+
+        public async Task<Flight> GetFlightWithDelay()
+        {
+            return await _repository.GetFlightWithDelay();
         }
     }
 }

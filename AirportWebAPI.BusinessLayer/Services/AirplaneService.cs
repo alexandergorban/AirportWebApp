@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
@@ -25,15 +26,15 @@ namespace AirportWebAPI.BusinessLayer.Services
             _validator = validator;
         }
 
-        public IEnumerable<AirplaneDto> GetEntities()
+        public async Task<IEnumerable<AirplaneDto>> GetEntitiesAsync()
         {
-            var data = _repository.GetEntities();
+            var data = await _repository.GetEntitiesAsync();
             return _mapper.Map<IEnumerable<Airplane>, IEnumerable<AirplaneDto>>(data);
         }
 
-        public AirplaneDto GetEntity(Guid entityId)
+        public async Task<AirplaneDto> GetEntityAsync(Guid entityId)
         {
-            var data = _repository.GetEntity(entityId);
+            var data = await _repository.GetEntityAsync(entityId);
             if (data == null)
             {
                 throw new NotFoundException();
@@ -42,18 +43,18 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Airplane, AirplaneDto>(data);
         }
 
-        public AirplaneDto AddEntity(AirplaneDto entity)
+        public async Task<AirplaneDto> AddEntityAsync(AirplaneDto entity)
         {
-            var validationResult = _validator.Validate(entity);
+            var validationResult = await _validator.ValidateAsync(entity);
             if (!validationResult.IsValid)
             {
                 throw new BadRequestException();
             }
 
             var mapedEntity = _mapper.Map<AirplaneDto, Airplane>(entity);
-            _repository.AddEntity(mapedEntity);
+            await _repository.AddEntityAsync(mapedEntity);
 
-            if (!_repository.Save())
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Adding Airplane failed on save.");
             }
@@ -61,23 +62,23 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Airplane, AirplaneDto>(mapedEntity);
         }
 
-        public AirplaneDto UpdateEntity(AirplaneDto entity)
+        public async Task<AirplaneDto> UpdateEntityAsync(AirplaneDto entity)
         {
-            if (!_repository.EntityExists(entity.Id))
+            if (!_repository.EntityExistsAsync(entity.Id).Result)
             {
                 throw new NotFoundException();
             }
 
-            var validationResult = _validator.Validate(entity);
+            var validationResult = await _validator.ValidateAsync(entity);
             if (!validationResult.IsValid)
             {
                 throw new BadRequestException();
             }
 
             var mapedEntity = _mapper.Map<AirplaneDto, Airplane>(entity);
-            _repository.UpdateEntity(mapedEntity);
+            await _repository.UpdateEntityAsync(mapedEntity);
 
-            if (!_repository.Save())
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Updating Airplane failed on save.");
             }
@@ -85,16 +86,16 @@ namespace AirportWebAPI.BusinessLayer.Services
             return _mapper.Map<Airplane, AirplaneDto>(mapedEntity);
         }
 
-        public void DeleteEntity(Guid entityId)
+        public async Task DeleteEntityAsync(Guid entityId)
         {
-            var airplaneFromRepo = _repository.GetEntity(entityId);
+            var airplaneFromRepo = await _repository.GetEntityAsync(entityId);
             if (airplaneFromRepo == null)
             {
                 throw new NotFoundException();
             }
 
-            _repository.DeleteEntity(airplaneFromRepo);
-            if (!_repository.Save())
+            await _repository.DeleteEntityAsync(airplaneFromRepo);
+            if (!_repository.SaveAsync().Result)
             {
                 throw new Exception("Deleting Airplane failed on save.");
             }

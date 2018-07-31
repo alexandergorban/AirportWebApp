@@ -23,11 +23,11 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/flights/{flightId}/tickets
         [HttpGet]
-        public IActionResult Get(Guid flightId)
+        public async Task<IActionResult> Get(Guid flightId)
         {
             try
             {
-                var tickets = _ticketService.GetEntities(flightId);
+                var tickets = await _ticketService.GetEntitiesAsync(flightId);
                 return Ok(tickets);
             }
             catch (NotFoundException)
@@ -38,11 +38,11 @@ namespace AirportWebAPI.Controllers
 
         // GET: api/v1/flights/{flightId}/tickets/5
         [HttpGet("{id}", Name = "GetTicket")]
-        public IActionResult Get(Guid flightId, Guid id)
+        public async Task<IActionResult> Get(Guid flightId, Guid id)
         {
             try
             {
-                var ticket = _ticketService.GetEntity(flightId, id);
+                var ticket = await _ticketService.GetEntityAsync(flightId, id);
                 return Ok(ticket);
             }
             catch (NotFoundException)
@@ -53,12 +53,12 @@ namespace AirportWebAPI.Controllers
 
         // POST: api/v1/flights/{flightId}/tickets
         [HttpPost]
-        public IActionResult Post(Guid flightId, [FromBody] TicketDto ticketDto)
+        public async Task<IActionResult> Post(Guid flightId, [FromBody] TicketDto ticketDto)
         {
             try
             {
                 ticketDto.FlightId = flightId;
-                var ticketToReturn = _ticketService.AddEntity(ticketDto);
+                var ticketToReturn = await _ticketService.AddEntityAsync(ticketDto);
                 return CreatedAtRoute("GetTicket", 
                     new { flightId = ticketToReturn.FlightId, id = ticketToReturn.Id }, 
                     ticketToReturn);
@@ -75,13 +75,13 @@ namespace AirportWebAPI.Controllers
 
         // PUT: api/v1/flights/{flightId}/tickets/5
         [HttpPut("{id}")]
-        public IActionResult Put(Guid flightId, Guid id, [FromBody] TicketDto ticketDto)
+        public async Task<IActionResult> Put(Guid flightId, Guid id, [FromBody] TicketDto ticketDto)
         {
             try
             {
                 ticketDto.Id = id;
                 ticketDto.FlightId = flightId;
-                _ticketService.UpdateEntity(ticketDto);
+                await _ticketService.UpdateEntityAsync(ticketDto);
                 return NoContent();
             }
             catch (BadRequestException)
@@ -96,11 +96,11 @@ namespace AirportWebAPI.Controllers
 
         // DELETE: api/v1/flights/{flightId}/tickets/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid flightId, Guid id)
+        public async Task<IActionResult> Delete(Guid flightId, Guid id)
         {
             try
             {
-                _ticketService.DeleteEntity(flightId, id);
+                await _ticketService.DeleteEntityAsync(flightId, id);
             }
             catch (NotFoundException)
             {

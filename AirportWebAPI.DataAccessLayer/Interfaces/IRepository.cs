@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AirportWebAPI.DataAccessLayer.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : IEntity
     {
-        IEnumerable<TEntity> GetEntities();
-        TEntity GetEntity(Guid entityId);
-        void AddEntity(TEntity entity);
-        void UpdateEntity(TEntity entity);
-        void DeleteEntity(TEntity entity);
-        bool EntityExists(Guid entityId);
-        bool Save();
+        Task<IEnumerable<TEntity>> GetEntitiesAsync();
+        Task<TEntity> GetEntityAsync(Guid entityId);
+        Task AddEntityAsync(TEntity entity);
+        Task UpdateEntityAsync(TEntity entity);
+        Task DeleteEntityAsync(TEntity entity);
+        Task<bool> EntityExistsAsync(Guid entityId);
+        Task<bool> SaveAsync();
     }
 }

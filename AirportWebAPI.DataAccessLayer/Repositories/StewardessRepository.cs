@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AirportWebAPI.DataAccessLayer.Abstractions;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
 using AirportWebAPI.DataAccessLayer.Entities;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace AirportWebAPI.DataAccessLayer.Repositories
 {
@@ -20,12 +22,12 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public override IEnumerable<Stewardess> GetEntities()
+        public override async Task<IEnumerable<Stewardess>> GetEntitiesAsync()
         {
-            return _context.Stewardesses
+            return await _context.Stewardesses
                 .OrderBy(s => s.Name)
                 .OrderBy(s => s.Surname)
-                .ToList();
+                .ToListAsync();
         }
     }
 }

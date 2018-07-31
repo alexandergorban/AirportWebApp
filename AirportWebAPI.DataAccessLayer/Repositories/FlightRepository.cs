@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Timers;
 using AirportWebAPI.DataAccessLayer.Abstractions;
 using AirportWebAPI.DataAccessLayer.Data;
 using AirportWebAPI.DataAccessLayer.Interfaces;
@@ -21,29 +23,29 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public override IEnumerable<Flight> GetEntities()
+        public override async Task<IEnumerable<Flight>> GetEntitiesAsync()
         {
-            return _context.Flights
+            return await _context.Flights
                 .Include(f => f.DeparturePoint)
                 .Include(f => f.DestinationPoint)
                 .OrderBy(f => f.DepartureTime)
-                .ToList();
+                .ToListAsync();
         }
 
-        public override Flight GetEntity(Guid entityId)
+        public override async Task<Flight> GetEntityAsync(Guid entityId)
         {
-            return _context.Flights
+            return await _context.Flights
                 .Include(f => f.DeparturePoint)
                 .Include(f => f.DestinationPoint)
                 .Include(f => f.Tickets)
                 .OrderBy(f => f.DepartureTime)
-                .FirstOrDefault(f => f.Id == entityId);
+                .FirstOrDefaultAsync(f => f.Id == entityId);
         }
 
-        public override void AddEntity(Flight entity)
+        public override async Task AddEntityAsync(Flight entity)
         {
             entity.Id = Guid.NewGuid();
-            _context.Flights.Add(entity);
+            await _context.Flights.AddAsync(entity);
 
             if (entity.Tickets.Any())
             {
@@ -56,9 +58,9 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
         }
 
         // Tickets
-        public void AddTicketForFlight(Guid flightId, Ticket ticket)
+        public async Task AddTicketForFlight(Guid flightId, Ticket ticket)
         {
-            var flight = GetEntity(flightId);
+            var flight = await GetEntityAsync(flightId);
             if (flight != null)
             {
                 if (ticket.Id == Guid.Empty)
@@ -67,6 +69,31 @@ namespace AirportWebAPI.DataAccessLayer.Repositories
                 }
                 flight.Tickets.Add(ticket);
             }
+        }
+
+        public Task<Flight> GetFlightWithDelay()
+        {
+            var taskCompletitionSource = new TaskCompletionSource<Flight>();
+            var timer = new Timer()
+            {
+                Interval = 3000,
+                Enabled = true
+            };
+
+            timer.Elapsed += (source, args) =>
+            {
+                try
+                {
+                    taskCompletitionSource.SetResult(_context.Flights.First());
+                    timer.Enabled = false;
+                }
+                catch (Exception e)
+                {
+                    taskCompletitionSource.SetException(e);
+                }
+            };
+
+            return taskCompletitionSource.Task;
         }
     }
 }

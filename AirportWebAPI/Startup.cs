@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirportWebAPI.BusinessLayer.DataServices;
 using AirportWebAPI.BusinessLayer.Services;
 using AirportWebAPI.BusinessLayer.Interfaces;
 using AirportWebAPI.BusinessLayer.Validators;
@@ -13,11 +14,14 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Shared.Models.Json;
 
 namespace AirportWebAPI
 {
@@ -35,6 +39,17 @@ namespace AirportWebAPI
         {
             services.AddMvc();
 
+            services.AddCors();
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                );
+            });
+
             services.AddDbContext<AirportDbContext>();
 
             services.AddTransient<IRepository<Airplane>, AirplaneRepository>();
@@ -46,6 +61,9 @@ namespace AirportWebAPI
             services.AddTransient<IRepository<Stewardess>, StewardessRepository>();
             services.AddTransient<ITicketRepository, TicketRepository>();
 
+            services.AddTransient<CrewRepository>();
+            services.AddTransient<FlightRepository>();
+
             services.AddScoped<IService<AirplaneDto>, AirplaneService>();
             services.AddScoped<IService<AirplaneTypeDto>, AirplaneTypeService>();
             services.AddScoped<IService<CrewDto>, CrewService>();
@@ -54,6 +72,9 @@ namespace AirportWebAPI
             services.AddScoped<IService<PilotDto>, PilotService>();
             services.AddScoped<IService<StewardessDto>, StewardessService>();
             services.AddScoped<ITicketService, TicketService>();
+
+            services.AddScoped<CrewDataService>();
+            services.AddScoped<FlightService>();
 
             services.AddTransient<AbstractValidator<AirplaneDto>, AirplaneDtoValidator>();
             services.AddTransient<AbstractValidator<AirplaneTypeDto>, AirplaneTypeDtoValidator>();
@@ -76,12 +97,9 @@ namespace AirportWebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
-                .AllowCredentials()
-                .AllowAnyHeader()
-                .AllowAnyMethod());
-
+            app.UseCorsMiddleware();
             app.UseMvc();
+            app.UseCors("CorsPolicy");
         }
 
         public MapperConfiguration MapperConfiguration()
@@ -99,6 +117,10 @@ namespace AirportWebAPI
                 cfg.CreateMap<Crew, CrewDto>();
                 cfg.CreateMap<CrewDto, Crew>();
                 cfg.CreateMap<Crew, Crew>();
+                cfg.CreateMap<JsonCrewDto, Crew>()
+                    .ForMember(c => c.Id, opt => opt.UseValue(0))
+                    .ForMember(c => c.Pilot, opt => opt.MapFrom(jc => jc.Pilot.First()))
+                    .ForMember(c => c.Stewardesses, opt => opt.MapFrom(jc => jc.Stewardess));
 
                 cfg.CreateMap<Departure, DepartureDto>();
                 cfg.CreateMap<DepartureDto, Departure>();
@@ -111,10 +133,21 @@ namespace AirportWebAPI
                 cfg.CreateMap<Pilot, PilotDto>();
                 cfg.CreateMap<PilotDto, Pilot>();
                 cfg.CreateMap<Pilot, Pilot>();
+                cfg.CreateMap<JsonPilotDto, Pilot>()
+                    .ForMember(p => p.Id, opt => opt.UseValue(0))
+                    .ForMember(p => p.Name, opt => opt.MapFrom(jp => jp.FirstName))
+                    .ForMember(p => p.Surname, opt => opt.MapFrom(jp => jp.LastName))
+                    .ForMember(p => p.DateOfBirth, opt => opt.MapFrom(jp => jp.BirthDate))
+                    .ForMember(p => p.Experience, opt => opt.MapFrom(jp => jp.Exp));
 
                 cfg.CreateMap<Stewardess, StewardessDto>();
                 cfg.CreateMap<StewardessDto, Stewardess>();
                 cfg.CreateMap<Stewardess, Stewardess>();
+                cfg.CreateMap<JsonStewardessDto, Stewardess>()
+                    .ForMember(s => s.Id, opt => opt.UseValue(0))
+                    .ForMember(s => s.Name, opt => opt.MapFrom(js => js.FirstName))
+                    .ForMember(s => s.Surname, opt => opt.MapFrom(js => js.LastName))
+                    .ForMember(s => s.DateOfBirth, opt => opt.MapFrom(js => js.BirthDate));
 
                 cfg.CreateMap<Ticket, TicketDto>();
                 cfg.CreateMap<TicketDto, Ticket>();
